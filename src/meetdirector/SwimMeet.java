@@ -47,4 +47,11 @@ public class SwimMeet {
         status = "Success";
         return true;
     }
+    
+    public String getStatus() {
+        if (status == null)
+            return "Unknown";
+        else
+            return status;
+    }
 }

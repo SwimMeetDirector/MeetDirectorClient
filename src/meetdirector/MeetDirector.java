@@ -10,7 +10,7 @@ package meetdirector;
  * @author nhorman
  */
 public class MeetDirector extends javax.swing.JFrame {
-    private SwimMeet meet;
+    private SwimMeet meet = null;
     /**
      * Creates new form MeetSetup
      */
@@ -206,6 +206,11 @@ public class MeetDirector extends javax.swing.JFrame {
 
     private void ConnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectButtonActionPerformed
         this.jLabel7.setText("Connecting To DB");
+        meet = new SwimMeet(DBHostTextField.getText(), DBPortTextField.getText(), DBNameTextField.getText(), DBUserTextField.getText(), DBPassTextField.getText());
+        if (meet.Connect(NewDBTextBox.isSelected()) == false) {
+            this.jLabel7.setText(meet.getStatus());
+            return;
+        }
         // TODO add your handling code here:
     }//GEN-LAST:event_ConnectButtonActionPerformed
 

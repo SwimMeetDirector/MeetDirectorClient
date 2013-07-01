@@ -4,18 +4,21 @@
  */
 package meetdirector;
 
+import entity.SwimMeet;
+
 /**
  *
  * @author nhorman
  */
 public class MeetInfoDialog extends javax.swing.JDialog {
-
+    private SwimMeet MeetInfo = null;
     /**
      * Creates new form MeetInfoDialog
      */
     public MeetInfoDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        MeetInfo = SwimMeet.getSwimMeet();
     }
 
     /**
@@ -77,7 +80,7 @@ public class MeetInfoDialog extends javax.swing.JDialog {
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
+                        return;
                     }
                 });
                 dialog.setVisible(true);

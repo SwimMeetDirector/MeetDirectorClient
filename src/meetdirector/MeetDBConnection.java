@@ -70,6 +70,12 @@ public class MeetDBConnection {
         return rc;
     }
     
+    public EntityManagerFactory getEmf(String unit) {
+        EntityManagerFactory emf;
+        emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());
+        return emf;
+    }
+    
     public static MeetDBConnection getDBConnection() {
         if (instance == null)
                 instance = new MeetDBConnection();

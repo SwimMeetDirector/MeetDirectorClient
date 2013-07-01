@@ -6,6 +6,8 @@ package entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,8 +38,30 @@ public class SwimMeet implements Serializable {
     private static final String PersistenceUnit = "SwimMeetPU";
     
     public Boolean persist() {
-        MeetDBConnection meet = MeetDBConnection.getDBConnection();
-        return meet.storeObject(this, PersistenceUnit);
+        MeetDBConnection conn = MeetDBConnection.getDBConnection();
+        return conn.storeObject(this, PersistenceUnit);
+    }
+    
+    public static SwimMeet getSwimMeet() {
+        SwimMeet meet;
+        EntityManagerFactory emf;
+        EntityManager em;
+        MeetDBConnection conn = MeetDBConnection.getDBConnection();
+        
+        // Theres only ever one entry of this type in the db
+        emf = conn.getEmf(PersistenceUnit);
+        em = emf.createEntityManager();
+        
+        meet = em.find(SwimMeet.class, 1L);
+        em.close();
+        emf.close();
+        
+        if (meet == null) {
+            meet = new SwimMeet();
+            meet.persist();
+        }
+        
+        return meet;
     }
     
     public Long getId() {

@@ -16,6 +16,7 @@ public class MeetDirector extends javax.swing.JFrame {
      */
     public MeetDirector() {
         initComponents();
+        this.MeetInfoMenu.setEnabled(false);
     }
 
     /**
@@ -42,6 +43,11 @@ public class MeetDirector extends javax.swing.JFrame {
         DBNameTextField = new javax.swing.JTextField();
         InformationLabel = new javax.swing.JLabel();
         NewDBTextBox = new javax.swing.JCheckBox();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu3 = new javax.swing.JMenu();
+        ExitMenuItem = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        MeetInfoMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,7 +128,7 @@ public class MeetDirector extends javax.swing.JFrame {
                             .addComponent(DBPortTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(NewDBTextBox)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -160,7 +166,7 @@ public class MeetDirector extends javax.swing.JFrame {
                     .addComponent(DBNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NewDBTextBox))
                 .addGap(18, 18, 18)
-                .addComponent(InformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addComponent(InformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ConnectButton)
                 .addContainerGap())
@@ -172,39 +178,58 @@ public class MeetDirector extends javax.swing.JFrame {
         DBPassTextField.getAccessibleContext().setAccessibleName("DBPass");
         InformationLabel.getAccessibleContext().setAccessibleName("InformationLabel");
 
+        jMenu3.setText("File");
+
+        ExitMenuItem.setLabel("Exit");
+        ExitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExitMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(ExitMenuItem);
+
+        jMenuBar2.add(jMenu3);
+
+        jMenu4.setText("Meet");
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
+
+        MeetInfoMenu.setLabel("Meet Info");
+        MeetInfoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MeetInfoMenuActionPerformed(evt);
+            }
+        });
+        jMenu4.add(MeetInfoMenu);
+
+        jMenuBar2.add(jMenu4);
+
+        setJMenuBar(jMenuBar2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(116, 116, 116)
+                .addGap(210, 210, 210)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(180, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addGap(192, 192, 192))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("DBConnectionPanel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void DBHostTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBHostTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DBHostTextFieldActionPerformed
-
-    private void DBPortTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBPortTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DBPortTextFieldActionPerformed
-
-    private void DBUserTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBUserTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DBUserTextFieldActionPerformed
 
     private void ConnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectButtonActionPerformed
         this.InformationLabel.setText("Connecting To DB");
@@ -215,8 +240,36 @@ public class MeetDirector extends javax.swing.JFrame {
             return;
         }
         this.InformationLabel.setText("Connected!");
+        this.jPanel2.removeAll();
+        this.MeetInfoMenu.setEnabled(true);
+        
         // TODO add your handling code here:
     }//GEN-LAST:event_ConnectButtonActionPerformed
+
+    private void DBUserTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBUserTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DBUserTextFieldActionPerformed
+
+    private void DBPortTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBPortTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DBPortTextFieldActionPerformed
+
+    private void DBHostTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBHostTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DBHostTextFieldActionPerformed
+
+    private void ExitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitMenuItemActionPerformed
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_ExitMenuItemActionPerformed
+
+    private void MeetInfoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MeetInfoMenuActionPerformed
+        MeetInfoDialog meetinfo = new MeetInfoDialog(this, true);
+        meetinfo.main(null);// TODO add your handling code here:
+    }//GEN-LAST:event_MeetInfoMenuActionPerformed
+
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,7 +312,9 @@ public class MeetDirector extends javax.swing.JFrame {
     private javax.swing.JPasswordField DBPassTextField;
     private javax.swing.JTextField DBPortTextField;
     private javax.swing.JTextField DBUserTextField;
+    private javax.swing.JMenuItem ExitMenuItem;
     private javax.swing.JLabel InformationLabel;
+    private javax.swing.JMenuItem MeetInfoMenu;
     private javax.swing.JCheckBox NewDBTextBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -267,6 +322,9 @@ public class MeetDirector extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

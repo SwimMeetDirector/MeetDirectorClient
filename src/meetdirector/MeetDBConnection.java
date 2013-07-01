@@ -7,6 +7,9 @@ import java.sql.Statement;
 import java.sql.ResultSetMetaData;
 import java.util.HashMap;
 import java.util.Map;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -43,6 +46,28 @@ public class MeetDBConnection {
             pmap.put("javax.persistence.jdbc.user", user);
         pmap.put("javax.persistence.jdbc.url", DbUrl);
         return pmap;
+    }
+    
+    public Boolean storeObject(Object obj, String unit) {
+        EntityManagerFactory emf;
+        Boolean rc = true;
+        emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        try {
+            em.persist(obj);
+            em.getTransaction().commit();
+        }
+        catch (Exception except) {
+            except.printStackTrace();
+            em.getTransaction().rollback();
+            rc = false;
+        }
+        finally {
+            em.close();
+            emf.close();
+        }
+        return rc;
     }
     
     public static MeetDBConnection getDBConnection() {

@@ -9,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import meetdirector.MeetDBConnection;
+ 
 
 /**
  *
@@ -31,6 +33,12 @@ public class SwimMeet implements Serializable {
     private String[] Marshall;
     private String Sanction;
     private String AnnouncementText;
+    private static final String PersistenceUnit = "SwimMeetPU";
+    
+    public Boolean persist() {
+        MeetDBConnection meet = MeetDBConnection.getDBConnection();
+        return meet.storeObject(this, PersistenceUnit);
+    }
     
     public Long getId() {
         return id;

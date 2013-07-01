@@ -4,6 +4,10 @@
  */
 package meetdirector;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Properties;
+
 
 /**
  *
@@ -14,11 +18,57 @@ public class MeetDirector extends javax.swing.JFrame {
     /**
      * Creates new form MeetSetup
      */
+    private Properties DBConfigProps;
+    private String configFileName = "./.meetdirector.conf";
+    
     public MeetDirector() {
         initComponents();
         this.MeetInfoMenu.setEnabled(false);
+        DBConfigProps = new Properties();
+        this.loadDBConfig();
+        
     }
 
+    protected void loadDBConfig() {
+        FileInputStream instream = null;
+        try {
+            instream = new FileInputStream(configFileName);
+            DBConfigProps.loadFromXML(instream);
+        } catch (Exception except) {
+            DBConfigProps.setProperty("Server", "127.0.0.1");
+            DBConfigProps.setProperty("Port", "1527");
+            DBConfigProps.setProperty("UserName", "User");
+            DBConfigProps.setProperty("Password", "password");
+            DBConfigProps.setProperty("DBName", "GenericSwimMeet");
+        }
+        try {
+            if (instream != null)
+                instream.close();
+        } catch (Exception except) {
+            
+        }
+        DBHostTextField.setText(DBConfigProps.getProperty("Server"));
+        DBPortTextField.setText(DBConfigProps.getProperty("Port"));
+        DBUserTextField.setText(DBConfigProps.getProperty("UserName"));
+        DBPassTextField.setText(DBConfigProps.getProperty("Password"));
+        DBNameTextField.setText(DBConfigProps.getProperty("DBName"));   
+    }
+    
+    protected void saveDBConfig() {
+        FileOutputStream outstream = null;
+        try {
+            outstream = new FileOutputStream(configFileName);
+            DBConfigProps.storeToXML(outstream, "Meet Director Configuration");
+        }
+        catch (Exception except) {
+        }
+        try {
+            if (outstream != null)
+                outstream.close();
+        } catch (Exception except) {
+            
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -239,6 +289,13 @@ public class MeetDirector extends javax.swing.JFrame {
             this.InformationLabel.setText(meet.getStatus());
             return;
         }
+        DBConfigProps.setProperty("Server", DBHostTextField.getText());
+        DBConfigProps.setProperty("Port", DBPortTextField.getText());
+        DBConfigProps.setProperty("UserName", DBUserTextField.getText());
+        DBConfigProps.setProperty("Password", DBPassTextField.getText());
+        DBConfigProps.setProperty("DBName", DBNameTextField.getText());
+        this.saveDBConfig();
+        
         this.InformationLabel.setText("Connected!");
         this.jPanel2.removeAll();
         this.MeetInfoMenu.setEnabled(true);
@@ -263,8 +320,8 @@ public class MeetDirector extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitMenuItemActionPerformed
 
     private void MeetInfoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MeetInfoMenuActionPerformed
-        MeetInfoDialog meetinfo = new MeetInfoDialog(this, true);
-        meetinfo.main(null);// TODO add your handling code here:
+
+        MeetInfoDialog.main(null);// TODO add your handling code here:
     }//GEN-LAST:event_MeetInfoMenuActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
@@ -300,6 +357,7 @@ public class MeetDirector extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MeetDirector().setVisible(true);
             }

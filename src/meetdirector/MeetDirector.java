@@ -247,7 +247,7 @@ public class MeetDirector extends javax.swing.JFrame {
             }
         });
 
-        MeetInfoMenu.setLabel("Meet Info");
+        MeetInfoMenu.setText("Meet announcement");
         MeetInfoMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MeetInfoMenuActionPerformed(evt);
@@ -321,7 +321,7 @@ public class MeetDirector extends javax.swing.JFrame {
 
     private void MeetInfoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MeetInfoMenuActionPerformed
 
-        MeetInfoDialog.main(null);// TODO add your handling code here:
+        MeetAnnouncementDialog.main(null);// TODO add your handling code here:
     }//GEN-LAST:event_MeetInfoMenuActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed

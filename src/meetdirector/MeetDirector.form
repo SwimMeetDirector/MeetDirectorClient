@@ -29,7 +29,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MeetInfoMenu">
               <Properties>
-                <Property name="label" type="java.lang.String" value="Meet Info"/>
+                <Property name="text" type="java.lang.String" value="Meet announcement"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MeetInfoMenuActionPerformed"/>

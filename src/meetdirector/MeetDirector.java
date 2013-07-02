@@ -321,7 +321,7 @@ public class MeetDirector extends javax.swing.JFrame {
 
     private void MeetInfoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MeetInfoMenuActionPerformed
 
-        MeetAnnouncementDialog.main(null);// TODO add your handling code here:
+        MeetAnnouncementDialog.openWindow(null);// TODO add your handling code here:
     }//GEN-LAST:event_MeetInfoMenuActionPerformed
 
     private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed

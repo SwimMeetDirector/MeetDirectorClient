@@ -70,6 +70,19 @@ public class MeetDBConnection {
         return rc;
     }
     
+    public <T> T findObject(Class classtype, String unit, Object pk) {
+        EntityManagerFactory emf;
+        Object rc;
+        emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());
+        EntityManager em = emf.createEntityManager();
+        
+        rc = em.find(classtype, pk);
+       
+        em.close();
+        emf.close();
+        return (T)rc;
+    }
+    
     public EntityManagerFactory getEmf(String unit) {
         EntityManagerFactory emf;
         emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());

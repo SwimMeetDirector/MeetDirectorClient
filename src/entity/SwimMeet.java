@@ -48,13 +48,7 @@ public class SwimMeet implements Serializable {
         EntityManager em;
         MeetDBConnection conn = MeetDBConnection.getDBConnection();
         
-        // Theres only ever one entry of this type in the db
-        emf = conn.getEmf(PersistenceUnit);
-        em = emf.createEntityManager();
-        
-        meet = em.find(SwimMeet.class, 1L);
-        em.close();
-        emf.close();
+        meet = conn.findObject(SwimMeet.class, PersistenceUnit, 1L);
         
         if (meet == null) {
             meet = new SwimMeet();

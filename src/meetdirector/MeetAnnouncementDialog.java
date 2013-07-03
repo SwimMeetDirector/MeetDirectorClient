@@ -11,14 +11,27 @@ import entity.SwimMeet;
  * @author nhorman
  */
 public class MeetAnnouncementDialog extends javax.swing.JDialog {
-    private SwimMeet MeetInfo = null;
+    private SwimMeet meet = null;
     /**
      * Creates new form MeetInfoDialog
      */
     public MeetAnnouncementDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        MeetInfo = SwimMeet.getSwimMeet();
+        meet = SwimMeet.getSwimMeet();
+        this.MeetNameText.setText(meet.getMeetName());
+        this.MeetHostText.setText(meet.getMeetHost());
+        this.MeetAddressText.setText(meet.getAddress());
+        this.MeetDirectorNameText.setText(meet.getDirector()[SwimMeet.NAME_INDEX]);
+        this.MeetDirectorEmailText.setText(meet.getDirector()[SwimMeet.EMAIL_INDEX]);
+        this.EntryCoordinatorNameText.setText(meet.getEntryCoordinator()[SwimMeet.NAME_INDEX]);
+        this.EntryCoordinatorEmailText.setText(meet.getEntryCoordinator()[SwimMeet.EMAIL_INDEX]);
+        this.RefereeNameText.setText(meet.getReferee()[SwimMeet.NAME_INDEX]);
+        this.RefereeEmailText.setText(meet.getReferee()[SwimMeet.EMAIL_INDEX]);
+        this.MarshallNameText.setText(meet.getMarshall()[SwimMeet.NAME_INDEX]);
+        this.MarshallEmailText.setText(meet.getMarshall()[SwimMeet.EMAIL_INDEX]);
+        this.SanctionNumberText.setText(meet.getSanction());
+        this.AnnouncementText.setText(meet.getAnnouncementText());
     }
 
     /**
@@ -56,10 +69,10 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         MarshallEmailText = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        SanctinoNumberText = new javax.swing.JTextField();
+        SanctionNumberText = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        AnnouncementText = new javax.swing.JTextArea();
         CancelButton = new javax.swing.JButton();
         AcceptButton = new javax.swing.JButton();
 
@@ -99,9 +112,9 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
 
         jLabel14.setText("Announcement Text");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
+        AnnouncementText.setColumns(20);
+        AnnouncementText.setRows(5);
+        jScrollPane2.setViewportView(AnnouncementText);
 
         CancelButton.setText("Cancel");
         CancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,6 +124,11 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
         });
 
         AcceptButton.setText("Accept");
+        AcceptButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AcceptButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -168,7 +186,7 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
                                     .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(SanctinoNumberText, javax.swing.GroupLayout.Alignment.LEADING)))
+                                        .addComponent(SanctionNumberText, javax.swing.GroupLayout.Alignment.LEADING)))
                                 .addGap(131, 131, 131))))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,7 +212,7 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
                 .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(SanctinoNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(SanctionNumberText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MeetDirectorNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,6 +278,31 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_CancelButtonActionPerformed
 
+    private void AcceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptButtonActionPerformed
+        String names[] = new String[2];
+        SwimMeet change = SwimMeet.beginUpdate();
+        change.setMeetName(MeetNameText.getText());
+        change.setMeetHost(MeetHostText.getText());
+        change.setAddress(MeetAddressText.getText());
+        names[SwimMeet.NAME_INDEX] = MeetDirectorNameText.getText();
+        names[SwimMeet.EMAIL_INDEX] = MeetDirectorEmailText.getText();
+        change.setDirector(names);
+        names[SwimMeet.NAME_INDEX] = EntryCoordinatorNameText.getText();
+        names[SwimMeet.EMAIL_INDEX] = EntryCoordinatorEmailText.getText();
+        change.setEntryCoordinator(names);
+        names[SwimMeet.NAME_INDEX] = RefereeNameText.getText();
+        names[SwimMeet.EMAIL_INDEX] = RefereeEmailText.getText();
+        change.setReferee(names);
+        names[SwimMeet.NAME_INDEX] = MarshallNameText.getText();
+        names[SwimMeet.EMAIL_INDEX] = MarshallEmailText.getText();
+        change.setMarshall(names);
+        change.setSanction(SanctionNumberText.getText());
+        change.setAnnouncementText(AnnouncementText.getText());
+        
+        change.commitUpdate();
+        this.dispose();
+    }//GEN-LAST:event_AcceptButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -303,6 +346,7 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AcceptButton;
+    private javax.swing.JTextArea AnnouncementText;
     private javax.swing.JButton CancelButton;
     private javax.swing.JTextField EntryCoordinatorEmailText;
     private javax.swing.JTextField EntryCoordinatorNameText;
@@ -315,7 +359,7 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
     private javax.swing.JTextField MeetNameText;
     private javax.swing.JTextField RefereeEmailText;
     private javax.swing.JTextField RefereeNameText;
-    private javax.swing.JTextField SanctinoNumberText;
+    private javax.swing.JTextField SanctionNumberText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -333,6 +377,5 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

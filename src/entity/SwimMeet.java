@@ -24,22 +24,58 @@ public class SwimMeet implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private static int EMAIL_INDEX=1;
-    private static int NAME_INDEX=0;
-    private String MeetName;
-    private String MeetHost;
-    private String Address;
-    private String[] Director;
-    private String[] EntryCoordinator;
-    private String[] Referee;
-    private String[] Marshall;
-    private String Sanction;
-    private String AnnouncementText;
-    private static final String PersistenceUnit = "SwimMeetPU";
+    public static int EMAIL_INDEX=1;
+    public static int NAME_INDEX=0;
+    protected String MeetName;
+    protected String MeetHost;
+    protected String Address;
+    protected String[] Director;
+    protected String[] EntryCoordinator;
+    protected String[] Referee;
+    protected String[] Marshall;
+    protected String Sanction;
+    protected String AnnouncementText;
+    protected static final String PersistenceUnit = "SwimMeetPU";
     
     public Boolean persist() {
         MeetDBConnection conn = MeetDBConnection.getDBConnection();
         return conn.storeObject(this, PersistenceUnit);
+    }
+    
+    protected SwimMeet(SwimMeet orig) {
+        this.MeetName = new String(orig.MeetName);
+        this.MeetHost = new String(orig.MeetHost);
+        this.Address = new String(orig.Address);
+        this.Director[this.NAME_INDEX] = new String(orig.Director[this.NAME_INDEX]);
+        this.Director[this.EMAIL_INDEX] = new String(orig.Director[this.EMAIL_INDEX]);
+        this.EntryCoordinator[this.NAME_INDEX] = new String(orig.EntryCoordinator[this.NAME_INDEX]);
+        this.EntryCoordinator[this.EMAIL_INDEX] = new String(orig.EntryCoordinator[this.EMAIL_INDEX]);
+        this.Referee[this.NAME_INDEX] = new String(orig.Referee[this.NAME_INDEX]);
+        this.Referee[this.EMAIL_INDEX] = new String(orig.Referee[this.EMAIL_INDEX]);
+        this.Marshall[this.NAME_INDEX] = new String(orig.Marshall[this.NAME_INDEX]);
+        this.Marshall[this.EMAIL_INDEX] = new String(orig.Marshall[this.EMAIL_INDEX]);
+        this.Sanction = new String (orig.Sanction);
+        this.AnnouncementText = new String(orig.AnnouncementText);
+    }
+    
+    protected SwimMeet() {
+        this.MeetName = "";
+        this.MeetHost = "";
+        this.Address = "";
+        this.Director = new String[2];
+        this.Director[this.NAME_INDEX] = "";
+        this.Director[this.EMAIL_INDEX] = "";
+        this.EntryCoordinator = new String[2];
+        this.EntryCoordinator[this.NAME_INDEX] = "";
+        this.EntryCoordinator[this.EMAIL_INDEX] = "";
+        this.Referee = new String[2];
+        this.Referee[this.NAME_INDEX] = "";
+        this.Referee[this.EMAIL_INDEX] = "";
+        this.Marshall = new String[2];
+        this.Marshall[this.NAME_INDEX] = "";
+        this.Marshall[this.EMAIL_INDEX] = "";
+        this.Sanction = "";
+        this.AnnouncementText = "";
     }
     
     public static SwimMeet getSwimMeet() {
@@ -48,7 +84,7 @@ public class SwimMeet implements Serializable {
         EntityManager em;
         MeetDBConnection conn = MeetDBConnection.getDBConnection();
         
-        meet = conn.findObject(SwimMeet.class, PersistenceUnit, 1L);
+        meet = conn.findObject(SwimMeet.class, SwimMeet.PersistenceUnit, 1L);
         
         if (meet == null) {
             meet = new SwimMeet();
@@ -56,6 +92,36 @@ public class SwimMeet implements Serializable {
         }
         
         return meet;
+    }
+    
+    public static SwimMeet beginUpdate() {
+        SwimMeet slave = new SwimMeet();
+        return slave;
+    }
+  
+    public void commitUpdate() {
+        MeetDBConnection conn = MeetDBConnection.getDBConnection();
+        EntityManagerFactory emf = conn.getEmf(this.PersistenceUnit);
+        EntityManager em = emf.createEntityManager();
+        
+        SwimMeet master = em.find(SwimMeet.class, 1L);
+        em.getTransaction().begin();
+        
+        master.MeetName = this.MeetName;
+        master.MeetHost = this.MeetHost;
+        master.Address = this.Address;
+        master.Director[this.NAME_INDEX] = this.Director[this.NAME_INDEX];
+        master.Director[this.EMAIL_INDEX] = this.Director[this.EMAIL_INDEX];
+        master.EntryCoordinator[this.NAME_INDEX] = this.EntryCoordinator[this.NAME_INDEX];
+        master.EntryCoordinator[this.EMAIL_INDEX] = this.EntryCoordinator[this.EMAIL_INDEX];
+        master.Referee[this.NAME_INDEX] = this.Referee[this.NAME_INDEX];
+        master.Referee[this.EMAIL_INDEX] = this.Referee[this.EMAIL_INDEX];
+        master.Marshall[this.NAME_INDEX] = this.Marshall[this.NAME_INDEX];
+        master.Marshall[this.EMAIL_INDEX] = this.Marshall[this.EMAIL_INDEX];
+        master.Sanction = this.Sanction;
+        master.AnnouncementText = this.AnnouncementText;
+        
+        em.getTransaction().commit();
     }
     
     public Long getId() {

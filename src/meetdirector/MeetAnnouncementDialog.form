@@ -107,7 +107,7 @@
                                       <Component id="jLabel13" min="-2" pref="223" max="-2" attributes="0"/>
                                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="jLabel14" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="SanctinoNumberText" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="SanctionNumberText" alignment="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="131" max="-2" attributes="0"/>
@@ -144,7 +144,7 @@
                   <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="SanctinoNumberText" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="SanctionNumberText" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="MeetDirectorNameText" min="-2" max="-2" attributes="0"/>
@@ -296,7 +296,7 @@
             <Property name="text" type="java.lang.String" value="Sanction Number"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="SanctinoNumberText">
+        <Component class="javax.swing.JTextField" name="SanctionNumberText">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
@@ -310,7 +310,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="AnnouncementText">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
@@ -330,6 +330,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Accept"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AcceptButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

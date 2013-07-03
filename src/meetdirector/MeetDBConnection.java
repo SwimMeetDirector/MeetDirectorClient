@@ -76,6 +76,7 @@ public class MeetDBConnection {
         try {
             em.getTransaction().begin();
             em.persist(obj);
+            em.flush();
             em.getTransaction().commit();
         }
         catch (Exception except) {

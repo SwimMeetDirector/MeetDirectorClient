@@ -3,7 +3,6 @@
   <persistence-unit name="SwimMeetPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>entity.SwimMeet</class>
-    <class>entity.SwimMeetSession</class>
     <properties>
       <property name="hibernate.connection.username" value="nhorman"/>
       <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver"/>
@@ -12,7 +11,7 @@
       <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
-  <persistence-unit name="MeetObjectsPU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="MeetObjectPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <properties>
       <property name="hibernate.connection.username" value="nhorman"/>

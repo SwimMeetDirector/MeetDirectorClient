@@ -101,11 +101,12 @@ public class MeetDBConnection {
     }
     
     public EntityManagerFactory getEmf(String unit) {
-        EntityManagerFactory emf;
-        emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());
-        return emf;
+        return (EntityManagerFactory)this.EmfMap.get(unit);
     }
     
+    public EntityManager getEm(String unit) {
+        return (EntityManager)this.EmMap.get(unit);
+    }
     public static MeetDBConnection getDBConnection() {
         if (instance == null)
                 instance = new MeetDBConnection();
@@ -142,6 +143,7 @@ public class MeetDBConnection {
             status = "Odd problem closing connection";
         }
         this.registerPersistenceUnit("SwimMeetPU");
+        this.registerPersistenceUnit("MeetObjectPU");
         return true;
     }
     

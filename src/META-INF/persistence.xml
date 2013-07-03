@@ -13,6 +13,7 @@
   </persistence-unit>
   <persistence-unit name="MeetObjectPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>entity.SwimMeetSession</class>
     <properties>
       <property name="hibernate.connection.username" value="nhorman"/>
       <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver"/>

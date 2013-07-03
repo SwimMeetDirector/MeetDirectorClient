@@ -83,9 +83,6 @@ public class MeetDBConnection {
             em.getTransaction().rollback();
             rc = false;
         }
-        finally {
-            em.flush();
-        }
         return rc;
     }
     

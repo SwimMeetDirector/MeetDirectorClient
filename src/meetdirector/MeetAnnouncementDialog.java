@@ -287,12 +287,15 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
         names[SwimMeet.NAME_INDEX] = MeetDirectorNameText.getText();
         names[SwimMeet.EMAIL_INDEX] = MeetDirectorEmailText.getText();
         change.setDirector(names);
+        names = new String[2];
         names[SwimMeet.NAME_INDEX] = EntryCoordinatorNameText.getText();
         names[SwimMeet.EMAIL_INDEX] = EntryCoordinatorEmailText.getText();
         change.setEntryCoordinator(names);
+        names = new String[2];
         names[SwimMeet.NAME_INDEX] = RefereeNameText.getText();
         names[SwimMeet.EMAIL_INDEX] = RefereeEmailText.getText();
         change.setReferee(names);
+        names = new String[2];
         names[SwimMeet.NAME_INDEX] = MarshallNameText.getText();
         names[SwimMeet.EMAIL_INDEX] = MarshallEmailText.getText();
         change.setMarshall(names);

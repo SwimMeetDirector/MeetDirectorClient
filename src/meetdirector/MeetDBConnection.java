@@ -26,9 +26,12 @@ public class MeetDBConnection {
     private Connection conn = null;
     private String user = null;
     private String pass = null;
+    private HashMap EmfMap;
+    private HashMap EmMap;
     
     protected MeetDBConnection() {
-         
+        EmfMap = new HashMap();
+        EmMap = new HashMap();
     }
     
     public void SetConnectionParams(String server, String port, String name, String user, String pass) {
@@ -48,13 +51,30 @@ public class MeetDBConnection {
         return pmap;
     }
     
-    public Boolean storeObject(Object obj, String unit) {
+    public Boolean registerPersistenceUnit(String unit) {
         EntityManagerFactory emf;
-        Boolean rc = true;
+        EntityManager em;
+        
+        if (EmfMap.get(unit) != null)
+            return false;
         emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        em = emf.createEntityManager();
+        EmfMap.put(unit, emf);
+        EmMap.put(unit, em);
+        return true;
+    }
+    
+    public Boolean storeObject(Object obj, String unit) {
+        EntityManager em;
+        Boolean rc = true;
+        
+        em = (EntityManager)this.EmMap.get(unit);
+        
+        if (em == null)
+            return false;
+        
         try {
+            em.getTransaction().begin();
             em.persist(obj);
             em.getTransaction().commit();
         }
@@ -64,8 +84,7 @@ public class MeetDBConnection {
             rc = false;
         }
         finally {
-            em.close();
-            emf.close();
+            em.flush();
         }
         return rc;
     }
@@ -124,6 +143,7 @@ public class MeetDBConnection {
         catch (Exception except) {
             status = "Odd problem closing connection";
         }
+        this.registerPersistenceUnit("SwimMeetPU");
         return true;
     }
     

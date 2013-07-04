@@ -98,6 +98,7 @@ public class MeetDirector extends javax.swing.JFrame {
         ExitMenuItem = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         MeetInfoMenu = new javax.swing.JMenuItem();
+        ImportMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -255,6 +256,9 @@ public class MeetDirector extends javax.swing.JFrame {
         });
         jMenu4.add(MeetInfoMenu);
 
+        ImportMenuItem.setText("Import meet Data");
+        jMenu4.add(ImportMenuItem);
+
         jMenuBar2.add(jMenu4);
 
         setJMenuBar(jMenuBar2);
@@ -371,6 +375,7 @@ public class MeetDirector extends javax.swing.JFrame {
     private javax.swing.JTextField DBPortTextField;
     private javax.swing.JTextField DBUserTextField;
     private javax.swing.JMenuItem ExitMenuItem;
+    private javax.swing.JMenuItem ImportMenuItem;
     private javax.swing.JLabel InformationLabel;
     private javax.swing.JMenuItem MeetInfoMenu;
     private javax.swing.JCheckBox NewDBTextBox;

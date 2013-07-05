@@ -4,9 +4,11 @@
  */
 package meetdirector;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Properties;
+import javax.swing.JFileChooser;
 
 
 /**
@@ -26,7 +28,7 @@ public class MeetDirector extends javax.swing.JFrame {
         this.MeetInfoMenu.setEnabled(false);
         DBConfigProps = new Properties();
         this.loadDBConfig();
-        
+        this.MainPanel.setVisible(false);
     }
 
     protected void loadDBConfig() {
@@ -78,7 +80,8 @@ public class MeetDirector extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        ImportChooser = new javax.swing.JFileChooser();
+        ConnectPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         DBHostTextField = new javax.swing.JTextField();
@@ -93,12 +96,16 @@ public class MeetDirector extends javax.swing.JFrame {
         DBNameTextField = new javax.swing.JTextField();
         InformationLabel = new javax.swing.JLabel();
         NewDBTextBox = new javax.swing.JCheckBox();
+        MainPanel = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         ExitMenuItem = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        MeetImportMenuItem = new javax.swing.JMenu();
         MeetInfoMenu = new javax.swing.JMenuItem();
         ImportMenuItem = new javax.swing.JMenuItem();
+
+        ImportChooser.setDialogTitle("Import Meet XML");
+        ImportChooser.getAccessibleContext().setAccessibleParent(MainPanel);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -145,75 +152,75 @@ public class MeetDirector extends javax.swing.JFrame {
 
         NewDBTextBox.setText("New DB");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout ConnectPanelLayout = new javax.swing.GroupLayout(ConnectPanel);
+        ConnectPanel.setLayout(ConnectPanelLayout);
+        ConnectPanelLayout.setHorizontalGroup(
+            ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ConnectPanelLayout.createSequentialGroup()
+                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ConnectPanelLayout.createSequentialGroup()
                         .addGap(137, 137, 137)
                         .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(ConnectPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(ConnectPanelLayout.createSequentialGroup()
                                     .addComponent(DBHostTextField)
                                     .addGap(9, 9, 9)))
                             .addComponent(jLabel1))
                         .addGap(116, 116, 116)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
                             .addComponent(DBUserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DBPassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(ConnectPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(ConnectPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(DBNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DBPortTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(NewDBTextBox)))
                 .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConnectPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(InformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(ConnectPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(ConnectButton)))
                 .addGap(23, 23, 23))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        ConnectPanelLayout.setVerticalGroup(
+            ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ConnectPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addGap(27, 27, 27)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(DBHostTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DBUserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DBPortTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(DBPassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(DBNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NewDBTextBox))
                 .addGap(18, 18, 18)
@@ -229,6 +236,17 @@ public class MeetDirector extends javax.swing.JFrame {
         DBPassTextField.getAccessibleContext().setAccessibleName("DBPass");
         InformationLabel.getAccessibleContext().setAccessibleName("InformationLabel");
 
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 895, Short.MAX_VALUE)
+        );
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 759, Short.MAX_VALUE)
+        );
+
         jMenu3.setText("File");
 
         ExitMenuItem.setLabel("Exit");
@@ -241,10 +259,10 @@ public class MeetDirector extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
-        jMenu4.setText("Meet");
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+        MeetImportMenuItem.setText("Meet");
+        MeetImportMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
+                MeetImportMenuItemActionPerformed(evt);
             }
         });
 
@@ -254,12 +272,17 @@ public class MeetDirector extends javax.swing.JFrame {
                 MeetInfoMenuActionPerformed(evt);
             }
         });
-        jMenu4.add(MeetInfoMenu);
+        MeetImportMenuItem.add(MeetInfoMenu);
 
-        ImportMenuItem.setText("Import meet Data");
-        jMenu4.add(ImportMenuItem);
+        ImportMenuItem.setText("Import Meet Entries");
+        ImportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportMenuItemActionPerformed(evt);
+            }
+        });
+        MeetImportMenuItem.add(ImportMenuItem);
 
-        jMenuBar2.add(jMenu4);
+        jMenuBar2.add(MeetImportMenuItem);
 
         setJMenuBar(jMenuBar2);
 
@@ -269,18 +292,24 @@ public class MeetDirector extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(210, 210, 210)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ConnectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(218, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(180, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(ConnectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(192, 192, 192))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        jPanel2.getAccessibleContext().setAccessibleName("DBConnectionPanel");
+        ConnectPanel.getAccessibleContext().setAccessibleName("DBConnectionPanel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -301,7 +330,8 @@ public class MeetDirector extends javax.swing.JFrame {
         this.saveDBConfig();
         
         this.InformationLabel.setText("Connected!");
-        this.jPanel2.removeAll();
+        this.ConnectPanel.setVisible(false);
+        this.MainPanel.setVisible(true);
         this.MeetInfoMenu.setEnabled(true);
         
         // TODO add your handling code here:
@@ -328,9 +358,22 @@ public class MeetDirector extends javax.swing.JFrame {
         MeetAnnouncementDialog.openWindow(null);// TODO add your handling code here:
     }//GEN-LAST:event_MeetInfoMenuActionPerformed
 
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenu4ActionPerformed
+    private void MeetImportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MeetImportMenuItemActionPerformed
+             // TODO add your handling code here:
+    }//GEN-LAST:event_MeetImportMenuItemActionPerformed
+
+    private void ImportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportMenuItemActionPerformed
+
+        ImportChooser.setFileFilter(new XmlFileFilter());
+        int retval = ImportChooser.showOpenDialog(this.MainPanel);// TODO add your handling code here:
+        if (retval == JFileChooser.APPROVE_OPTION) {
+            File file = ImportChooser.getSelectedFile();
+            MeetEntriesImportDialog importer = new MeetEntriesImportDialog(new javax.swing.JFrame(), true);
+            Thread t = new Thread(importer);
+            t.start();
+            importer.ImportMeetEntries(file);
+        }
+    }//GEN-LAST:event_ImportMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -369,14 +412,18 @@ public class MeetDirector extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ConnectButton;
+    private javax.swing.JPanel ConnectPanel;
     private javax.swing.JTextField DBHostTextField;
     private javax.swing.JTextField DBNameTextField;
     private javax.swing.JPasswordField DBPassTextField;
     private javax.swing.JTextField DBPortTextField;
     private javax.swing.JTextField DBUserTextField;
     private javax.swing.JMenuItem ExitMenuItem;
+    private javax.swing.JFileChooser ImportChooser;
     private javax.swing.JMenuItem ImportMenuItem;
     private javax.swing.JLabel InformationLabel;
+    private javax.swing.JPanel MainPanel;
+    private javax.swing.JMenu MeetImportMenuItem;
     private javax.swing.JMenuItem MeetInfoMenu;
     private javax.swing.JCheckBox NewDBTextBox;
     private javax.swing.JLabel jLabel1;
@@ -386,8 +433,6 @@ public class MeetDirector extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }

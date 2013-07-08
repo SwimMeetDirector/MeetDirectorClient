@@ -4,22 +4,28 @@
  */
 package meetdirector;
 
+import entity.SwimMeetClub;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
+import org.usa_swimming.xsdif.ClubEntryType;
 import org.usa_swimming.xsdif.MeetEntryFileType;
 
 /**
  *
  * @author nhorman
  */
-public class MeetEntriesImportDialog extends javax.swing.JDialog implements Runnable {
+public class MeetEntriesImportDialog extends javax.swing.JDialog {
 
+    private static MeetEntriesImportDialog myself = null;
+    
     /**
      * Creates new form MeetImportDialog
      */
@@ -91,12 +97,27 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog implements Runn
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    protected void importMeetEntry(MeetEntryFileType meet) {
+        List<ClubEntryType> clubs;
+        // Start by getting the clubs in this meet and adding any
+        // That aren't already in the database
+        clubs = meet.getClubs().getClub();
+        Iterator<ClubEntryType> iterator = clubs.iterator();
+        
+        while (iterator.hasNext()) {
+            ClubEntryType club = iterator.next();
+            SwimMeetClub DbClub = SwimMeetClub.GetClub(club.getLSCCode(), club.getClubCode());
+            if (DbClub == null) {
+                System.out.println("Club " + club.getLSCCode() + ":" + club.getClubCode() + " Not found");
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
     public void ImportMeetEntries(File file) {
         /* Set the Nimbus look and feel */
-        MeetEntryFileType meetEntry;
+        MeetEntryFileType meetEntry = null;
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -127,16 +148,39 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog implements Runn
             XMLEventReader xer = XMLInputFactory.newInstance().createXMLEventReader(in);
             JAXBElement <MeetEntryFileType> meetEntryElement = u.unmarshal(xer, MeetEntryFileType.class);
             meetEntry = meetEntryElement.getValue();
+            
         } catch (Exception e) {
             e.printStackTrace();
+            this.ImportResultsText.append("Unable to find meet entry information in file");
+            this.DismissButton.setEnabled(true);
+            return;
         }
+        //Now We need to start importing objects from the file
+        this.importMeetEntry(meetEntry);
+        this.DismissButton.setEnabled(true);
             
     }
     
-    @Override
-    public void run() {
+
+    
+    public void OpenWindow() {
+        if (myself != null)
+            return;
+        myself = this;
         this.DismissButton.setEnabled(false);
-        this.setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                
+                myself.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        return;
+                    }
+                });
+                myself.setVisible(true);
+                myself = null;
+            }
+        });
     }
         
     

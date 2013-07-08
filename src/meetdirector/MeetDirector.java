@@ -369,8 +369,7 @@ public class MeetDirector extends javax.swing.JFrame {
         if (retval == JFileChooser.APPROVE_OPTION) {
             File file = ImportChooser.getSelectedFile();
             MeetEntriesImportDialog importer = new MeetEntriesImportDialog(new javax.swing.JFrame(), true);
-            Thread t = new Thread(importer);
-            t.start();
+            importer.OpenWindow();
             importer.ImportMeetEntries(file);
         }
     }//GEN-LAST:event_ImportMenuItemActionPerformed

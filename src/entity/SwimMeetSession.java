@@ -24,7 +24,7 @@ public class SwimMeetSession implements Serializable {
     private Long id;
     
     private String SessionName;
-    protected static final String PersistenceUnit = "SwimMeetPU";
+    protected static final String PersistenceUnit = "MeetObjectPU";
     
     public SwimMeetSession() {
         SessionName = "";

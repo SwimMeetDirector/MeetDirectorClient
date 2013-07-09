@@ -35,8 +35,8 @@ public class MeetDBConnection {
     }
     
     public void SetConnectionParams(String server, String port, String name, String user, String pass) {
-        DbUrl = "jdbc:derby://";
-        DbUrl = DbUrl + server + ":" + port + "/" + name;
+        this.DbUrl = "jdbc:derby://";
+        this.DbUrl = this.DbUrl + server + ":" + port + "/" + name;
         this.user = user;
         this.pass = pass; 
     }
@@ -44,10 +44,10 @@ public class MeetDBConnection {
     public Map getDBConnectionProperties() {
         Map pmap = new HashMap();
         if (this.pass != null)
-            pmap.put("javax.persistence.jdbc.password", pass);
+            pmap.put("hibernate.connection.password", pass);
         if (this.user != null)
-            pmap.put("javax.persistence.jdbc.user", user);
-        pmap.put("javax.persistence.jdbc.url", DbUrl);
+            pmap.put("hibernate.connection.username", user);
+        pmap.put("hibernate.connection.url", this.DbUrl);
         return pmap;
     }
     
@@ -115,7 +115,7 @@ public class MeetDBConnection {
     
     public Boolean Connect(Boolean newDb) {
         try {
-            String sendUrl = DbUrl;
+            String sendUrl = this.DbUrl;
             if (this.user != null)
                 sendUrl = sendUrl + ";user=" + this.user;
             if (this.pass != null)

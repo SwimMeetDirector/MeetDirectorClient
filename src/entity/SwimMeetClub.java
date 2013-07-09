@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Query;
 import meetdirector.MeetDBConnection;
+import org.usa_swimming.xsdif.ClubEntryType;
 import org.usa_swimming.xsdif.LscCodeType;
 
 /**
@@ -36,6 +37,28 @@ public class SwimMeetClub implements Serializable {
     private String clubCode;
     private LscCodeType lscCode;
     protected static final String PersistenceUnit = "MeetObjectPU";
+    
+    public SwimMeetClub(ClubEntryType club) {
+        this.clubFullName = new String(club.getClubFullName());
+        this.clubShortName = new String(club.getClubShortName());
+        this.phone = club.getPhone();
+        this.fax = club.getFax();
+        this.mobilePhone = club.getMobilePhone();
+        this.clubCode = new String(club.getClubCode());
+        this.lscCode = club.getLSCCode();
+        this.persist();
+    }
+    
+    public SwimMeetClub() {
+        this.clubFullName = null;
+        this.clubShortName = null;
+        this.clubCode = null;
+    }
+    // Add this object and all persistable children objects to the database
+    public Boolean persist() {
+        MeetDBConnection conn = MeetDBConnection.getDBConnection();
+        return conn.storeObject(this, PersistenceUnit);
+    }
     
     public Long getId() {
         return id;

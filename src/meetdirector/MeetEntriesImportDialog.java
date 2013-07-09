@@ -55,6 +55,11 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         DismissButton.setText("Dismiss");
+        DismissButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DismissButtonActionPerformed(evt);
+            }
+        });
 
         ImportResultsText.setEditable(false);
         ImportResultsText.setColumns(20);
@@ -97,6 +102,10 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void DismissButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DismissButtonActionPerformed
+        this.dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_DismissButtonActionPerformed
+
     protected void importMeetEntry(MeetEntryFileType meet) {
         List<ClubEntryType> clubs;
         // Start by getting the clubs in this meet and adding any
@@ -108,7 +117,10 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
             ClubEntryType club = iterator.next();
             SwimMeetClub DbClub = SwimMeetClub.GetClub(club.getLSCCode(), club.getClubCode());
             if (DbClub == null) {
-                System.out.println("Club " + club.getLSCCode() + ":" + club.getClubCode() + " Not found");
+                this.ImportResultsText.append("Club " + club.getLSCCode() + ":" + club.getClubCode() + " Not found..adding");
+                DbClub = new SwimMeetClub(club);
+            } else {
+                this.ImportResultsText.append("Club " + club.getLSCCode() + ":" + club.getClubCode() + " Found..skipping add");
             }
         }
     }

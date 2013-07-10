@@ -19,7 +19,7 @@ import meetdirector.MeetDBConnection;
  * @author nhorman
  */
 @Entity
-public class SwimMeet implements Serializable {
+public class SwimMeet extends PersistingObject implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,12 +35,8 @@ public class SwimMeet implements Serializable {
     protected String[] Marshall;
     protected String Sanction;
     protected String AnnouncementText;
-    protected static final String PersistenceUnit = "SwimMeetPU";
+    protected static final String myPersistenceUnit = "SwimMeetPU";
     
-    public Boolean persist() {
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        return conn.storeObject(this, PersistenceUnit);
-    }
     
     protected SwimMeet(SwimMeet orig) {
         this.MeetName = new String(orig.MeetName);
@@ -56,6 +52,7 @@ public class SwimMeet implements Serializable {
         this.Marshall[this.EMAIL_INDEX] = new String(orig.Marshall[this.EMAIL_INDEX]);
         this.Sanction = new String (orig.Sanction);
         this.AnnouncementText = new String(orig.AnnouncementText);
+        this.PersistenceUnit = this.myPersistenceUnit;
     }
     
     protected SwimMeet() {
@@ -76,6 +73,7 @@ public class SwimMeet implements Serializable {
         this.Marshall[this.EMAIL_INDEX] = "";
         this.Sanction = "";
         this.AnnouncementText = "";
+        this.PersistenceUnit = this.myPersistenceUnit;
     }
     
     public static SwimMeet getSwimMeet() {
@@ -84,7 +82,7 @@ public class SwimMeet implements Serializable {
         EntityManager em;
         MeetDBConnection conn = MeetDBConnection.getDBConnection();
         
-        meet = conn.findObject(SwimMeet.class, SwimMeet.PersistenceUnit, 1L);
+        meet = conn.findObject(SwimMeet.class, "SwimMeetPU", 1L);
         
         if (meet == null) {
             meet = new SwimMeet();

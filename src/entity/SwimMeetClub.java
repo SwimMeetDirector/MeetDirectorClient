@@ -36,6 +36,7 @@ public class SwimMeetClub implements Serializable {
     private BigInteger mobilePhone;
     private String clubCode;
     private LscCodeType lscCode;
+    private SwimMeetAthlete[] athletes;
     protected static final String PersistenceUnit = "MeetObjectPU";
     
     public SwimMeetClub(ClubEntryType club) {
@@ -46,6 +47,7 @@ public class SwimMeetClub implements Serializable {
         this.mobilePhone = club.getMobilePhone();
         this.clubCode = new String(club.getClubCode());
         this.lscCode = club.getLSCCode();
+        this.athletes = new SwimMeetAthlete[club.getAthleteCount().intValue()];
         this.persist();
     }
     
@@ -53,6 +55,7 @@ public class SwimMeetClub implements Serializable {
         this.clubFullName = null;
         this.clubShortName = null;
         this.clubCode = null;
+        this.athletes = null;
     }
     // Add this object and all persistable children objects to the database
     public Boolean persist() {

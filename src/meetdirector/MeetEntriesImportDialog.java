@@ -173,7 +173,10 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
             
     }
     
-
+    public static void UpdateLog(String msg) {
+        if (myself != null)
+            myself.ImportResultsText.append(msg);
+    }
     
     public void OpenWindow() {
         if (myself != null)

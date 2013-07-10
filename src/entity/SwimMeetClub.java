@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Query;
 import meetdirector.MeetDBConnection;
+import org.usa_swimming.xsdif.AthleteEntryType;
 import org.usa_swimming.xsdif.ClubEntryType;
 import org.usa_swimming.xsdif.LscCodeType;
 
@@ -40,6 +41,8 @@ public class SwimMeetClub implements Serializable {
     protected static final String PersistenceUnit = "MeetObjectPU";
     
     public SwimMeetClub(ClubEntryType club) {
+        List<AthleteEntryType> athletes;
+        int i = 0;
         this.clubFullName = new String(club.getClubFullName());
         this.clubShortName = new String(club.getClubShortName());
         this.phone = club.getPhone();
@@ -48,6 +51,12 @@ public class SwimMeetClub implements Serializable {
         this.clubCode = new String(club.getClubCode());
         this.lscCode = club.getLSCCode();
         this.athletes = new SwimMeetAthlete[club.getAthleteCount().intValue()];
+        athletes = club.getAthleteEntries().getAthleteEntry();
+        Iterator<AthleteEntryType> iterator = athletes.iterator();
+        while (iterator.hasNext()) {
+            AthleteEntryType athlete = iterator.next();
+            this.athletes[i] = new SwimMeetAthlete(athlete);
+        }
         this.persist();
     }
     

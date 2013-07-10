@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.usa_swimming.xsdif.AthleteEntryType;
 
 /**
  *
@@ -21,6 +22,14 @@ public class SwimMeetAthlete implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    public SwimMeetAthlete(AthleteEntryType athlete) {
+        this.id = null;
+    }
+    
+    public SwimMeetAthlete() {
+        this.id = null;
+    }
+    
     public Long getId() {
         return id;
     }

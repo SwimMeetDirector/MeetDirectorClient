@@ -17,7 +17,7 @@ import meetdirector.MeetDBConnection;
  * @author nhorman
  */
 @Entity
-public class SwimMeetSession implements Serializable {
+public class SwimMeetSession extends PersistingObject implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,11 +28,6 @@ public class SwimMeetSession implements Serializable {
     
     public SwimMeetSession() {
         SessionName = "";
-    }
-    
-    public Boolean persist() {
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        return conn.storeObject(this, PersistenceUnit);
     }
     
     public void beginUpdate() {

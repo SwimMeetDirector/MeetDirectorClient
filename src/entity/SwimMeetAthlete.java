@@ -16,7 +16,7 @@ import org.usa_swimming.xsdif.AthleteEntryType;
  * @author nhorman
  */
 @Entity
-public class SwimMeetAthlete implements Serializable {
+public class SwimMeetAthlete extends PersistingObject implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

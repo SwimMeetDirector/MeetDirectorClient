@@ -24,7 +24,7 @@ import org.usa_swimming.xsdif.LscCodeType;
  * @author nhorman
  */
 @Entity
-public class SwimMeetClub implements Serializable {
+public class SwimMeetClub extends PersistingObject implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,11 +65,6 @@ public class SwimMeetClub implements Serializable {
         this.clubShortName = null;
         this.clubCode = null;
         this.athletes = null;
-    }
-    // Add this object and all persistable children objects to the database
-    public Boolean persist() {
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        return conn.storeObject(this, PersistenceUnit);
     }
     
     public Long getId() {

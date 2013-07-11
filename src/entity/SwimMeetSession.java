@@ -29,20 +29,7 @@ public class SwimMeetSession extends PersistingObject implements Serializable {
     public SwimMeetSession() {
         SessionName = "";
     }
-    
-    public void beginUpdate() {
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        EntityManager em = conn.getEm(PersistenceUnit);
-        em.getTransaction().begin();
-    }
-    
-    public void commitUpdate() {
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        EntityManager em = conn.getEm(PersistenceUnit);
-        em.flush();
-        em.getTransaction().commit();
-    }
-    
+   
     public Long getId() {
         return id;
     }

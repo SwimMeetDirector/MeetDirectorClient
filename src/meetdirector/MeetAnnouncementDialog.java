@@ -5,6 +5,7 @@
 package meetdirector;
 
 import entity.SwimMeet;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -280,7 +281,8 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
 
     private void AcceptButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcceptButtonActionPerformed
         String names[] = new String[2];
-        SwimMeet change = SwimMeet.beginUpdate();
+        SwimMeet change = SwimMeet.getSwimMeet();
+        change.startUpdate();
         change.setMeetName(MeetNameText.getText());
         change.setMeetHost(MeetHostText.getText());
         change.setAddress(MeetAddressText.getText());

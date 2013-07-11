@@ -86,41 +86,13 @@ public class SwimMeet extends PersistingObject implements Serializable {
         
         if (meet == null) {
             meet = new SwimMeet();
-            meet.persist();
+            if (meet.persist() == false) {
+                System.out.println("Unable to persist Swimmeet");
+            }
         }
         
         return meet;
-    }
-    
-    public static SwimMeet beginUpdate() {
-        SwimMeet slave = new SwimMeet();
-        return slave;
-    }
-  
-    public void commitUpdate() {
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        EntityManagerFactory emf = conn.getEmf(this.PersistenceUnit);
-        EntityManager em = emf.createEntityManager();
-        
-        SwimMeet master = em.find(SwimMeet.class, 1L);
-        em.getTransaction().begin();
-        
-        master.MeetName = this.MeetName;
-        master.MeetHost = this.MeetHost;
-        master.Address = this.Address;
-        master.Director[this.NAME_INDEX] = this.Director[this.NAME_INDEX];
-        master.Director[this.EMAIL_INDEX] = this.Director[this.EMAIL_INDEX];
-        master.EntryCoordinator[this.NAME_INDEX] = this.EntryCoordinator[this.NAME_INDEX];
-        master.EntryCoordinator[this.EMAIL_INDEX] = this.EntryCoordinator[this.EMAIL_INDEX];
-        master.Referee[this.NAME_INDEX] = this.Referee[this.NAME_INDEX];
-        master.Referee[this.EMAIL_INDEX] = this.Referee[this.EMAIL_INDEX];
-        master.Marshall[this.NAME_INDEX] = this.Marshall[this.NAME_INDEX];
-        master.Marshall[this.EMAIL_INDEX] = this.Marshall[this.EMAIL_INDEX];
-        master.Sanction = this.Sanction;
-        master.AnnouncementText = this.AnnouncementText;
-        
-        em.getTransaction().commit();
-    }
+    }    
     
     public Long getId() {
         return id;

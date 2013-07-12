@@ -45,7 +45,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     public SwimMeetAthlete(AthleteEntryType swimmer, Boolean persist) {
         if (swimmer != null) {
             AthleteType athlete = swimmer.getAthlete();
-            MeetEntriesImportDialog.UpdateLog("Adding Swimmer " + athlete.toString());
+            MeetEntriesImportDialog.UpdateLog("Adding Swimmer " + athlete.getUsasID());
             this.name = new AthleteName(athlete.getName(), true);
             this.birthDate = athlete.getBirthDate().toGregorianCalendar();
             this.gender = athlete.getGender();
@@ -57,7 +57,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.organization = athlete.getOrganization();
             this.usasID = athlete.getUsasID();
             this.PersistenceUnit = "MeetObjectPU";
-            MeetEntriesImportDialog.UpdateLog("Done adding swimmer " + athlete.toString());
+            MeetEntriesImportDialog.UpdateLog("Done adding swimmer " + athlete.getUsasID());
         }
         if (persist == true)
             this.persist();

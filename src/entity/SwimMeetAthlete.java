@@ -5,11 +5,19 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import meetdirector.MeetEntriesImportDialog;
 import org.usa_swimming.xsdif.AthleteEntryType;
+import org.usa_swimming.xsdif.AthleteType;
+import org.usa_swimming.xsdif.Gender;
+import org.usa_swimming.xsdif.LscCodeType;
+import org.usa_swimming.xsdif.OrganizationType;
 
 /**
  *
@@ -22,16 +30,47 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public SwimMeetAthlete(AthleteEntryType athlete) {
-        this.id = null;
+    @OneToOne
+    @JoinColumn
+    private AthleteName name;
+    private GregorianCalendar birthDate;
+    private Gender gender;
+    private boolean isAttached;
+    private LscCodeType lsc;
+    private String clubCode;
+    private String[] citizenOf;
+    private OrganizationType organization;
+    private String usasID;
+    
+    public SwimMeetAthlete(AthleteEntryType swimmer, Boolean persist) {
+        if (swimmer != null) {
+            AthleteType athlete = swimmer.getAthlete();
+            MeetEntriesImportDialog.UpdateLog("Adding Swimmer " + athlete.toString());
+            this.name = new AthleteName(athlete.getName(), true);
+            this.birthDate = athlete.getBirthDate().toGregorianCalendar();
+            this.gender = athlete.getGender();
+            this.isAttached = athlete.isIsAttached();
+            this.lsc = athlete.getLSC();
+            this.clubCode = new String(athlete.getClubCode());
+            this.citizenOf = new String[athlete.getCitizenOf().size()];
+            this.citizenOf = athlete.getCitizenOf().toArray(this.citizenOf);
+            this.organization = athlete.getOrganization();
+            this.usasID = athlete.getUsasID();
+            this.PersistenceUnit = "MeetObjectPU";
+            MeetEntriesImportDialog.UpdateLog("Done adding swimmer " + athlete.toString());
+        }
+        if (persist == true)
+            this.persist();
     }
     
+    
     public SwimMeetAthlete() {
+        this(null, false);
         this.id = null;
     }
     
     public Long getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Long id) {
@@ -60,7 +99,55 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.SwimMeetAthlete[ id=" + id + " ]";
+        //return "entity.SwimMeetAthlete[ id=" + id + " ]";
+        return "entity.SwimMeetAthlete[ usasID=" + getUsasID() + " ]";
+        
+    }
+
+    /**
+     * @return the name
+     */
+    public AthleteName getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(AthleteName name) {
+        this.name = name;
+    }
+
+
+
+    /**
+     * @return the clubCode
+     */
+    public String getClubCode() {
+        return clubCode;
+    }
+
+    /**
+     * @param clubCode the clubCode to set
+     */
+    public void setClubCode(String clubCode) {
+        this.clubCode = clubCode;
+    }
+
+
+    /**
+     * @return the usasID
+     */
+    public String getUsasID() {
+        return usasID;
+    }
+
+    /**
+     * @param usasID the usasID to set
+     */
+    public void setUsasID(String usasID) {
+        this.usasID = usasID;
     }
     
 }
+

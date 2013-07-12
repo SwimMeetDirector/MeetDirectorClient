@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Entity;
@@ -13,8 +14,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Query;
 import meetdirector.MeetDBConnection;
+import meetdirector.MeetEntriesImportDialog;
 import org.usa_swimming.xsdif.AthleteEntryType;
 import org.usa_swimming.xsdif.ClubEntryType;
 import org.usa_swimming.xsdif.LscCodeType;
@@ -37,12 +41,15 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     private BigInteger mobilePhone;
     private String clubCode;
     private LscCodeType lscCode;
-    private SwimMeetAthlete[] athletes;
-    protected static final String PersistenceUnit = "MeetObjectPU";
+    @OneToMany
+    private List<SwimMeetAthlete> athletes;
+    
     
     public SwimMeetClub(ClubEntryType club) {
+        this();
         List<AthleteEntryType> athletes;
         int i = 0;
+        MeetEntriesImportDialog.UpdateLog("Adding club " + club.getClubCode());
         this.clubFullName = new String(club.getClubFullName());
         this.clubShortName = new String(club.getClubShortName());
         this.phone = club.getPhone();
@@ -50,13 +57,14 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.mobilePhone = club.getMobilePhone();
         this.clubCode = new String(club.getClubCode());
         this.lscCode = club.getLSCCode();
-        this.athletes = new SwimMeetAthlete[club.getAthleteCount().intValue()];
+        this.athletes = new ArrayList<SwimMeetAthlete>();
         athletes = club.getAthleteEntries().getAthleteEntry();
         Iterator<AthleteEntryType> iterator = athletes.iterator();
         while (iterator.hasNext()) {
             AthleteEntryType athlete = iterator.next();
-            this.athletes[i] = new SwimMeetAthlete(athlete);
+            this.athletes.add(new SwimMeetAthlete(athlete, true));
         }
+        MeetEntriesImportDialog.UpdateLog("Done Adding club " + club.getClubCode());
         this.persist();
     }
     
@@ -65,6 +73,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.clubShortName = null;
         this.clubCode = null;
         this.athletes = null;
+        this.PersistenceUnit = "MeetObjectPU";
     }
     
     public Long getId() {
@@ -102,7 +111,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     
     public static SwimMeetClub GetClub(LscCodeType lsc, String clubcode) {
         MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        EntityManager em = conn.getEm(PersistenceUnit);
+        EntityManager em = conn.getEm("MeetObjectPU");
         Query query = em.createNativeQuery("SELECT * FROM SwimMeetClub", SwimMeetClub.class);
         List<SwimMeetClub> results = query.getResultList();
         Iterator<SwimMeetClub> iterator = results.iterator();

@@ -5,6 +5,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,7 +36,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
     protected String[] Marshall;
     protected String Sanction;
     protected String AnnouncementText;
-    protected static final String myPersistenceUnit = "SwimMeetPU";
+    protected static final String myPersistenceUnit = "MeetObjectPU";
     
     
     protected SwimMeet(SwimMeet orig) {
@@ -78,17 +79,16 @@ public class SwimMeet extends PersistingObject implements Serializable {
     
     public static SwimMeet getSwimMeet() {
         SwimMeet meet;
-        EntityManagerFactory emf;
-        EntityManager em;
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
+        List<SwimMeet> results = PersistingObject.queryClassObjects("SELECT * From SwimMeet", "MeetObjectPU", SwimMeet.class);
         
-        meet = conn.findObject(SwimMeet.class, "SwimMeetPU", 1L);
-        
-        if (meet == null) {
+        if (results.isEmpty()) {
             meet = new SwimMeet();
             if (meet.persist() == false) {
                 System.out.println("Unable to persist Swimmeet");
             }
+        } else {
+            // There should only ever be one SwimMeet object per database
+            meet = results.get(0);
         }
         
         return meet;

@@ -142,7 +142,7 @@ public class MeetDBConnection {
         catch (Exception except) {
             status = "Odd problem closing connection";
         }
-        this.registerPersistenceUnit("SwimMeetPU");
+        //this.registerPersistenceUnit("SwimMeetPU");
         this.registerPersistenceUnit("MeetObjectPU");
         return true;
     }

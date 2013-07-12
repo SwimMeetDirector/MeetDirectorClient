@@ -110,10 +110,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     }
     
     public static SwimMeetClub GetClub(LscCodeType lsc, String clubcode) {
-        MeetDBConnection conn = MeetDBConnection.getDBConnection();
-        EntityManager em = conn.getEm("MeetObjectPU");
-        Query query = em.createNativeQuery("SELECT * FROM SwimMeetClub", SwimMeetClub.class);
-        List<SwimMeetClub> results = query.getResultList();
+        List<SwimMeetClub> results = PersistingObject.queryClassObjects("SELECT * From SwimMeetClub", "MeetObjectPU", SwimMeetClub.class);
         Iterator<SwimMeetClub> iterator = results.iterator();
         while (iterator.hasNext()) {
             SwimMeetClub club = iterator.next();

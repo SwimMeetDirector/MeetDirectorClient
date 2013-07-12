@@ -4,7 +4,9 @@
  */
 package entity;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import meetdirector.MeetDBConnection;
 
 /**
@@ -39,4 +41,11 @@ public class PersistingObject {
         return true;
     }
     
+    public static <T> List<T> queryClassObjects(String query, String unit, Class classtype) {
+        MeetDBConnection conn = MeetDBConnection.getDBConnection();
+        EntityManager em = conn.getEm(unit);
+        Query myquery = em.createNativeQuery(query, classtype);
+        List<T> results = myquery.getResultList();
+        return results;
+    }
 }

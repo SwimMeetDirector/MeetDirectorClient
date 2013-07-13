@@ -120,7 +120,7 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
             if (DbClub == null) {
                 DbClub = new SwimMeetClub(club);
             } else {
-                    this.ImportResultsText.append("Found Existing swim club " + DbClub.getClubCode() + " ...skipping add");
+                    MeetEntriesImportDialog.UpdateLog("Found Existing swim club " + DbClub.getClubCode() + " ...skipping add");
             }
         }
     }
@@ -163,7 +163,7 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
             
         } catch (Exception e) {
             e.printStackTrace();
-            this.ImportResultsText.append("Unable to find meet entry information in file");
+            MeetEntriesImportDialog.UpdateLog("Unable to find meet entry information in file");
             this.DismissButton.setEnabled(true);
             return;
         }

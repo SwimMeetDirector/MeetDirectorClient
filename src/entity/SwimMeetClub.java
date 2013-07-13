@@ -116,16 +116,15 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         return "entity.SwimMeetClub[ id=" + id + " ]";
     }
     
-    public static SwimMeetClub GetClub(LscCodeType lsc, String clubcode) {
-        List<SwimMeetClub> results = PersistingObject.queryClassObjects("SELECT * From SwimMeetClub", SwimMeetClub.class);
-        Iterator<SwimMeetClub> iterator = results.iterator();
-        while (iterator.hasNext()) {
-            SwimMeetClub club = iterator.next();
-            if ((club.getClubCode().equals(clubcode)) &&
-                (club.getLscCode().equals(lsc)))
-                    return club;
-        }
-        return null;
+    public static SwimMeetClub GetClub(String clubcode) {
+        String myquery = "SELECT * FROM SwimMeetClub WHERE SwimMeetClub.clubcode = '" + clubcode + "'";
+        List<SwimMeetClub> results = PersistingObject.queryClassObjects(myquery, SwimMeetClub.class);
+        if (results.isEmpty())
+            return null;
+        if (results.size() > 1)
+            MeetEntriesImportDialog.UpdateLog("ERROR! TWO SWIM CLUBS WITH THE SAME CLUB CODE " + clubcode);
+        
+        return results.get(0);
     }
 
     /**

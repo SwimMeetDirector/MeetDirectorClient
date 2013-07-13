@@ -116,11 +116,12 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         
         while (iterator.hasNext()) {
             ClubEntryType club = iterator.next();
-            SwimMeetClub DbClub = SwimMeetClub.GetClub(club.getLSCCode(), club.getClubCode());
+            SwimMeetClub DbClub = SwimMeetClub.GetClub(club.getClubCode());
             if (DbClub == null) {
                 DbClub = new SwimMeetClub(club);
             } else {
-                    MeetEntriesImportDialog.UpdateLog("Found Existing swim club " + DbClub.getClubCode() + " ...skipping add");
+                    MeetEntriesImportDialog.UpdateLog("Found Existing swim club " + DbClub.getClubCode() + " ...updating athletes");
+                    DbClub.ParseClubAthletes(club);
             }
         }
     }

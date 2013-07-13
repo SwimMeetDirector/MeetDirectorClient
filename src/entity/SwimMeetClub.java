@@ -46,9 +46,6 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     
     
     public SwimMeetClub(ClubEntryType club) {
-        this();
-        List<AthleteEntryType> athletes;
-        int i = 0;
         MeetEntriesImportDialog.UpdateLog("Adding club " + club.getClubCode());
         this.clubFullName = new String(club.getClubFullName());
         this.clubShortName = new String(club.getClubShortName());
@@ -58,12 +55,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.clubCode = new String(club.getClubCode());
         this.lscCode = club.getLSCCode();
         this.athletes = new ArrayList<SwimMeetAthlete>();
-        athletes = club.getAthleteEntries().getAthleteEntry();
-        Iterator<AthleteEntryType> iterator = athletes.iterator();
-        while (iterator.hasNext()) {
-            AthleteEntryType athlete = iterator.next();
-            this.athletes.add(new SwimMeetAthlete(athlete, true));
-        }
+        this.ParseClubAthletes(club);
         MeetEntriesImportDialog.UpdateLog("Done Adding club " + club.getClubCode());
         this.persist();
     }
@@ -74,6 +66,22 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.clubCode = null;
         this.athletes = null;
     }
+    
+    public void ParseClubAthletes(ClubEntryType club) {
+        List <AthleteEntryType> athletes;
+        athletes = club.getAthleteEntries().getAthleteEntry();
+        Iterator<AthleteEntryType> iterator = athletes.iterator();
+        while (iterator.hasNext()) {
+                AthleteEntryType athlete = iterator.next();
+                String usasid = athlete.getAthlete().getUsasID();
+                SwimMeetAthlete check = SwimMeetAthlete.getAthleteByUsasId(athlete.getAthlete().getUsasID());
+                if (check == null) {
+                    MeetEntriesImportDialog.UpdateLog("Already have swimmer " + usasid);
+                } else
+                    this.athletes.add(new SwimMeetAthlete(athlete, true));
+        }
+    }
+    
     
     public Long getId() {
         return id;

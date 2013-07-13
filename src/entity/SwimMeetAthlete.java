@@ -6,6 +6,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -66,6 +67,19 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     public SwimMeetAthlete() {
         this(null, false);
         this.id = null;
+    }
+    
+    public static SwimMeetAthlete getAthleteByUsasId(String usasid){
+        List<SwimMeetAthlete> results;
+        String myquery = "SELECT * FROM SwimMeetAthlete WHERE SwimMeetAthlete.usasid = '" + usasid +"'";
+        results = SwimMeetAthlete.queryClassObjects(myquery, SwimMeetAthlete.class);
+        if (results.isEmpty())
+            return null;
+        if (results.size() > 1) {
+            MeetEntriesImportDialog.UpdateLog("ERROR!  MULTIPLE SWIMMERS IN DB WITH USASID " + usasid);
+            return null;
+        }
+        return results.get(0);
     }
     
     public Long getId() {

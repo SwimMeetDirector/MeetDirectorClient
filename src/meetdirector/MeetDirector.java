@@ -28,6 +28,7 @@ public class MeetDirector extends javax.swing.JFrame {
         this.MeetInfoMenu.setEnabled(false);
         DBConfigProps = new Properties();
         this.loadDBConfig();
+        this.setTitle("Meet Director");
         this.MainPanel.setVisible(false);
     }
 
@@ -108,6 +109,7 @@ public class MeetDirector extends javax.swing.JFrame {
         ImportChooser.getAccessibleContext().setAccessibleParent(MainPanel);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setName("MeetDirector"); // NOI18N
 
         jLabel2.setText("Connect to Database");
 

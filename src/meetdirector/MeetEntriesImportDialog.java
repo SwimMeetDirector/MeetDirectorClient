@@ -32,6 +32,7 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
     public MeetEntriesImportDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.setTitle("Importing Meet Data");
     }
 
     /**

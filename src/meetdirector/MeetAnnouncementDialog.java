@@ -33,6 +33,7 @@ public class MeetAnnouncementDialog extends javax.swing.JDialog {
         this.MarshallEmailText.setText(meet.getMarshall()[SwimMeet.EMAIL_INDEX]);
         this.SanctionNumberText.setText(meet.getSanction());
         this.AnnouncementText.setText(meet.getAnnouncementText());
+        this.setTitle("Meet Announcement Information");
     }
 
     /**

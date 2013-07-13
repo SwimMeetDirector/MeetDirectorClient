@@ -36,7 +36,6 @@ public class AthleteName extends PersistingObject implements Serializable {
         this.middleName = name.getMiddleName();
         this.preferredName = name.getPreferredName();
         this.suffix = name.getSuffix();
-        this.PersistenceUnit = "MeetObjectPU";
         if (persist == true)
             this.persist();
     }

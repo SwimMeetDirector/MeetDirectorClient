@@ -26,12 +26,11 @@ public class MeetDBConnection {
     private Connection conn = null;
     private String user = null;
     private String pass = null;
-    private HashMap EmfMap;
-    private HashMap EmMap;
+    private EntityManagerFactory emf = null;
+    private EntityManager em = null;
     
     protected MeetDBConnection() {
-        EmfMap = new HashMap();
-        EmMap = new HashMap();
+        
     }
     
     public void SetConnectionParams(String server, String port, String name, String user, String pass) {
@@ -51,24 +50,11 @@ public class MeetDBConnection {
         return pmap;
     }
     
-    public Boolean registerPersistenceUnit(String unit) {
-        EntityManagerFactory emf;
-        EntityManager em;
-        
-        if (EmfMap.get(unit) != null)
-            return false;
-        emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());
-        em = emf.createEntityManager();
-        EmfMap.put(unit, emf);
-        EmMap.put(unit, em);
-        return true;
-    }
-    
-    public Boolean storeObject(Object obj, String unit) {
+    public Boolean storeObject(Object obj) {
         EntityManager em;
         Boolean rc = true;
         
-        em = (EntityManager)this.EmMap.get(unit);
+        em = (EntityManager)this.em;
         
         if (em == null)
             return false;
@@ -87,25 +73,18 @@ public class MeetDBConnection {
         return rc;
     }
     
-    public <T> T findObject(Class classtype, String unit, Object pk) {
-        EntityManagerFactory emf;
+    public <T> T findObject(Class classtype, Object pk) {
         Object rc;
-        emf = javax.persistence.Persistence.createEntityManagerFactory(unit, this.getDBConnectionProperties());
-        EntityManager em = emf.createEntityManager();
-        
-        rc = em.find(classtype, pk);
-       
-        em.close();
-        emf.close();
+        rc = this.em.find(classtype, pk);
         return (T)rc;
     }
     
-    public EntityManagerFactory getEmf(String unit) {
-        return (EntityManagerFactory)this.EmfMap.get(unit);
+    public EntityManagerFactory getEmf() {
+        return this.emf;
     }
     
-    public EntityManager getEm(String unit) {
-        return (EntityManager)this.EmMap.get(unit);
+    public EntityManager getEm() {
+        return this.em;
     }
     public static MeetDBConnection getDBConnection() {
         if (instance == null)
@@ -142,8 +121,8 @@ public class MeetDBConnection {
         catch (Exception except) {
             status = "Odd problem closing connection";
         }
-        //this.registerPersistenceUnit("SwimMeetPU");
-        this.registerPersistenceUnit("MeetObjectPU");
+        this.emf = javax.persistence.Persistence.createEntityManagerFactory("MeetObjectPU", this.getDBConnectionProperties());
+        this.em = emf.createEntityManager();
         return true;
     }
     

@@ -73,7 +73,6 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.clubShortName = null;
         this.clubCode = null;
         this.athletes = null;
-        this.PersistenceUnit = "MeetObjectPU";
     }
     
     public Long getId() {
@@ -110,7 +109,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     }
     
     public static SwimMeetClub GetClub(LscCodeType lsc, String clubcode) {
-        List<SwimMeetClub> results = PersistingObject.queryClassObjects("SELECT * From SwimMeetClub", "MeetObjectPU", SwimMeetClub.class);
+        List<SwimMeetClub> results = PersistingObject.queryClassObjects("SELECT * From SwimMeetClub", SwimMeetClub.class);
         Iterator<SwimMeetClub> iterator = results.iterator();
         while (iterator.hasNext()) {
             SwimMeetClub club = iterator.next();

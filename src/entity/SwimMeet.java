@@ -36,7 +36,6 @@ public class SwimMeet extends PersistingObject implements Serializable {
     protected String[] Marshall;
     protected String Sanction;
     protected String AnnouncementText;
-    protected static final String myPersistenceUnit = "MeetObjectPU";
     
     
     protected SwimMeet(SwimMeet orig) {
@@ -53,7 +52,6 @@ public class SwimMeet extends PersistingObject implements Serializable {
         this.Marshall[this.EMAIL_INDEX] = new String(orig.Marshall[this.EMAIL_INDEX]);
         this.Sanction = new String (orig.Sanction);
         this.AnnouncementText = new String(orig.AnnouncementText);
-        this.PersistenceUnit = this.myPersistenceUnit;
     }
     
     protected SwimMeet() {
@@ -74,12 +72,11 @@ public class SwimMeet extends PersistingObject implements Serializable {
         this.Marshall[this.EMAIL_INDEX] = "";
         this.Sanction = "";
         this.AnnouncementText = "";
-        this.PersistenceUnit = this.myPersistenceUnit;
     }
     
     public static SwimMeet getSwimMeet() {
         SwimMeet meet;
-        List<SwimMeet> results = PersistingObject.queryClassObjects("SELECT * From SwimMeet", "MeetObjectPU", SwimMeet.class);
+        List<SwimMeet> results = PersistingObject.queryClassObjects("SELECT * From SwimMeet", SwimMeet.class);
         
         if (results.isEmpty()) {
             meet = new SwimMeet();

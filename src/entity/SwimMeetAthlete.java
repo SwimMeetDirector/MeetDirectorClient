@@ -56,7 +56,6 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.citizenOf = athlete.getCitizenOf().toArray(this.citizenOf);
             this.organization = athlete.getOrganization();
             this.usasID = athlete.getUsasID();
-            this.PersistenceUnit = "MeetObjectPU";
             MeetEntriesImportDialog.UpdateLog("Done adding swimmer " + athlete.getUsasID());
         }
         if (persist == true)

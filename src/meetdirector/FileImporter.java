@@ -106,6 +106,7 @@ public class FileImporter {
                     this.updateOutputText("Already have swimmer " + usasid);
                     newAthletes.add(check);
                 } else {
+                    this.updateOutputText("Adding new swimmer " + usasid);
                     newAthletes.add(new SwimMeetAthlete(athlete, true));
                 }
         }

@@ -9,15 +9,12 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.Query;
-import meetdirector.MeetDBConnection;
 import meetdirector.MeetEntriesImportDialog;
 import org.usa_swimming.xsdif.AthleteEntryType;
 import org.usa_swimming.xsdif.ClubEntryType;
@@ -46,7 +43,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     
     
     public SwimMeetClub(ClubEntryType club) {
-        MeetEntriesImportDialog.UpdateLog("Adding club " + club.getClubCode());
+        //MeetEntriesImportDialog.UpdateLog("Adding club " + club.getClubCode());
         this.clubFullName = new String(club.getClubFullName());
         this.clubShortName = new String(club.getClubShortName());
         this.phone = club.getPhone();
@@ -55,8 +52,8 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.clubCode = new String(club.getClubCode());
         this.lscCode = club.getLSCCode();
         this.athletes = new ArrayList<SwimMeetAthlete>();
-        this.ParseClubAthletes(club);
-        MeetEntriesImportDialog.UpdateLog("Done Adding club " + club.getClubCode());
+        //this.ParseClubAthletes(club);
+        //MeetEntriesImportDialog.UpdateLog("Done Adding club " + club.getClubCode());
         this.persist();
     }
     
@@ -76,7 +73,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
                 String usasid = athlete.getAthlete().getUsasID();
                 SwimMeetAthlete check = SwimMeetAthlete.getAthleteByUsasId(athlete.getAthlete().getUsasID());
                 if (check != null) {
-                    MeetEntriesImportDialog.UpdateLog("Already have swimmer " + usasid);
+                    //MeetEntriesImportDialog.UpdateLog("Already have swimmer " + usasid);
                 } else
                     this.athletes.add(new SwimMeetAthlete(athlete, true));
         }
@@ -121,8 +118,8 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         List<SwimMeetClub> results = PersistingObject.queryClassObjects(myquery, SwimMeetClub.class);
         if (results.isEmpty())
             return null;
-        if (results.size() > 1)
-            MeetEntriesImportDialog.UpdateLog("ERROR! TWO SWIM CLUBS WITH THE SAME CLUB CODE " + clubcode);
+        //if (results.size() > 1)
+            //MeetEntriesImportDialog.UpdateLog("ERROR! TWO SWIM CLUBS WITH THE SAME CLUB CODE " + clubcode);
         
         return results.get(0);
     }

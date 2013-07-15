@@ -46,7 +46,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     public SwimMeetAthlete(AthleteEntryType swimmer, Boolean persist) {
         if (swimmer != null) {
             AthleteType athlete = swimmer.getAthlete();
-            MeetEntriesImportDialog.UpdateLog("Adding Swimmer " + athlete.getUsasID());
+            //MeetEntriesImportDialog.UpdateLog("Adding Swimmer " + athlete.getUsasID());
             this.name = new AthleteName(athlete.getName(), true);
             this.birthDate = athlete.getBirthDate().toGregorianCalendar();
             this.gender = athlete.getGender();
@@ -57,7 +57,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.citizenOf = athlete.getCitizenOf().toArray(this.citizenOf);
             this.organization = athlete.getOrganization();
             this.usasID = athlete.getUsasID();
-            MeetEntriesImportDialog.UpdateLog("Done adding swimmer " + athlete.getUsasID());
+           // MeetEntriesImportDialog.UpdateLog("Done adding swimmer " + athlete.getUsasID());
         }
         if (persist == true)
             this.persist();
@@ -76,7 +76,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         if (results.isEmpty())
             return null;
         if (results.size() > 1) {
-            MeetEntriesImportDialog.UpdateLog("ERROR!  MULTIPLE SWIMMERS IN DB WITH USASID " + usasid);
+            //MeetEntriesImportDialog.UpdateLog("ERROR!  MULTIPLE SWIMMERS IN DB WITH USASID " + usasid);
             return null;
         }
         return results.get(0);

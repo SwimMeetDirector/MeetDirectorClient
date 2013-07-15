@@ -28,7 +28,6 @@ public class PersistingObject {
     public Boolean commitUpdate() {
         EntityManager em = MeetDBConnection.getDBConnection().getEm();
         try {
-            em.merge(this);
             em.flush();
             em.getTransaction().commit();
         } catch (Exception except) {
@@ -37,6 +36,11 @@ public class PersistingObject {
             return false;
         }
         return true;
+    }
+    
+    public void merge() {
+        EntityManager em = MeetDBConnection.getDBConnection().getEm();
+        em.merge(this);
     }
     
     public static <T> List<T> queryClassObjects(String query, Class classtype) {

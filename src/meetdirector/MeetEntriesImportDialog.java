@@ -107,76 +107,12 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_DismissButtonActionPerformed
 
-    protected void importMeetEntry(MeetEntryFileType meet) {
-        List<ClubEntryType> clubs;
-        // Start by getting the clubs in this meet and adding any
-        // That aren't already in the database
-        clubs = meet.getClubs().getClub();
-        Iterator<ClubEntryType> iterator = clubs.iterator();
-        
-        while (iterator.hasNext()) {
-            ClubEntryType club = iterator.next();
-            SwimMeetClub DbClub = SwimMeetClub.GetClub(club.getClubCode());
-            if (DbClub == null) {
-                DbClub = new SwimMeetClub(club);
-            } else {
-                    MeetEntriesImportDialog.UpdateLog("Found Existing swim club " + DbClub.getClubCode() + " ...updating athletes");
-                    DbClub.ParseClubAthletes(club);
-            }
-        }
-    }
-    /**
-     * @param args the command line arguments
-     */
-    public void ImportMeetEntries(File file) {
-        /* Set the Nimbus look and feel */
-        MeetEntryFileType meetEntry = null;
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MeetEntriesImportDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MeetEntriesImportDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MeetEntriesImportDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MeetEntriesImportDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        /* Create and display the dialog */
-        try {
-            
-            JAXBContext context = JAXBContext.newInstance(MeetEntryFileType.class);
-            Unmarshaller u = context.createUnmarshaller();
-            InputStreamReader in = new InputStreamReader(new FileInputStream(file));
-            XMLEventReader xer = XMLInputFactory.newInstance().createXMLEventReader(in);
-            JAXBElement <MeetEntryFileType> meetEntryElement = u.unmarshal(xer, MeetEntryFileType.class);
-            meetEntry = meetEntryElement.getValue();
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-            MeetEntriesImportDialog.UpdateLog("Unable to find meet entry information in file");
-            this.DismissButton.setEnabled(true);
-            return;
-        }
-        //Now We need to start importing objects from the file
-        this.importMeetEntry(meetEntry);
-        this.DismissButton.setEnabled(true);
-            
+    public javax.swing.JTextArea getTextOutputArea() {
+        return this.ImportResultsText;
     }
     
-    public static void UpdateLog(String msg) {
-        if (myself != null)
-            myself.ImportResultsText.append(msg + "\n");
+    public void AllowDismiss() {
+        this.DismissButton.setEnabled(true);
     }
     
     public void OpenWindow() {

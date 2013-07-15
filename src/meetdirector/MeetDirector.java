@@ -370,9 +370,12 @@ public class MeetDirector extends javax.swing.JFrame {
         int retval = ImportChooser.showOpenDialog(this.MainPanel);// TODO add your handling code here:
         if (retval == JFileChooser.APPROVE_OPTION) {
             File file = ImportChooser.getSelectedFile();
-            MeetEntriesImportDialog importer = new MeetEntriesImportDialog(new javax.swing.JFrame(), true);
-            importer.OpenWindow();
-            importer.ImportMeetEntries(file);
+            MeetEntriesImportDialog importerWindow = new MeetEntriesImportDialog(new javax.swing.JFrame(), true);
+            FileImporter fileimporter = new FileImporter(file, importerWindow.getTextOutputArea());
+            importerWindow.OpenWindow();
+            //importer.ImportMeetEntries(file);
+            fileimporter.ImportMeetEntryFile();
+            importerWindow.AllowDismiss();
         }
     }//GEN-LAST:event_ImportMenuItemActionPerformed
 

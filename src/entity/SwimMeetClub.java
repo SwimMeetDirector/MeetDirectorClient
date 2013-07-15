@@ -224,4 +224,18 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     public void setLscCode(LscCodeType lscCode) {
         this.lscCode = lscCode;
     }
+
+    /**
+     * @return the athletes
+     */
+    public List<SwimMeetAthlete> getAthletes() {
+        return athletes;
+    }
+
+    /**
+     * @param athletes the athletes to set
+     */
+    public void setAthletes(List<SwimMeetAthlete> athletes) {
+        this.athletes = athletes;
+    }
 }

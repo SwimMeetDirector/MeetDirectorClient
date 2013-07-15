@@ -57,7 +57,6 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.citizenOf = athlete.getCitizenOf().toArray(this.citizenOf);
             this.organization = athlete.getOrganization();
             this.usasID = athlete.getUsasID();
-           // MeetEntriesImportDialog.UpdateLog("Done adding swimmer " + athlete.getUsasID());
         }
         if (persist == true)
             this.persist();
@@ -76,7 +75,6 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         if (results.isEmpty())
             return null;
         if (results.size() > 1) {
-            //MeetEntriesImportDialog.UpdateLog("ERROR!  MULTIPLE SWIMMERS IN DB WITH USASID " + usasid);
             return null;
         }
         return results.get(0);
@@ -112,7 +110,6 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
 
     @Override
     public String toString() {
-        //return "entity.SwimMeetAthlete[ id=" + id + " ]";
         return "entity.SwimMeetAthlete[ usasID=" + getUsasID() + " ]";
         
     }

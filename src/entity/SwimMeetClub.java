@@ -52,8 +52,6 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.clubCode = new String(club.getClubCode());
         this.lscCode = club.getLSCCode();
         this.athletes = new ArrayList<SwimMeetAthlete>();
-        //this.ParseClubAthletes(club);
-        //MeetEntriesImportDialog.UpdateLog("Done Adding club " + club.getClubCode());
         this.persist();
     }
     
@@ -62,21 +60,6 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         this.clubShortName = null;
         this.clubCode = null;
         this.athletes = null;
-    }
-    
-    public void ParseClubAthletes(ClubEntryType club) {
-        List <AthleteEntryType> athletes;
-        athletes = club.getAthleteEntries().getAthleteEntry();
-        Iterator<AthleteEntryType> iterator = athletes.iterator();
-        while (iterator.hasNext()) {
-                AthleteEntryType athlete = iterator.next();
-                String usasid = athlete.getAthlete().getUsasID();
-                SwimMeetAthlete check = SwimMeetAthlete.getAthleteByUsasId(athlete.getAthlete().getUsasID());
-                if (check != null) {
-                    //MeetEntriesImportDialog.UpdateLog("Already have swimmer " + usasid);
-                } else
-                    this.athletes.add(new SwimMeetAthlete(athlete, true));
-        }
     }
     
     
@@ -118,8 +101,6 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
         List<SwimMeetClub> results = PersistingObject.queryClassObjects(myquery, SwimMeetClub.class);
         if (results.isEmpty())
             return null;
-        //if (results.size() > 1)
-            //MeetEntriesImportDialog.UpdateLog("ERROR! TWO SWIM CLUBS WITH THE SAME CLUB CODE " + clubcode);
         
         return results.get(0);
     }

@@ -373,7 +373,6 @@ public class MeetDirector extends javax.swing.JFrame {
             MeetEntriesImportDialog importerWindow = new MeetEntriesImportDialog(new javax.swing.JFrame(), true);
             FileImporter fileimporter = new FileImporter(file, importerWindow.getTextOutputArea());
             importerWindow.OpenWindow();
-            //importer.ImportMeetEntries(file);
             fileimporter.ImportMeetEntryFile();
             importerWindow.AllowDismiss();
         }

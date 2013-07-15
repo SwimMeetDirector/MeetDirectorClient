@@ -75,7 +75,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
                 AthleteEntryType athlete = iterator.next();
                 String usasid = athlete.getAthlete().getUsasID();
                 SwimMeetAthlete check = SwimMeetAthlete.getAthleteByUsasId(athlete.getAthlete().getUsasID());
-                if (check == null) {
+                if (check != null) {
                     MeetEntriesImportDialog.UpdateLog("Already have swimmer " + usasid);
                 } else
                     this.athletes.add(new SwimMeetAthlete(athlete, true));

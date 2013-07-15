@@ -7,16 +7,13 @@ package entity;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import meetdirector.MeetEntriesImportDialog;
-import org.usa_swimming.xsdif.AthleteEntryType;
 import org.usa_swimming.xsdif.ClubEntryType;
 import org.usa_swimming.xsdif.LscCodeType;
 
@@ -39,6 +36,7 @@ public class SwimMeetClub extends PersistingObject implements Serializable {
     private String clubCode;
     private LscCodeType lscCode;
     @OneToMany
+    @JoinColumn
     private List<SwimMeetAthlete> athletes;
     
     

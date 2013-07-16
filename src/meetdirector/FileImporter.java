@@ -111,8 +111,9 @@ public class FileImporter {
                 }
         }
         // Now that we have a list of Athletes, lets update the club with the new list
+        DbClub.startUpdate();
         DbClub.setAthletes(newAthletes);
-        DbClub.merge();
+        DbClub.commitUpdate();
         
     }
     

@@ -161,4 +161,7 @@ public class AthleteName extends PersistingObject implements Serializable {
         this.suffix = suffix;
     }
     
+    public String getFullName() {
+        return getFirstName() + " " + getLastName(); 
+    }
 }

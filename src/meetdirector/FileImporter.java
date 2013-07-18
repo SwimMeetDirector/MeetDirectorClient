@@ -6,6 +6,7 @@ package meetdirector;
 
 import entity.SwimMeetAthlete;
 import entity.SwimMeetClub;
+import entity.SwimMeetEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -20,6 +21,7 @@ import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import org.usa_swimming.xsdif.AthleteEntryType;
 import org.usa_swimming.xsdif.ClubEntryType;
+import org.usa_swimming.xsdif.IndividualEntryType;
 import org.usa_swimming.xsdif.MeetEntryFileType;
 
 /**
@@ -107,14 +109,42 @@ public class FileImporter {
                     newAthletes.add(check);
                 } else {
                     this.updateOutputText("Adding new swimmer " + usasid);
-                    newAthletes.add(new SwimMeetAthlete(athlete, true));
+                    check = new SwimMeetAthlete(athlete, true);
+                    newAthletes.add(check);
                 }
+                this.ImportAthleteEvents(check, athlete.getEntries().getEventEntry());
         }
         // Now that we have a list of Athletes, lets update the club with the new list
         DbClub.startUpdate();
         DbClub.setAthletes(newAthletes);
         DbClub.commitUpdate();
         
+    }
+    
+    public void ImportAthleteEvents(SwimMeetAthlete athlete, List<IndividualEntryType> entries) {
+        Iterator<IndividualEntryType> iterator = entries.iterator();
+        List<SwimMeetEvent> newEvents = new ArrayList<SwimMeetEvent>();
+        while (iterator.hasNext()) {
+            IndividualEntryType event = iterator.next();
+            SwimMeetEvent check = SwimMeetEvent.getEventByEventNumber(event.getEventNumber());
+            if (check != null) {
+                this.updateOutputText("Found Event " + event.getEventNumber() + "...Validating");
+                // Note, need to validate the events here, make sure more than the event number matches
+                newEvents.add(check);
+                //add the new athlete here
+                athlete.startUpdate();
+                try {
+                    check.addSwimmer(athlete);
+                } catch (Exception e) {
+                    this.updateOutputText("Cant add swimmer " + athlete.getName().getFullName() + " : " + e.getLocalizedMessage());
+                }
+                athlete.commitUpdate();
+                
+            } else {
+                // Events have to be created in the event creation window, they won't auto create on import
+                this.updateOutputText("Hmm, I don't have Event " + event.getEventNumber() + " ... Skipping");
+            }
+        }
     }
     
     public void updateOutputText(String msg) {

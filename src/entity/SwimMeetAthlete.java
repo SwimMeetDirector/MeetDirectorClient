@@ -12,8 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import meetdirector.MeetEntriesImportDialog;
 import org.usa_swimming.xsdif.AthleteEntryType;
 import org.usa_swimming.xsdif.AthleteType;
 import org.usa_swimming.xsdif.Gender;
@@ -42,6 +42,10 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     private String[] citizenOf;
     private OrganizationType organization;
     private String usasID;
+    @OneToMany
+    @JoinColumn
+    private List<SwimMeetEvent> enteredEvents;
+    //Note Still need a seed time class list here
     
     public SwimMeetAthlete(AthleteEntryType swimmer, Boolean persist) {
         if (swimmer != null) {
@@ -57,6 +61,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.citizenOf = athlete.getCitizenOf().toArray(this.citizenOf);
             this.organization = athlete.getOrganization();
             this.usasID = athlete.getUsasID();
+            this.enteredEvents = null;
         }
         if (persist == true)
             this.persist();

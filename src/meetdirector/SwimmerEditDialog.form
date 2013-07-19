@@ -115,73 +115,107 @@
                           <Component id="FirstNameText" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Component id="BirthdayDateChooserCombo1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="CitizenshipLabel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                      <Component id="CitizenshipTExt" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="lastnamelabel" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="LastNameText" min="-2" pref="115" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="GenderLabel" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="GenderCombo" alignment="1" min="-2" pref="115" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="lastnamelabel" alignment="1" max="32767" attributes="0"/>
+                      <Component id="LastNameText" alignment="1" max="32767" attributes="0"/>
+                      <Component id="GenderLabel" max="32767" attributes="0"/>
+                      <Component id="GenderCombo" max="32767" attributes="0"/>
+                      <Component id="OrgTypeLabel" max="32767" attributes="0"/>
+                      <Component id="OrgTypeCombo" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="MiddleNameLabel" min="-2" pref="115" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="SuffixLabel" min="-2" pref="115" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="MiddleNameText" min="-2" pref="115" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="SuffixText" min="-2" pref="115" max="-2" attributes="0"/>
-                          </Group>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="MiddleNameLabel" min="-2" pref="115" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="SuffixLabel" min="-2" pref="115" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="AttachedCombo" alignment="0" max="32767" attributes="0"/>
-                          <Component id="AtatchedLabel" alignment="0" pref="115" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="MiddleNameText" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                              <Component id="AttachedCombo" alignment="0" max="32767" attributes="0"/>
+                              <Component id="AtatchedLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="IDLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="IDText" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="28" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="SuffixText" max="32767" attributes="0"/>
+                              <Component id="LSCCodeLabel" pref="115" max="32767" attributes="0"/>
+                              <Component id="LSCCodeText" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="159" max="32767" attributes="0"/>
+                  <EmptySpace pref="143" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="FirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lastnamelabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="MiddleNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="SuffixLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="FirstNameText" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="LastNameText" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="MiddleNameText" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="SuffixText" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="BrthdayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="GenderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="AtatchedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="GenderCombo" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="AttachedCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="FirstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lastnamelabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="MiddleNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="SuffixLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="FirstNameText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="LastNameText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="MiddleNameText" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="SuffixText" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="BrthdayLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="GenderLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="AtatchedLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="LSCCodeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="GenderCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="AttachedCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="BirthdayDateChooserCombo1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="LSCCodeText" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="CitizenshipLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="OrgTypeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <Component id="BirthdayDateChooserCombo1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
+                          <Component id="IDLabel" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="552" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="CitizenshipTExt" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="OrgTypeCombo" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="IDText" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="488" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -262,12 +296,61 @@
                 <StringItem index="1" value="No"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="datechooser.beans.DateChooserCombo" name="BirthdayDateChooserCombo1">
           <Properties>
             <Property name="dch_enabled" type="boolean" value="false"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="LSCCodeLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="LSC code"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="LSCCodeText">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="CitizenshipLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Citizenship"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="CitizenshipTExt">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="OrgTypeLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Organization Type"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="OrgTypeCombo">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="7">
+                <StringItem index="0" value="NCAA DIV 1"/>
+                <StringItem index="1" value="NCAA DIV 2"/>
+                <StringItem index="2" value="NCAA DIV 3"/>
+                <StringItem index="3" value="USAS"/>
+                <StringItem index="4" value="MASTERS"/>
+                <StringItem index="5" value="YMCA"/>
+                <StringItem index="6" value="FINA"/>
+              </StringArray>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="IDLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="IDText">
         </Component>
       </SubComponents>
     </Container>

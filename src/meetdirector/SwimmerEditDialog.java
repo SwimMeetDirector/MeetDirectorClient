@@ -45,6 +45,14 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         AtatchedLabel = new javax.swing.JLabel();
         AttachedCombo = new javax.swing.JComboBox();
         BirthdayDateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        LSCCodeLabel = new javax.swing.JLabel();
+        LSCCodeText = new javax.swing.JTextField();
+        CitizenshipLabel = new javax.swing.JLabel();
+        CitizenshipTExt = new javax.swing.JTextField();
+        OrgTypeLabel = new javax.swing.JLabel();
+        OrgTypeCombo = new javax.swing.JComboBox();
+        IDLabel = new javax.swing.JLabel();
+        IDText = new javax.swing.JTextField();
         SwimmerInfoLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -88,8 +96,24 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         AtatchedLabel.setText("Attached");
 
         AttachedCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "No" }));
+        AttachedCombo.setEnabled(false);
 
         BirthdayDateChooserCombo1.setEnabled(false);
+
+        LSCCodeLabel.setText("LSC code");
+
+        LSCCodeText.setEnabled(false);
+
+        CitizenshipLabel.setText("Citizenship");
+
+        CitizenshipTExt.setEnabled(false);
+
+        OrgTypeLabel.setText("Organization Type");
+
+        OrgTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NCAA DIV 1", "NCAA DIV 2", "NCAA DIV 3", "USAS", "MASTERS", "YMCA", "FINA" }));
+        OrgTypeCombo.setEnabled(false);
+
+        IDLabel.setText("ID");
 
         javax.swing.GroupLayout SwimmerInfoPanelLayout = new javax.swing.GroupLayout(SwimmerInfoPanel);
         SwimmerInfoPanel.setLayout(SwimmerInfoPanelLayout);
@@ -102,58 +126,85 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                         .addComponent(BrthdayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(FirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                         .addComponent(FirstNameText, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CitizenshipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CitizenshipTExt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lastnamelabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(GenderLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(GenderCombo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lastnamelabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LastNameText, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(GenderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(GenderCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(OrgTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(OrgTypeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(45, 45, 45)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
-                            .addComponent(MiddleNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(28, 28, 28)
-                            .addComponent(SuffixLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addComponent(MiddleNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(SuffixLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(MiddleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(SuffixText, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(AttachedCombo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(AtatchedLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)))
-                .addContainerGap(159, Short.MAX_VALUE))
+                            .addComponent(AttachedCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AtatchedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(IDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(IDText))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SuffixText)
+                            .addComponent(LSCCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(LSCCodeText))))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
         SwimmerInfoPanelLayout.setVerticalGroup(
             SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FirstNameLabel)
-                    .addComponent(lastnamelabel)
-                    .addComponent(MiddleNameLabel)
-                    .addComponent(SuffixLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FirstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MiddleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SuffixText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BrthdayLabel)
-                    .addComponent(GenderLabel)
-                    .addComponent(AtatchedLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(GenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(AttachedCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(552, Short.MAX_VALUE))
+                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FirstNameLabel)
+                            .addComponent(lastnamelabel)
+                            .addComponent(MiddleNameLabel)
+                            .addComponent(SuffixLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FirstNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LastNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MiddleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SuffixText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(BrthdayLabel)
+                            .addComponent(GenderLabel)
+                            .addComponent(AtatchedLabel)
+                            .addComponent(LSCCodeLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(GenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AttachedCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LSCCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CitizenshipLabel)
+                            .addComponent(OrgTypeLabel)))
+                    .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(IDLabel)))
+                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CitizenshipTExt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(OrgTypeCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(IDText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(488, Short.MAX_VALUE))
         );
 
         SwimmerInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -252,13 +303,21 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JComboBox AttachedCombo;
     private datechooser.beans.DateChooserCombo BirthdayDateChooserCombo1;
     private javax.swing.JLabel BrthdayLabel;
+    private javax.swing.JLabel CitizenshipLabel;
+    private javax.swing.JTextField CitizenshipTExt;
     private javax.swing.JLabel FirstNameLabel;
     private javax.swing.JTextField FirstNameText;
     private javax.swing.JComboBox GenderCombo;
     private javax.swing.JLabel GenderLabel;
+    private javax.swing.JLabel IDLabel;
+    private javax.swing.JTextField IDText;
+    private javax.swing.JLabel LSCCodeLabel;
+    private javax.swing.JTextField LSCCodeText;
     private javax.swing.JTextField LastNameText;
     private javax.swing.JLabel MiddleNameLabel;
     private javax.swing.JTextField MiddleNameText;
+    private javax.swing.JComboBox OrgTypeCombo;
+    private javax.swing.JLabel OrgTypeLabel;
     private javax.swing.JLabel SuffixLabel;
     private javax.swing.JTextField SuffixText;
     private javax.swing.JLabel SwimmerInfoLabel;

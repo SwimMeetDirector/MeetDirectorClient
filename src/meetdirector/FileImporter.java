@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -33,10 +34,16 @@ public class FileImporter {
     
     private File importFile;
     private javax.swing.JTextArea outputText;
+    private HashMap options;
+    
+    //Values for the options
+    public static final String IMPORT_NOT_FOUND_EVENTS = "ImportNotFoundEvents";
     
     public FileImporter(File file) {
         importFile = file;
         this.outputText = null;
+        this.options = new HashMap();
+        this.options.put(IMPORT_NOT_FOUND_EVENTS, false);
     }
     
     public FileImporter (File file, javax.swing.JTextArea output) {
@@ -134,6 +141,7 @@ public class FileImporter {
     public void ImportAthleteEvents(SwimMeetAthlete athlete, List<IndividualEntryType> entries) {
         Iterator<IndividualEntryType> iterator = entries.iterator();
         List<SwimMeetEvent> newEvents = new ArrayList<SwimMeetEvent>();
+        this.updateOutputText("Importing Events for Swimmer " + athlete.getName().getFullName());
         while (iterator.hasNext()) {
             IndividualEntryType event = iterator.next();
             SwimMeetEvent check = SwimMeetEvent.getEventByEventNumber(event.getEventNumber());
@@ -152,9 +160,27 @@ public class FileImporter {
                 
             } else {
                 // Events have to be created in the event creation window, they won't auto create on import
-                this.updateOutputText("Hmm, I don't have Event " + event.getEventNumber() + " ... Skipping");
+                // unless the user has selected the import events button
+                if (this.getOptions().get(IMPORT_NOT_FOUND_EVENTS) == true) {
+                    this.updateOutputText("Importing new event number " + event.getEventNumber() + " From File");
+                    SwimMeetEvent newEvent = new SwimMeetEvent(event, true);
+                    newEvent.startUpdate();
+                    try {
+                        newEvent.addSwimmer(athlete);
+                    } catch (Exception e) {
+                        this.updateOutputText("Error adding swimmer " + athlete.getName().getFullName() + " to event " + event.getEventNumber() + ": " + e.getMessage());
+                    }
+                    newEvent.commitUpdate();
+                    newEvents.add(newEvent);
+                } else {
+                    this.updateOutputText("Hmm, I don't have Event " + event.getEventNumber() + " ... Skipping");
+                }
             }
         }
+        athlete.startUpdate();
+        athlete.setEnteredEvents(newEvents);
+        athlete.commitUpdate();
+        
     }
     
     public void updateOutputText(String msg) {
@@ -162,6 +188,20 @@ public class FileImporter {
             this.outputText.append(msg + "\n");
         else
             System.out.println(msg + "\n");
+    }
+
+    /**
+     * @return the options
+     */
+    public HashMap getOptions() {
+        return options;
+    }
+
+    /**
+     * @param options the options to set
+     */
+    public void setOptions(HashMap options) {
+        this.options = options;
     }
     
 }

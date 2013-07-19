@@ -4,19 +4,8 @@
  */
 package meetdirector;
 
-import entity.SwimMeetClub;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.Iterator;
-import java.util.List;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.stream.XMLEventReader;
-import javax.xml.stream.XMLInputFactory;
-import org.usa_swimming.xsdif.ClubEntryType;
-import org.usa_swimming.xsdif.MeetEntryFileType;
+import java.util.HashMap;
 
 /**
  *
@@ -25,14 +14,16 @@ import org.usa_swimming.xsdif.MeetEntryFileType;
 public class MeetEntriesImportDialog extends javax.swing.JDialog {
 
     private static MeetEntriesImportDialog myself = null;
+    private FileImporter importer;
     
     /**
      * Creates new form MeetImportDialog
      */
-    public MeetEntriesImportDialog(java.awt.Frame parent, boolean modal) {
+    public MeetEntriesImportDialog(java.awt.Frame parent, boolean modal, File importfile) {
         super(parent, modal);
         initComponents();
         this.setTitle("Importing Meet Data");
+        this.importer = new FileImporter(importfile, this.getTextOutputArea());
     }
 
     /**
@@ -48,6 +39,10 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         DismissButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         ImportResultsText = new javax.swing.JTextArea();
+        StartImportButton = new javax.swing.JButton();
+        ImportOptionsLabel = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        AddEventsCheckbox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,6 +62,24 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         ImportResultsText.setRows(5);
         jScrollPane1.setViewportView(ImportResultsText);
 
+        StartImportButton.setText("Start Import");
+        StartImportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartImportButtonActionPerformed(evt);
+            }
+        });
+
+        ImportOptionsLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ImportOptionsLabel.setText("Import Options");
+        ImportOptionsLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        AddEventsCheckbox.setText("Add events from file");
+        AddEventsCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddEventsCheckboxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,27 +90,40 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
                 .addContainerGap(265, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(DismissButton)
-                .addGap(352, 352, 352))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(80, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(64, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ImportOptionsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddEventsCheckbox))
+                        .addGap(234, 234, 234)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(StartImportButton)
+                            .addComponent(DismissButton)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 450, Short.MAX_VALUE)
-                .addComponent(DismissButton)
-                .addGap(36, 36, 36))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap(47, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(97, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(StartImportButton)
+                            .addGap(18, 18, 18)
+                            .addComponent(DismissButton))
+                        .addComponent(jSeparator1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ImportOptionsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(AddEventsCheckbox)))
+                .addContainerGap())
         );
 
         pack();
@@ -107,12 +133,21 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_DismissButtonActionPerformed
 
+    private void AddEventsCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEventsCheckboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddEventsCheckboxActionPerformed
+
+    private void StartImportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartImportButtonActionPerformed
+        //When pressed, apply the options to the importer and start the import
+        HashMap options = importer.getOptions();
+        options.put(FileImporter.IMPORT_NOT_FOUND_EVENTS, this.AddEventsCheckbox.isSelected());
+        importer.setOptions(options);
+        importer.ImportMeetEntryFile();
+        this.DismissButton.setEnabled(true);
+    }//GEN-LAST:event_StartImportButtonActionPerformed
+
     public javax.swing.JTextArea getTextOutputArea() {
         return this.ImportResultsText;
-    }
-    
-    public void AllowDismiss() {
-        this.DismissButton.setEnabled(true);
     }
     
     public void OpenWindow() {
@@ -137,9 +172,13 @@ public class MeetEntriesImportDialog extends javax.swing.JDialog {
         
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox AddEventsCheckbox;
     private javax.swing.JButton DismissButton;
+    private javax.swing.JLabel ImportOptionsLabel;
     private javax.swing.JTextArea ImportResultsText;
+    private javax.swing.JButton StartImportButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSeparator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

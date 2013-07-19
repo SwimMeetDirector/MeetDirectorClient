@@ -163,6 +163,20 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     public void setUsasID(String usasID) {
         this.usasID = usasID;
     }
+
+    /**
+     * @return the enteredEvents
+     */
+    public List<SwimMeetEvent> getEnteredEvents() {
+        return enteredEvents;
+    }
+
+    /**
+     * @param enteredEvents the enteredEvents to set
+     */
+    public void setEnteredEvents(List<SwimMeetEvent> enteredEvents) {
+        this.enteredEvents = enteredEvents;
+    }
     
 }
 

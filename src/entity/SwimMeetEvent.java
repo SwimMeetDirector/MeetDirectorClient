@@ -5,16 +5,17 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javassist.tools.rmi.ObjectNotFoundException;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import org.usa_swimming.xsdif.CourseType;
 import org.usa_swimming.xsdif.Gender;
+import org.usa_swimming.xsdif.IndividualEntryType;
 import org.usa_swimming.xsdif.StrokeType;
 
 /**
@@ -44,7 +45,31 @@ public class SwimMeetEvent extends PersistingObject implements Serializable {
     @OneToMany
     private List<SwimMeetAthlete> swimmers;
     
-
+    public SwimMeetEvent() {
+        this.minAge = "";
+        this.maxAge = "";
+        this.isRelay = false;
+        this.minTimeClass = "";
+        this.maxTimeClass = "";
+        this.swimmers = new ArrayList<SwimMeetAthlete>();
+    }
+    
+    public SwimMeetEvent(IndividualEntryType event, Boolean persist) {
+        this();
+        this.stroke = event.getStroke();
+        this.distance = event.getDistance();
+        this.course = event.getCourse();
+        this.gender = event.getGender();
+        this.minAge = event.getMinAge();
+        this.maxAge = event.getMaxAge();
+        this.isRelay = event.isIsRelay();
+        this.minTimeClass = event.getMinTimeClass();
+        this.maxTimeClass = event.getMaxTimeClass();
+        this.eventNumber = event.getEventNumber();
+        if (persist == true)
+            this.persist();
+    }
+    
     public Long getId() {
         return id;
     }

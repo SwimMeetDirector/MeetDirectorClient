@@ -4,6 +4,7 @@
  */
 package meetdirector;
 
+import entity.SwimMeet;
 import entity.SwimMeetAthlete;
 import entity.SwimMeetClub;
 import entity.SwimMeetEvent;
@@ -74,8 +75,17 @@ public class FileImporter {
             return;
         }
         this.updateOutputText("Found Meet Entry " + meetEntry.getMeet().getMeetName());
+        try {
+            this.updateOutputText("Attempting import of meet overview data");
+            SwimMeet newMeet = new SwimMeet(meetEntry.getMeet());
+            this.updateOutputText("Imported new meet overview data");
+            newMeet.persist();
+        } catch (Exception e) {
+            this.updateOutputText("Error: " + e.getLocalizedMessage());
+            this.updateOutputText("Meet overview already exists, skipping");
+        }
+        
         this.updateOutputText("Importing Clubs");
-       
         this.ImportClubs(meetEntry.getClubs().getClub());
         
     }

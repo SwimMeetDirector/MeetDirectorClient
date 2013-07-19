@@ -5,14 +5,13 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import meetdirector.MeetDBConnection;
+import org.usa_swimming.xsdif.MeetType;
  
 
 /**
@@ -21,37 +20,54 @@ import meetdirector.MeetDBConnection;
  */
 @Entity
 public class SwimMeet extends PersistingObject implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static long serialVersionUID = 1L;
+
+    /**
+     * @return the serialVersionUID
+     */
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    /**
+     * @param aSerialVersionUID the serialVersionUID to set
+     */
+    public static void setSerialVersionUID(long aSerialVersionUID) {
+        serialVersionUID = aSerialVersionUID;
+    }
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     public static int EMAIL_INDEX=1;
     public static int NAME_INDEX=0;
-    protected String MeetName;
-    protected String MeetHost;
-    protected String Address;
-    protected String[] Director;
-    protected String[] EntryCoordinator;
-    protected String[] Referee;
-    protected String[] Marshall;
-    protected String Sanction;
-    protected String AnnouncementText;
-    
+    private String MeetName;
+    private String MeetHost;
+    private String Address;
+    private String[] Director;
+    private String[] EntryCoordinator;
+    private String[] Referee;
+    private String[] Marshall;
+    private String Sanction;
+    private String AnnouncementText;
+    private GregorianCalendar StartTime;
+    private GregorianCalendar EndTime;
     
     protected SwimMeet(SwimMeet orig) {
-        this.MeetName = new String(orig.MeetName);
-        this.MeetHost = new String(orig.MeetHost);
-        this.Address = new String(orig.Address);
-        this.Director[this.NAME_INDEX] = new String(orig.Director[this.NAME_INDEX]);
-        this.Director[this.EMAIL_INDEX] = new String(orig.Director[this.EMAIL_INDEX]);
-        this.EntryCoordinator[this.NAME_INDEX] = new String(orig.EntryCoordinator[this.NAME_INDEX]);
-        this.EntryCoordinator[this.EMAIL_INDEX] = new String(orig.EntryCoordinator[this.EMAIL_INDEX]);
-        this.Referee[this.NAME_INDEX] = new String(orig.Referee[this.NAME_INDEX]);
-        this.Referee[this.EMAIL_INDEX] = new String(orig.Referee[this.EMAIL_INDEX]);
-        this.Marshall[this.NAME_INDEX] = new String(orig.Marshall[this.NAME_INDEX]);
-        this.Marshall[this.EMAIL_INDEX] = new String(orig.Marshall[this.EMAIL_INDEX]);
-        this.Sanction = new String (orig.Sanction);
-        this.AnnouncementText = new String(orig.AnnouncementText);
+        this.MeetName = new String(orig.getMeetName());
+        this.MeetHost = new String(orig.getMeetHost());
+        this.Address = new String(orig.getAddress());
+        this.Director[this.NAME_INDEX] = new String(orig.getDirector()[this.NAME_INDEX]);
+        this.Director[this.EMAIL_INDEX] = new String(orig.getDirector()[this.EMAIL_INDEX]);
+        this.EntryCoordinator[this.NAME_INDEX] = new String(orig.getEntryCoordinator()[this.NAME_INDEX]);
+        this.EntryCoordinator[this.EMAIL_INDEX] = new String(orig.getEntryCoordinator()[this.EMAIL_INDEX]);
+        this.Referee[this.NAME_INDEX] = new String(orig.getReferee()[this.NAME_INDEX]);
+        this.Referee[this.EMAIL_INDEX] = new String(orig.getReferee()[this.EMAIL_INDEX]);
+        this.Marshall[this.NAME_INDEX] = new String(orig.getMarshall()[this.NAME_INDEX]);
+        this.Marshall[this.EMAIL_INDEX] = new String(orig.getMarshall()[this.EMAIL_INDEX]);
+        this.Sanction = new String (orig.getSanction());
+        this.AnnouncementText = new String(orig.getAnnouncementText());
+        this.StartTime = orig.getStartTime();
+        this.EndTime = orig.getEndTime();
     }
     
     protected SwimMeet() {
@@ -72,6 +88,20 @@ public class SwimMeet extends PersistingObject implements Serializable {
         this.Marshall[this.EMAIL_INDEX] = "";
         this.Sanction = "";
         this.AnnouncementText = "";
+        this.StartTime = new GregorianCalendar();
+        this.EndTime = new GregorianCalendar();
+    }
+    
+    public SwimMeet(MeetType meetimport) throws Exception{
+        this();
+        if (SwimMeet.swimMeetCreated())
+            throw new Exception("Meet Entry already Created");
+        this.setMeetName(meetimport.getMeetName());
+        this.setMeetHost(meetimport.getHosts().get(0).getName());
+        this.setAddress(meetimport.getLocation().toString());
+        this.setStartTime(meetimport.getStart().toGregorianCalendar());
+        this.setEndTime(meetimport.getEnd().toGregorianCalendar());
+        // Note we need to Modify the dialog to support the Start and End Times
     }
     
     public static SwimMeet getSwimMeet() {
@@ -91,6 +121,14 @@ public class SwimMeet extends PersistingObject implements Serializable {
         return meet;
     }    
     
+    public static Boolean swimMeetCreated() {
+        SwimMeet meet;
+        List<SwimMeet> results = PersistingObject.queryClassObjects("SELECT * From SwimMeet", SwimMeet.class);
+        if (results.isEmpty())
+            return false;
+        return true;
+    }
+      
     public Long getId() {
         return id;
     }
@@ -102,7 +140,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        hash += (getId() != null ? getId().hashCode() : 0);
         return hash;
     }
 
@@ -113,7 +151,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
             return false;
         }
         SwimMeet other = (SwimMeet) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if ((this.getId() == null && other.getId() != null) || (this.getId() != null && !this.id.equals(other.id))) {
             return false;
         }
         return true;
@@ -121,7 +159,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.SwimMeet[ id=" + id + " ]";
+        return "entity.SwimMeet[ id=" + getId() + " ]";
     }
 
     /**
@@ -177,7 +215,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param Director the Director to set
      */
     public void setDirector(String[] Director) {
-        this.Director = Director;
+        this.setDirector(Director);
     }
 
     /**
@@ -191,7 +229,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param EntryCoordinator the EntryCoordinator to set
      */
     public void setEntryCoordinator(String[] EntryCoordinator) {
-        this.EntryCoordinator = EntryCoordinator;
+        this.setEntryCoordinator(EntryCoordinator);
     }
 
     /**
@@ -205,7 +243,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param Referee the Referee to set
      */
     public void setReferee(String[] Referee) {
-        this.Referee = Referee;
+        this.setReferee(Referee);
     }
 
     /**
@@ -219,7 +257,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param Marshall the Marshall to set
      */
     public void setMarshall(String[] Marshall) {
-        this.Marshall = Marshall;
+        this.setMarshall(Marshall);
     }
 
     /**
@@ -248,6 +286,34 @@ public class SwimMeet extends PersistingObject implements Serializable {
      */
     public void setAnnouncementText(String AnnouncementText) {
         this.AnnouncementText = AnnouncementText;
+    }
+
+    /**
+     * @return the StartTime
+     */
+    public GregorianCalendar getStartTime() {
+        return StartTime;
+    }
+
+    /**
+     * @param StartTime the StartTime to set
+     */
+    public void setStartTime(GregorianCalendar StartTime) {
+        this.StartTime = StartTime;
+    }
+
+    /**
+     * @return the EndTime
+     */
+    public GregorianCalendar getEndTime() {
+        return EndTime;
+    }
+
+    /**
+     * @param EndTime the EndTime to set
+     */
+    public void setEndTime(GregorianCalendar EndTime) {
+        this.EndTime = EndTime;
     }
     
 }

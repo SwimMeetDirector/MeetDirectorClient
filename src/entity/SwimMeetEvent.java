@@ -42,7 +42,6 @@ public class SwimMeetEvent extends PersistingObject implements Serializable {
     //Note - This is a list to point to all Athletes registered for 
     //for this event
     @OneToMany
-    @JoinColumn
     private List<SwimMeetAthlete> swimmers;
     
 

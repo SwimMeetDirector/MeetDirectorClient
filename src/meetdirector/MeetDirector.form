@@ -55,6 +55,19 @@
             </MenuItem>
           </SubComponents>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="SwimmerMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Swimmers"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="SwimmerEditMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edit Swimmers"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
       </SubComponents>
     </Menu>
   </NonVisualComponents>

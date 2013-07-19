@@ -104,6 +104,8 @@ public class MeetDirector extends javax.swing.JFrame {
         MeetImportMenuItem = new javax.swing.JMenu();
         MeetInfoMenu = new javax.swing.JMenuItem();
         ImportMenuItem = new javax.swing.JMenuItem();
+        SwimmerMenu = new javax.swing.JMenu();
+        SwimmerEditMenuItem = new javax.swing.JMenuItem();
 
         ImportChooser.setDialogTitle("Import Meet XML");
         ImportChooser.getAccessibleContext().setAccessibleParent(MainPanel);
@@ -286,6 +288,14 @@ public class MeetDirector extends javax.swing.JFrame {
 
         jMenuBar2.add(MeetImportMenuItem);
 
+        SwimmerMenu.setText("Swimmers");
+
+        SwimmerEditMenuItem.setText("Edit Swimmers");
+        SwimmerEditMenuItem.setToolTipText("");
+        SwimmerMenu.add(SwimmerEditMenuItem);
+
+        jMenuBar2.add(SwimmerMenu);
+
         setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -426,6 +436,8 @@ public class MeetDirector extends javax.swing.JFrame {
     private javax.swing.JMenu MeetImportMenuItem;
     private javax.swing.JMenuItem MeetInfoMenu;
     private javax.swing.JCheckBox NewDBTextBox;
+    private javax.swing.JMenuItem SwimmerEditMenuItem;
+    private javax.swing.JMenu SwimmerMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -27,6 +27,10 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
+        buttonGroup4 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         swimmerDropDown = new javax.swing.JComboBox();
         SwimmersPanel = new javax.swing.JLabel();
@@ -53,6 +57,23 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         OrgTypeCombo = new javax.swing.JComboBox();
         IDLabel = new javax.swing.JLabel();
         IDText = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        EnteredEventsBudget = new javax.swing.JRadioButton();
+        EventsPanel = new javax.swing.JLabel();
+        AllEventsButton = new javax.swing.JRadioButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        EntryTable = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        SeedTimeLabel = new javax.swing.JLabel();
+        RawTimeLabel = new javax.swing.JLabel();
+        RawSeedTimeText = new javax.swing.JTextField();
+        ConvertedSeedTimeLabel = new javax.swing.JLabel();
+        ConvertedTimeText = new javax.swing.JTextField();
+        RawCourseLabel = new javax.swing.JLabel();
+        RawCourseText = new javax.swing.JTextField();
+        MeetCourseLabel = new javax.swing.JLabel();
+        MeetCourseText = new javax.swing.JTextField();
+        AlternateCheckBox = new javax.swing.JCheckBox();
         SwimmerInfoLabel = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -115,6 +136,150 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         IDLabel.setText("ID");
 
+        EnteredEventsBudget.setText("Entered Events");
+        EnteredEventsBudget.setEnabled(false);
+
+        EventsPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        EventsPanel.setText("Events");
+
+        AllEventsButton.setText("All Events");
+        AllEventsButton.setEnabled(false);
+
+        EntryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Entered", "Event Number", "Gender", "Distance", "Stroke"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Boolean.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        EntryTable.setEnabled(false);
+        jScrollPane2.setViewportView(EntryTable);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(EnteredEventsBudget)
+                                .addGap(35, 35, 35)
+                                .addComponent(AllEventsButton))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(111, 111, 111)
+                                .addComponent(EventsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(EventsPanel)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EnteredEventsBudget)
+                    .addComponent(AllEventsButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        SeedTimeLabel.setText("Seed Time");
+
+        RawTimeLabel.setText("Raw Seed Time");
+
+        RawSeedTimeText.setEnabled(false);
+
+        ConvertedSeedTimeLabel.setText("Converted Seed Time");
+
+        ConvertedTimeText.setEnabled(false);
+
+        RawCourseLabel.setText("Raw Course");
+
+        MeetCourseLabel.setText("Meet Course");
+
+        MeetCourseText.setEnabled(false);
+
+        AlternateCheckBox.setText("Alternate");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addComponent(SeedTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(RawTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AlternateCheckBox)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(MeetCourseText, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(MeetCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(RawCourseText, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(RawCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ConvertedTimeText, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(ConvertedSeedTimeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(RawSeedTimeText, javax.swing.GroupLayout.Alignment.LEADING)))))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(SeedTimeLabel)
+                .addGap(48, 48, 48)
+                .addComponent(RawTimeLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RawSeedTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(ConvertedSeedTimeLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(ConvertedTimeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(RawCourseLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RawCourseText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(MeetCourseLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MeetCourseText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(AlternateCheckBox)
+                .addContainerGap(113, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout SwimmerInfoPanelLayout = new javax.swing.GroupLayout(SwimmerInfoPanel);
         SwimmerInfoPanel.setLayout(SwimmerInfoPanelLayout);
         SwimmerInfoPanelLayout.setHorizontalGroup(
@@ -122,40 +287,47 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
             .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(BrthdayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(FirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                        .addComponent(FirstNameText, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CitizenshipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CitizenshipTExt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lastnamelabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LastNameText, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(GenderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(GenderCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OrgTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(OrgTypeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(45, 45, 45)
-                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
-                        .addComponent(MiddleNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(SuffixLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                        .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(BrthdayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(FirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                .addComponent(FirstNameText, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CitizenshipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CitizenshipTExt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(MiddleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AttachedCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AtatchedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(IDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(IDText))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lastnamelabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(LastNameText, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(GenderLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(GenderCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(OrgTypeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(OrgTypeCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(45, 45, 45)
                         .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(SuffixText)
-                            .addComponent(LSCCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                            .addComponent(LSCCodeText))))
-                .addContainerGap(143, Short.MAX_VALUE))
+                            .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
+                                .addComponent(MiddleNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(SuffixLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SwimmerInfoPanelLayout.createSequentialGroup()
+                                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(MiddleNameText, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AttachedCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(AtatchedLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(IDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(IDText))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(SuffixText)
+                                    .addComponent(LSCCodeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                                    .addComponent(LSCCodeText))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         SwimmerInfoPanelLayout.setVerticalGroup(
             SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +376,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                     .addGroup(SwimmerInfoPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(IDText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(488, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         SwimmerInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -299,12 +475,19 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton AllEventsButton;
+    private javax.swing.JCheckBox AlternateCheckBox;
     private javax.swing.JLabel AtatchedLabel;
     private javax.swing.JComboBox AttachedCombo;
     private datechooser.beans.DateChooserCombo BirthdayDateChooserCombo1;
     private javax.swing.JLabel BrthdayLabel;
     private javax.swing.JLabel CitizenshipLabel;
     private javax.swing.JTextField CitizenshipTExt;
+    private javax.swing.JLabel ConvertedSeedTimeLabel;
+    private javax.swing.JTextField ConvertedTimeText;
+    private javax.swing.JRadioButton EnteredEventsBudget;
+    private javax.swing.JTable EntryTable;
+    private javax.swing.JLabel EventsPanel;
     private javax.swing.JLabel FirstNameLabel;
     private javax.swing.JTextField FirstNameText;
     private javax.swing.JComboBox GenderCombo;
@@ -314,19 +497,33 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JLabel LSCCodeLabel;
     private javax.swing.JTextField LSCCodeText;
     private javax.swing.JTextField LastNameText;
+    private javax.swing.JLabel MeetCourseLabel;
+    private javax.swing.JTextField MeetCourseText;
     private javax.swing.JLabel MiddleNameLabel;
     private javax.swing.JTextField MiddleNameText;
     private javax.swing.JComboBox OrgTypeCombo;
     private javax.swing.JLabel OrgTypeLabel;
+    private javax.swing.JLabel RawCourseLabel;
+    private javax.swing.JTextField RawCourseText;
+    private javax.swing.JTextField RawSeedTimeText;
+    private javax.swing.JLabel RawTimeLabel;
+    private javax.swing.JLabel SeedTimeLabel;
     private javax.swing.JLabel SuffixLabel;
     private javax.swing.JTextField SuffixText;
     private javax.swing.JLabel SwimmerInfoLabel;
     private javax.swing.JPanel SwimmerInfoPanel;
     private javax.swing.JLabel SwimmersPanel;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lastnamelabel;
     private javax.swing.JComboBox swimmerDropDown;
     // End of variables declaration//GEN-END:variables

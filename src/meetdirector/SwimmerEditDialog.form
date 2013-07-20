@@ -2,6 +2,14 @@
 
 <Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup3">
+    </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup4">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -109,48 +117,58 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="BrthdayLabel" max="32767" attributes="0"/>
-                          <Component id="FirstNameLabel" alignment="0" pref="115" max="32767" attributes="0"/>
-                          <Component id="FirstNameText" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jPanel2" max="32767" attributes="0"/>
                       </Group>
-                      <Component id="BirthdayDateChooserCombo1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="CitizenshipLabel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
-                      <Component id="CitizenshipTExt" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="BrthdayLabel" max="32767" attributes="0"/>
+                                  <Component id="FirstNameLabel" alignment="0" pref="115" max="32767" attributes="0"/>
+                                  <Component id="FirstNameText" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="BirthdayDateChooserCombo1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="CitizenshipLabel" alignment="0" min="-2" pref="142" max="-2" attributes="0"/>
+                              <Component id="CitizenshipTExt" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="lastnamelabel" alignment="1" max="32767" attributes="0"/>
+                              <Component id="LastNameText" alignment="1" max="32767" attributes="0"/>
+                              <Component id="GenderLabel" max="32767" attributes="0"/>
+                              <Component id="GenderCombo" max="32767" attributes="0"/>
+                              <Component id="OrgTypeLabel" max="32767" attributes="0"/>
+                              <Component id="OrgTypeCombo" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="MiddleNameLabel" min="-2" pref="115" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="SuffixLabel" min="-2" pref="115" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="MiddleNameText" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
+                                      <Component id="AttachedCombo" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="AtatchedLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="IDLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="IDText" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="28" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="SuffixText" max="32767" attributes="0"/>
+                                      <Component id="LSCCodeLabel" pref="115" max="32767" attributes="0"/>
+                                      <Component id="LSCCodeText" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lastnamelabel" alignment="1" max="32767" attributes="0"/>
-                      <Component id="LastNameText" alignment="1" max="32767" attributes="0"/>
-                      <Component id="GenderLabel" max="32767" attributes="0"/>
-                      <Component id="GenderCombo" max="32767" attributes="0"/>
-                      <Component id="OrgTypeLabel" max="32767" attributes="0"/>
-                      <Component id="OrgTypeCombo" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="MiddleNameLabel" min="-2" pref="115" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-                          <Component id="SuffixLabel" min="-2" pref="115" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="MiddleNameText" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
-                              <Component id="AttachedCombo" alignment="0" max="32767" attributes="0"/>
-                              <Component id="AtatchedLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="IDLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="IDText" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="28" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="SuffixText" max="32767" attributes="0"/>
-                              <Component id="LSCCodeLabel" pref="115" max="32767" attributes="0"/>
-                              <Component id="LSCCodeText" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace pref="143" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -215,7 +233,12 @@
                           <Component id="IDText" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="488" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -352,6 +375,211 @@
         </Component>
         <Component class="javax.swing.JTextField" name="IDText">
         </Component>
+        <Container class="javax.swing.JPanel" name="jPanel1">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                                      <Component id="EnteredEventsBudget" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="AllEventsButton" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                                      <Component id="EventsPanel" min="-2" pref="159" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jScrollPane2" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                      <Component id="EventsPanel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="EnteredEventsBudget" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="AllEventsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="8" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" min="-2" pref="422" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JRadioButton" name="EnteredEventsBudget">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Entered Events"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="EventsPanel">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Events"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JRadioButton" name="AllEventsButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="All Events"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="EntryTable">
+                  <Properties>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="5" rowCount="4">
+                        <Column editable="true" title="Entered" type="java.lang.Boolean"/>
+                        <Column editable="false" title="Event Number" type="java.lang.Integer"/>
+                        <Column editable="false" title="Gender" type="java.lang.String"/>
+                        <Column editable="false" title="Distance" type="java.lang.String"/>
+                        <Column editable="false" title="Stroke" type="java.lang.String"/>
+                      </Table>
+                    </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+          </SubComponents>
+        </Container>
+        <Container class="javax.swing.JPanel" name="jPanel2">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="SeedTimeLabel" min="-2" pref="144" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="RawTimeLabel" min="-2" pref="142" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="AlternateCheckBox" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="MeetCourseText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="MeetCourseLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="RawCourseText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="RawCourseLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ConvertedTimeText" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="ConvertedSeedTimeLabel" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="RawSeedTimeText" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace pref="58" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="SeedTimeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+                      <Component id="RawTimeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="RawSeedTimeText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="ConvertedSeedTimeLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="ConvertedTimeText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="RawCourseLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="RawCourseText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="MeetCourseLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="MeetCourseText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="AlternateCheckBox" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="113" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="SeedTimeLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Seed Time"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="RawTimeLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Raw Seed Time"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="RawSeedTimeText">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="ConvertedSeedTimeLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Converted Seed Time"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="ConvertedTimeText">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="RawCourseLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Raw Course"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="RawCourseText">
+            </Component>
+            <Component class="javax.swing.JLabel" name="MeetCourseLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Meet Course"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="MeetCourseText">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="AlternateCheckBox">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Alternate"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="SwimmerInfoLabel">

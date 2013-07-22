@@ -4,6 +4,13 @@
  */
 package meetdirector;
 
+import entity.SwimMeetAthlete;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  *
  * @author nhorman
@@ -31,7 +38,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        SwimmerNamePane = new javax.swing.JScrollPane();
         swimmerDropDown = new javax.swing.JComboBox();
         SwimmersPanel = new javax.swing.JLabel();
         SwimmerInfoPanel = new javax.swing.JPanel();
@@ -89,7 +96,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 swimmerDropDownActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(swimmerDropDown);
+        SwimmerNamePane.setViewportView(swimmerDropDown);
 
         SwimmersPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SwimmersPanel.setText("Swimmer");
@@ -437,7 +444,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                                 .addComponent(SwimmersPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(254, 254, 254)
                                 .addComponent(SwimmerInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(SwimmerNamePane, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -451,7 +458,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SwimmerNamePane, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(EditSwimmerButton)
@@ -468,9 +475,65 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void swimmerDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_swimmerDropDownActionPerformed
-        // TODO add your handling code here:
+        // We've had a selection made in the swimmer list, lets look that swimmer up
+        String name = (String)this.swimmerDropDown.getSelectedItem();
+        System.out.println ("Get Name " + name);
+        
+        // Now look the name up in the hash map
+        SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+        if (swimmer == null)
+            return;
+        this.PopulateSwimmerFields(swimmer);
+        
     }//GEN-LAST:event_swimmerDropDownActionPerformed
 
+    private void PopulateSwimmerFields(SwimMeetAthlete swimmer) {
+        int index = 0;
+        this.FirstNameText.setText(swimmer.getName().getFirstName());
+        this.LastNameText.setText(swimmer.getName().getLastName());
+        this.MiddleNameText.setText(swimmer.getName().getMiddleName());
+        this.SuffixText.setText(swimmer.getName().getSuffix());
+        this.BirthdayDateChooserCombo1.setSelectedDate(swimmer.getBirthDate());
+        
+        this.GenderCombo.setSelectedItem(swimmer.getGender().name());
+        
+        if (swimmer.isIsAttached())
+            this.AttachedCombo.setSelectedIndex(0);
+        else
+            this.AttachedCombo.setSelectedIndex(1);
+        
+        this.LSCCodeText.setText(swimmer.getLsc().name());
+        this.CitizenshipTExt.setText(swimmer.getCitizenOf()[0]);
+        this.OrgTypeCombo.setSelectedItem(swimmer.getOrganization().name());
+        this.IDText.setText(swimmer.getUsasID());
+    }
+    
+    private void PopulateSwimmerDropDown() {
+         //When the component is shown, we need to build a list of swimmers and add them to this component
+        List<SwimMeetAthlete> swimmers;
+        Comparator<SwimMeetAthlete> alphabeticalSort = new Comparator<SwimMeetAthlete>() {
+            public int compare(SwimMeetAthlete c1, SwimMeetAthlete c2) {
+                    return c1.getName().getLastName().compareTo(c2.getName().getLastName());
+            }
+        };
+        this.SwimmerDropDownMap = new HashMap();
+        
+        // STart by getting a full list of all swimmers
+        swimmers = SwimMeetAthlete.getAllAthletes();
+        if (swimmers.isEmpty())
+            return;
+        
+        Collections.sort(swimmers, alphabeticalSort);
+        
+        // Now we have a sorted list of swimmmers, add each swimmer to the combo box
+        Iterator<SwimMeetAthlete> iterator = swimmers.iterator();
+        while (iterator.hasNext()) {
+                SwimMeetAthlete swimmer = iterator.next();
+                String name = swimmer.getName().getLastName() + ", " + swimmer.getName().getFirstName();
+                this.swimmerDropDown.addItem(name);
+                this.SwimmerDropDownMap.put(name, swimmer);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -508,10 +571,13 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                         return;
                     }
                 });
+                dialog.PopulateSwimmerDropDown();
                 dialog.setVisible(true);
             }
         });
     }
+    private HashMap SwimmerDropDownMap;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddSwimmerButton;
     private javax.swing.JRadioButton AllEventsButton;
@@ -555,6 +621,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JTextField SuffixText;
     private javax.swing.JLabel SwimmerInfoLabel;
     private javax.swing.JPanel SwimmerInfoPanel;
+    private javax.swing.JScrollPane SwimmerNamePane;
     private javax.swing.JLabel SwimmersPanel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -562,7 +629,6 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lastnamelabel;
     private javax.swing.JComboBox swimmerDropDown;

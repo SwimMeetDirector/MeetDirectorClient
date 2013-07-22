@@ -5,6 +5,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.persistence.Entity;
@@ -83,6 +84,12 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             return null;
         }
         return results.get(0);
+    }
+    
+    public static List<SwimMeetAthlete> getAllAthletes() {
+        String myquery = "SELECT * FROM SwimMeetAthlete";
+                
+        return SwimMeetAthlete.queryClassObjects(myquery, SwimMeetAthlete.class);   
     }
     
     public Long getId() {
@@ -176,6 +183,90 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
      */
     public void setEnteredEvents(List<SwimMeetEvent> enteredEvents) {
         this.enteredEvents = enteredEvents;
+    }
+
+    /**
+     * @return the birthDate
+     */
+    public GregorianCalendar getBirthDate() {
+        return birthDate;
+    }
+
+    /**
+     * @param birthDate the birthDate to set
+     */
+    public void setBirthDate(GregorianCalendar birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    /**
+     * @return the gender
+     */
+    public Gender getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    /**
+     * @return the isAttached
+     */
+    public boolean isIsAttached() {
+        return isAttached;
+    }
+
+    /**
+     * @param isAttached the isAttached to set
+     */
+    public void setIsAttached(boolean isAttached) {
+        this.isAttached = isAttached;
+    }
+
+    /**
+     * @return the lsc
+     */
+    public LscCodeType getLsc() {
+        return lsc;
+    }
+
+    /**
+     * @param lsc the lsc to set
+     */
+    public void setLsc(LscCodeType lsc) {
+        this.lsc = lsc;
+    }
+
+    /**
+     * @return the citizenOf
+     */
+    public String[] getCitizenOf() {
+        return citizenOf;
+    }
+
+    /**
+     * @param citizenOf the citizenOf to set
+     */
+    public void setCitizenOf(String[] citizenOf) {
+        this.citizenOf = citizenOf;
+    }
+
+    /**
+     * @return the organization
+     */
+    public OrganizationType getOrganization() {
+        return organization;
+    }
+
+    /**
+     * @param organization the organization to set
+     */
+    public void setOrganization(OrganizationType organization) {
+        this.organization = organization;
     }
     
 }

@@ -74,12 +74,15 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         MeetCourseLabel = new javax.swing.JLabel();
         MeetCourseText = new javax.swing.JTextField();
         AlternateCheckBox = new javax.swing.JCheckBox();
+        CommitSeedButton = new javax.swing.JButton();
         SwimmerInfoLabel = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        EditSwimmerButton = new javax.swing.JButton();
+        AddSwimmerButton = new javax.swing.JButton();
+        CommitButton = new javax.swing.JButton();
+        CancelButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Swimmer Information");
 
         swimmerDropDown.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +93,8 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         SwimmersPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SwimmersPanel.setText("Swimmer");
+
+        SwimmerInfoPanel.setEnabled(false);
 
         FirstNameLabel.setText("First Name");
 
@@ -210,6 +215,8 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        jPanel2.setEnabled(false);
+
         SeedTimeLabel.setText("Seed Time");
 
         RawTimeLabel.setText("Raw Seed Time");
@@ -228,6 +235,9 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         AlternateCheckBox.setText("Alternate");
 
+        CommitSeedButton.setText("Commit Seed Info");
+        CommitSeedButton.setEnabled(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -242,9 +252,10 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                         .addComponent(RawTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AlternateCheckBox)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(CommitSeedButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(AlternateCheckBox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(MeetCourseText, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(MeetCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(RawCourseText, javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,7 +263,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                                 .addComponent(ConvertedTimeText, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(ConvertedSeedTimeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(RawSeedTimeText, javax.swing.GroupLayout.Alignment.LEADING)))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +288,9 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 .addComponent(MeetCourseText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(AlternateCheckBox)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(CommitSeedButton)
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout SwimmerInfoPanelLayout = new javax.swing.GroupLayout(SwimmerInfoPanel);
@@ -386,31 +399,42 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         SwimmerInfoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SwimmerInfoLabel.setText("Swimmer Information");
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        EditSwimmerButton.setText("Edit Swimmer");
+        EditSwimmerButton.setEnabled(false);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
+        AddSwimmerButton.setText("Add Swimmer");
 
-        setJMenuBar(jMenuBar1);
+        CommitButton.setText("Commit");
+        CommitButton.setEnabled(false);
+
+        CancelButton.setText("Cancel");
+        CancelButton.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(SwimmersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SwimmerInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(SwimmersPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
                         .addGap(254, 254, 254)
                         .addComponent(SwimmerInfoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(EditSwimmerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CommitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(AddSwimmerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(46, 46, 46)
+                        .addComponent(SwimmerInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -421,9 +445,18 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                     .addComponent(SwimmerInfoLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(EditSwimmerButton)
+                            .addComponent(AddSwimmerButton))
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CommitButton)
+                            .addComponent(CancelButton)))
                     .addComponent(SwimmerInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -475,16 +508,21 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddSwimmerButton;
     private javax.swing.JRadioButton AllEventsButton;
     private javax.swing.JCheckBox AlternateCheckBox;
     private javax.swing.JLabel AtatchedLabel;
     private javax.swing.JComboBox AttachedCombo;
     private datechooser.beans.DateChooserCombo BirthdayDateChooserCombo1;
     private javax.swing.JLabel BrthdayLabel;
+    private javax.swing.JButton CancelButton;
     private javax.swing.JLabel CitizenshipLabel;
     private javax.swing.JTextField CitizenshipTExt;
+    private javax.swing.JButton CommitButton;
+    private javax.swing.JButton CommitSeedButton;
     private javax.swing.JLabel ConvertedSeedTimeLabel;
     private javax.swing.JTextField ConvertedTimeText;
+    private javax.swing.JButton EditSwimmerButton;
     private javax.swing.JRadioButton EnteredEventsBudget;
     private javax.swing.JTable EntryTable;
     private javax.swing.JLabel EventsPanel;
@@ -517,9 +555,6 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.ButtonGroup buttonGroup4;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

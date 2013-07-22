@@ -264,6 +264,7 @@ public class MeetDirector extends javax.swing.JFrame {
         jMenuBar2.add(jMenu3);
 
         MeetImportMenuItem.setText("Meet");
+        MeetImportMenuItem.setEnabled(false);
         MeetImportMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MeetImportMenuItemActionPerformed(evt);
@@ -289,6 +290,7 @@ public class MeetDirector extends javax.swing.JFrame {
         jMenuBar2.add(MeetImportMenuItem);
 
         SwimmerMenu.setText("Swimmers");
+        SwimmerMenu.setEnabled(false);
 
         SwimmerEditMenuItem.setText("Edit Swimmers");
         SwimmerEditMenuItem.setToolTipText("");
@@ -350,6 +352,8 @@ public class MeetDirector extends javax.swing.JFrame {
         this.ConnectPanel.setVisible(false);
         this.MainPanel.setVisible(true);
         this.MeetInfoMenu.setEnabled(true);
+        this.MeetImportMenuItem.setEnabled(true);
+        this.SwimmerMenu.setEnabled(true);
         
         // TODO add your handling code here:
     }//GEN-LAST:event_ConnectButtonActionPerformed

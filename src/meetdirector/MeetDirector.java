@@ -292,6 +292,11 @@ public class MeetDirector extends javax.swing.JFrame {
 
         SwimmerEditMenuItem.setText("Edit Swimmers");
         SwimmerEditMenuItem.setToolTipText("");
+        SwimmerEditMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SwimmerEditMenuItemActionPerformed(evt);
+            }
+        });
         SwimmerMenu.add(SwimmerEditMenuItem);
 
         jMenuBar2.add(SwimmerMenu);
@@ -384,6 +389,10 @@ public class MeetDirector extends javax.swing.JFrame {
             importerWindow.OpenWindow();
         }
     }//GEN-LAST:event_ImportMenuItemActionPerformed
+
+    private void SwimmerEditMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SwimmerEditMenuItemActionPerformed
+        SwimmerEditDialog.OpenWindow();      // TODO add your handling code here:
+    }//GEN-LAST:event_SwimmerEditMenuItemActionPerformed
 
     /**
      * @param args the command line arguments

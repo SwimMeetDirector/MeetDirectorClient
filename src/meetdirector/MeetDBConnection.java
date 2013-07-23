@@ -22,7 +22,6 @@ import javax.persistence.EntityManager;
 public class MeetDBConnection {
     private static MeetDBConnection instance = null;
     private String DbUrl = null;
-    private String status = null;
     private Connection conn = null;
     private String user = null;
     private String pass = null;
@@ -93,49 +92,28 @@ public class MeetDBConnection {
         return instance;
     }
     
-    public Boolean Connect(Boolean newDb) {
-        try {
-            String sendUrl = this.DbUrl;
-            if (this.user != null)
-                sendUrl = sendUrl + ";user=" + this.user;
-            if (this.pass != null)
-                sendUrl = sendUrl + ";password=" + this.pass;
-            if (newDb == true)
-                sendUrl = sendUrl + ";create=true";
+    public void Connect(Boolean newDb) throws Exception {
+        
+       String sendUrl = this.DbUrl;
+       if (this.user != null)
+           sendUrl = sendUrl + ";user=" + this.user;
+       if (this.pass != null)
+           sendUrl = sendUrl + ";password=" + this.pass;
+       if (newDb == true)
+           sendUrl = sendUrl + ";create=true";
             
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            conn = DriverManager.getConnection(sendUrl);
-        }
-        catch (Exception except)
-        {
-            status = except.getLocalizedMessage();
-            System.out.println(status);
-            if (status == null) {
-                status = "Client Driver Error";
-            }
-            return false;
-        }
-        status = "Success";
-        try {
-            conn.close();
-            connected = true;
-        }
-        catch (Exception except) {
-            status = "Odd problem closing connection";
-        }
+       Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+       conn = DriverManager.getConnection(sendUrl);
+        
+        conn.close();
+        connected = true;
+        
         this.emf = javax.persistence.Persistence.createEntityManagerFactory("MeetObjectPU", this.getDBConnectionProperties());
         this.em = emf.createEntityManager();
-        return true;
     }
     
     public Boolean connected() {
         return connected;
     }
     
-    public String getStatus() {
-        if (status == null)
-            return "Unknown";
-        else
-            return status;
-    }
 }

@@ -173,10 +173,13 @@ public class ConnectionDialog extends javax.swing.JDialog {
 
         MeetDBConnection meet = MeetDBConnection.getDBConnection();
         meet.SetConnectionParams(DBAddrText.getText(), DBPortText.getText(), DBNameText.getText(), DBUserText.getText(), DBPasswordText.getText());
-        if (meet.Connect(CreateCheckBox.isSelected()) == false) {
-            ErrorDialog.DisplayErrorDialog("Failed to Connect");
+        try {
+            meet.Connect(CreateCheckBox.isSelected());
+        } catch (Exception e) {
+            ErrorDialog.DisplayErrorDialog(e.getLocalizedMessage());
             return;
         }
+        
         DBConfigProps.setProperty("Server", DBAddrText.getText());
         DBConfigProps.setProperty("Port", DBPortText.getText());
         DBConfigProps.setProperty("UserName", DBUserText.getText());

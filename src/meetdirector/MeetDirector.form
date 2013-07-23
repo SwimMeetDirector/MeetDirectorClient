@@ -19,6 +19,14 @@
             <Property name="text" type="java.lang.String" value="File"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="ImportMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Import Meet Entries"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ImportMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="ExitMenuItem">
               <Properties>
                 <Property name="label" type="java.lang.String" value="Exit"/>
@@ -29,14 +37,11 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="MeetImportMenuItem">
+        <Menu class="javax.swing.JMenu" name="MeetDataMenu">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Meet"/>
+            <Property name="text" type="java.lang.String" value="Meet Data"/>
             <Property name="enabled" type="boolean" value="false"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MeetImportMenuItemActionPerformed"/>
-          </Events>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MeetInfoMenu">
               <Properties>
@@ -46,22 +51,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MeetInfoMenuActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="ImportMenuItem">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Import Meet Entries"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ImportMenuItemActionPerformed"/>
-              </Events>
-            </MenuItem>
-          </SubComponents>
-        </Menu>
-        <Menu class="javax.swing.JMenu" name="SwimmerMenu">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Swimmers"/>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
-          <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="SwimmerEditMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit Swimmers"/>

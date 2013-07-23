@@ -100,11 +100,10 @@ public class MeetDirector extends javax.swing.JFrame {
         MainPanel = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
-        ExitMenuItem = new javax.swing.JMenuItem();
-        MeetImportMenuItem = new javax.swing.JMenu();
-        MeetInfoMenu = new javax.swing.JMenuItem();
         ImportMenuItem = new javax.swing.JMenuItem();
-        SwimmerMenu = new javax.swing.JMenu();
+        ExitMenuItem = new javax.swing.JMenuItem();
+        MeetDataMenu = new javax.swing.JMenu();
+        MeetInfoMenu = new javax.swing.JMenuItem();
         SwimmerEditMenuItem = new javax.swing.JMenuItem();
 
         ImportChooser.setDialogTitle("Import Meet XML");
@@ -253,6 +252,14 @@ public class MeetDirector extends javax.swing.JFrame {
 
         jMenu3.setText("File");
 
+        ImportMenuItem.setText("Import Meet Entries");
+        ImportMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ImportMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(ImportMenuItem);
+
         ExitMenuItem.setLabel("Exit");
         ExitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,13 +270,8 @@ public class MeetDirector extends javax.swing.JFrame {
 
         jMenuBar2.add(jMenu3);
 
-        MeetImportMenuItem.setText("Meet");
-        MeetImportMenuItem.setEnabled(false);
-        MeetImportMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MeetImportMenuItemActionPerformed(evt);
-            }
-        });
+        MeetDataMenu.setText("Meet Data");
+        MeetDataMenu.setEnabled(false);
 
         MeetInfoMenu.setText("Meet announcement");
         MeetInfoMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -277,20 +279,7 @@ public class MeetDirector extends javax.swing.JFrame {
                 MeetInfoMenuActionPerformed(evt);
             }
         });
-        MeetImportMenuItem.add(MeetInfoMenu);
-
-        ImportMenuItem.setText("Import Meet Entries");
-        ImportMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ImportMenuItemActionPerformed(evt);
-            }
-        });
-        MeetImportMenuItem.add(ImportMenuItem);
-
-        jMenuBar2.add(MeetImportMenuItem);
-
-        SwimmerMenu.setText("Swimmers");
-        SwimmerMenu.setEnabled(false);
+        MeetDataMenu.add(MeetInfoMenu);
 
         SwimmerEditMenuItem.setText("Edit Swimmers");
         SwimmerEditMenuItem.setToolTipText("");
@@ -299,9 +288,9 @@ public class MeetDirector extends javax.swing.JFrame {
                 SwimmerEditMenuItemActionPerformed(evt);
             }
         });
-        SwimmerMenu.add(SwimmerEditMenuItem);
+        MeetDataMenu.add(SwimmerEditMenuItem);
 
-        jMenuBar2.add(SwimmerMenu);
+        jMenuBar2.add(MeetDataMenu);
 
         setJMenuBar(jMenuBar2);
 
@@ -352,8 +341,8 @@ public class MeetDirector extends javax.swing.JFrame {
         this.ConnectPanel.setVisible(false);
         this.MainPanel.setVisible(true);
         this.MeetInfoMenu.setEnabled(true);
-        this.MeetImportMenuItem.setEnabled(true);
-        this.SwimmerMenu.setEnabled(true);
+        this.setEnabled(true);
+        this.MeetDataMenu.setEnabled(true);
         
         // TODO add your handling code here:
     }//GEN-LAST:event_ConnectButtonActionPerformed
@@ -378,10 +367,6 @@ public class MeetDirector extends javax.swing.JFrame {
 
         MeetAnnouncementDialog.openWindow(null);// TODO add your handling code here:
     }//GEN-LAST:event_MeetInfoMenuActionPerformed
-
-    private void MeetImportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MeetImportMenuItemActionPerformed
-             // TODO add your handling code here:
-    }//GEN-LAST:event_MeetImportMenuItemActionPerformed
 
     private void ImportMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportMenuItemActionPerformed
 
@@ -446,11 +431,10 @@ public class MeetDirector extends javax.swing.JFrame {
     private javax.swing.JMenuItem ImportMenuItem;
     private javax.swing.JLabel InformationLabel;
     private javax.swing.JPanel MainPanel;
-    private javax.swing.JMenu MeetImportMenuItem;
+    private javax.swing.JMenu MeetDataMenu;
     private javax.swing.JMenuItem MeetInfoMenu;
     private javax.swing.JCheckBox NewDBTextBox;
     private javax.swing.JMenuItem SwimmerEditMenuItem;
-    private javax.swing.JMenu SwimmerMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

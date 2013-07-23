@@ -215,7 +215,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param Director the Director to set
      */
     public void setDirector(String[] Director) {
-        this.setDirector(Director);
+        this.Director = Director;
     }
 
     /**
@@ -229,7 +229,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param EntryCoordinator the EntryCoordinator to set
      */
     public void setEntryCoordinator(String[] EntryCoordinator) {
-        this.setEntryCoordinator(EntryCoordinator);
+        this.EntryCoordinator = EntryCoordinator;
     }
 
     /**
@@ -243,7 +243,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param Referee the Referee to set
      */
     public void setReferee(String[] Referee) {
-        this.setReferee(Referee);
+        this.Referee = Referee;
     }
 
     /**
@@ -257,7 +257,7 @@ public class SwimMeet extends PersistingObject implements Serializable {
      * @param Marshall the Marshall to set
      */
     public void setMarshall(String[] Marshall) {
-        this.setMarshall(Marshall);
+        this.Marshall = Marshall;
     }
 
     /**

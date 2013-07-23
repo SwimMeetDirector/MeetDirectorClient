@@ -33,14 +33,12 @@ public class ErrorDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ErrorLabel = new javax.swing.JLabel();
         DismissButton = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ErrorLabel = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        ErrorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        getContentPane().add(ErrorLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(4, 27, 570, 61));
 
         DismissButton.setText("Dismiss");
         DismissButton.addActionListener(new java.awt.event.ActionListener() {
@@ -48,7 +46,12 @@ public class ErrorDialog extends javax.swing.JDialog {
                 DismissButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(DismissButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 120, -1, -1));
+        getContentPane().add(DismissButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 280, -1, -1));
+
+        ErrorLabel.setEditable(false);
+        jScrollPane1.setViewportView(ErrorLabel);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 240));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -63,6 +66,7 @@ public class ErrorDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton DismissButton;
-    private javax.swing.JLabel ErrorLabel;
+    private javax.swing.JTextPane ErrorLabel;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

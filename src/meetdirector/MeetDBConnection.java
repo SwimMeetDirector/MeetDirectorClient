@@ -28,6 +28,7 @@ public class MeetDBConnection {
     private String pass = null;
     private EntityManagerFactory emf = null;
     private EntityManager em = null;
+    private Boolean connected = false;
     
     protected MeetDBConnection() {
         
@@ -117,6 +118,7 @@ public class MeetDBConnection {
         status = "Success";
         try {
             conn.close();
+            connected = true;
         }
         catch (Exception except) {
             status = "Odd problem closing connection";
@@ -124,6 +126,10 @@ public class MeetDBConnection {
         this.emf = javax.persistence.Persistence.createEntityManagerFactory("MeetObjectPU", this.getDBConnectionProperties());
         this.em = emf.createEntityManager();
         return true;
+    }
+    
+    public Boolean connected() {
+        return connected;
     }
     
     public String getStatus() {

@@ -20,58 +20,14 @@ public class MeetDirector extends javax.swing.JFrame {
     /**
      * Creates new form MeetSetup
      */
-    private Properties DBConfigProps;
-    private String configFileName = "./.meetdirector.conf";
     
     public MeetDirector() {
         initComponents();
-        this.MeetInfoMenu.setEnabled(false);
-        DBConfigProps = new Properties();
-        this.loadDBConfig();
+        
         this.setTitle("Meet Director");
         this.MainPanel.setVisible(false);
     }
 
-    protected void loadDBConfig() {
-        FileInputStream instream = null;
-        try {
-            instream = new FileInputStream(configFileName);
-            DBConfigProps.loadFromXML(instream);
-        } catch (Exception except) {
-            DBConfigProps.setProperty("Server", "127.0.0.1");
-            DBConfigProps.setProperty("Port", "1527");
-            DBConfigProps.setProperty("UserName", "User");
-            DBConfigProps.setProperty("Password", "password");
-            DBConfigProps.setProperty("DBName", "GenericSwimMeet");
-        }
-        try {
-            if (instream != null)
-                instream.close();
-        } catch (Exception except) {
-            
-        }
-        DBHostTextField.setText(DBConfigProps.getProperty("Server"));
-        DBPortTextField.setText(DBConfigProps.getProperty("Port"));
-        DBUserTextField.setText(DBConfigProps.getProperty("UserName"));
-        DBPassTextField.setText(DBConfigProps.getProperty("Password"));
-        DBNameTextField.setText(DBConfigProps.getProperty("DBName"));   
-    }
-    
-    protected void saveDBConfig() {
-        FileOutputStream outstream = null;
-        try {
-            outstream = new FileOutputStream(configFileName);
-            DBConfigProps.storeToXML(outstream, "Meet Director Configuration");
-        }
-        catch (Exception except) {
-        }
-        try {
-            if (outstream != null)
-                outstream.close();
-        } catch (Exception except) {
-            
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -82,24 +38,10 @@ public class MeetDirector extends javax.swing.JFrame {
     private void initComponents() {
 
         ImportChooser = new javax.swing.JFileChooser();
-        ConnectPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        DBHostTextField = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        DBPortTextField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        DBUserTextField = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        DBPassTextField = new javax.swing.JPasswordField();
-        ConnectButton = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        DBNameTextField = new javax.swing.JTextField();
-        InformationLabel = new javax.swing.JLabel();
-        NewDBTextBox = new javax.swing.JCheckBox();
         MainPanel = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
+        ConnecttoDBMenuItem = new javax.swing.JMenuItem();
         ImportMenuItem = new javax.swing.JMenuItem();
         ExitMenuItem = new javax.swing.JMenuItem();
         MeetDataMenu = new javax.swing.JMenu();
@@ -111,133 +53,6 @@ public class MeetDirector extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("MeetDirector"); // NOI18N
-
-        jLabel2.setText("Connect to Database");
-
-        jLabel3.setText("Database Hostname");
-
-        DBHostTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DBHostTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Database Port");
-
-        DBPortTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DBPortTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("User Name");
-
-        DBUserTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DBUserTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Password");
-
-        ConnectButton.setText("Connect");
-        ConnectButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ConnectButtonActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setText("Database Name");
-
-        InformationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        InformationLabel.setText("Enter DB Information and Press Connect");
-        InformationLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        NewDBTextBox.setText("New DB");
-
-        javax.swing.GroupLayout ConnectPanelLayout = new javax.swing.GroupLayout(ConnectPanel);
-        ConnectPanel.setLayout(ConnectPanelLayout);
-        ConnectPanelLayout.setHorizontalGroup(
-            ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ConnectPanelLayout.createSequentialGroup()
-                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ConnectPanelLayout.createSequentialGroup()
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel2))
-                    .addGroup(ConnectPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(ConnectPanelLayout.createSequentialGroup()
-                                    .addComponent(DBHostTextField)
-                                    .addGap(9, 9, 9)))
-                            .addComponent(jLabel1))
-                        .addGap(116, 116, 116)
-                        .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4)
-                            .addComponent(DBUserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DBPassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(ConnectPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6))
-                    .addGroup(ConnectPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(DBNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(DBPortTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(NewDBTextBox)))
-                .addContainerGap(58, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ConnectPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(InformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(ConnectPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(ConnectButton)))
-                .addGap(23, 23, 23))
-        );
-        ConnectPanelLayout.setVerticalGroup(
-            ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ConnectPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(27, 27, 27)
-                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(DBHostTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DBUserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DBPortTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DBPassTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ConnectPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DBNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NewDBTextBox))
-                .addGap(18, 18, 18)
-                .addComponent(InformationLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ConnectButton)
-                .addContainerGap())
-        );
-
-        DBHostTextField.getAccessibleContext().setAccessibleName("DBHost");
-        DBPortTextField.getAccessibleContext().setAccessibleName("DBPort");
-        DBUserTextField.getAccessibleContext().setAccessibleName("DBUser");
-        DBPassTextField.getAccessibleContext().setAccessibleName("DBPass");
-        InformationLabel.getAccessibleContext().setAccessibleName("InformationLabel");
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -252,7 +67,16 @@ public class MeetDirector extends javax.swing.JFrame {
 
         jMenu3.setText("File");
 
+        ConnecttoDBMenuItem.setText("Connect. to DB...");
+        ConnecttoDBMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConnecttoDBMenuItemActionPerformed(evt);
+            }
+        });
+        jMenu3.add(ConnecttoDBMenuItem);
+
         ImportMenuItem.setText("Import Meet Entries");
+        ImportMenuItem.setEnabled(false);
         ImportMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ImportMenuItemActionPerformed(evt);
@@ -298,66 +122,17 @@ public class MeetDirector extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(210, 210, 210)
-                .addComponent(ConnectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(218, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(180, Short.MAX_VALUE)
-                .addComponent(ConnectPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(192, 192, 192))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap()
+                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        ConnectPanel.getAccessibleContext().setAccessibleName("DBConnectionPanel");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void ConnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectButtonActionPerformed
-        this.InformationLabel.setText("Connecting To DB");
-        MeetDBConnection meet = MeetDBConnection.getDBConnection();
-        meet.SetConnectionParams(DBHostTextField.getText(), DBPortTextField.getText(), DBNameTextField.getText(), DBUserTextField.getText(), DBPassTextField.getText());
-        if (meet.Connect(NewDBTextBox.isSelected()) == false) {
-            this.InformationLabel.setText(meet.getStatus());
-            return;
-        }
-        DBConfigProps.setProperty("Server", DBHostTextField.getText());
-        DBConfigProps.setProperty("Port", DBPortTextField.getText());
-        DBConfigProps.setProperty("UserName", DBUserTextField.getText());
-        DBConfigProps.setProperty("Password", DBPassTextField.getText());
-        DBConfigProps.setProperty("DBName", DBNameTextField.getText());
-        this.saveDBConfig();
-        
-        this.InformationLabel.setText("Connected!");
-        this.ConnectPanel.setVisible(false);
-        this.MainPanel.setVisible(true);
-        this.MeetInfoMenu.setEnabled(true);
-        this.setEnabled(true);
-        this.MeetDataMenu.setEnabled(true);
-        
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ConnectButtonActionPerformed
-
-    private void DBUserTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBUserTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DBUserTextFieldActionPerformed
-
-    private void DBPortTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBPortTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DBPortTextFieldActionPerformed
-
-    private void DBHostTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DBHostTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DBHostTextFieldActionPerformed
 
     private void ExitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitMenuItemActionPerformed
         System.exit(0);        // TODO add your handling code here:
@@ -382,6 +157,20 @@ public class MeetDirector extends javax.swing.JFrame {
     private void SwimmerEditMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SwimmerEditMenuItemActionPerformed
         SwimmerEditDialog.OpenWindow();      // TODO add your handling code here:
     }//GEN-LAST:event_SwimmerEditMenuItemActionPerformed
+
+    private void ConnecttoDBMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnecttoDBMenuItemActionPerformed
+        ConnectionDialog dialog = new ConnectionDialog(new javax.swing.JFrame(), true);
+        dialog.loadDBConfig();
+        dialog.setVisible(true);
+        // Return when the dialog is removed
+        // Check to see if we're connected
+        if (MeetDBConnection.getDBConnection().connected()) {
+            this.ImportMenuItem.setEnabled(true);
+            this.MeetDataMenu.setEnabled(true);
+            this.ConnecttoDBMenuItem.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_ConnecttoDBMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,28 +208,14 @@ public class MeetDirector extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ConnectButton;
-    private javax.swing.JPanel ConnectPanel;
-    private javax.swing.JTextField DBHostTextField;
-    private javax.swing.JTextField DBNameTextField;
-    private javax.swing.JPasswordField DBPassTextField;
-    private javax.swing.JTextField DBPortTextField;
-    private javax.swing.JTextField DBUserTextField;
+    private javax.swing.JMenuItem ConnecttoDBMenuItem;
     private javax.swing.JMenuItem ExitMenuItem;
     private javax.swing.JFileChooser ImportChooser;
     private javax.swing.JMenuItem ImportMenuItem;
-    private javax.swing.JLabel InformationLabel;
     private javax.swing.JPanel MainPanel;
     private javax.swing.JMenu MeetDataMenu;
     private javax.swing.JMenuItem MeetInfoMenu;
-    private javax.swing.JCheckBox NewDBTextBox;
     private javax.swing.JMenuItem SwimmerEditMenuItem;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar2;
     // End of variables declaration//GEN-END:variables

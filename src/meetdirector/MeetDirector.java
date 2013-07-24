@@ -67,7 +67,7 @@ public class MeetDirector extends javax.swing.JFrame {
 
         jMenu3.setText("File");
 
-        ConnecttoDBMenuItem.setText("Connect. to DB...");
+        ConnecttoDBMenuItem.setText("Connect to DB...");
         ConnecttoDBMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ConnecttoDBMenuItemActionPerformed(evt);

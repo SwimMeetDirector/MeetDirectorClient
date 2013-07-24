@@ -631,6 +631,7 @@
             <Component class="javax.swing.JCheckBox" name="AlternateCheckBox">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Alternate"/>
+                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="CommitSeedButton">
@@ -654,6 +655,9 @@
         <Property name="text" type="java.lang.String" value="Edit Swimmer"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EditSwimmerButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="AddSwimmerButton">
       <Properties>
@@ -671,6 +675,9 @@
         <Property name="text" type="java.lang.String" value="Cancel"/>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CancelButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

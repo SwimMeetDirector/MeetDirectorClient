@@ -245,6 +245,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         MeetCourseText.setEnabled(false);
 
         AlternateCheckBox.setText("Alternate");
+        AlternateCheckBox.setEnabled(false);
 
         CommitSeedButton.setText("Commit Seed Info");
         CommitSeedButton.setEnabled(false);
@@ -411,6 +412,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         EditSwimmerButton.setText("Edit Swimmer");
         EditSwimmerButton.setEnabled(false);
+        EditSwimmerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EditSwimmerButtonActionPerformed(evt);
+            }
+        });
 
         AddSwimmerButton.setText("Add Swimmer");
 
@@ -419,6 +425,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         CancelButton.setText("Cancel");
         CancelButton.setEnabled(false);
+        CancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -486,10 +497,21 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         
         // Now that we populated the data, enable the edit button
         this.EditSwimmerButton.setEnabled(true);
-        this.CommitButton.setEnabled(true);
-        this.CancelButton.setEnabled(true);
+        
         
     }//GEN-LAST:event_swimmerDropDownActionPerformed
+
+    private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+        this.CancelButton.setEnabled(false);
+        this.CommitButton.setEnabled(false);
+        this.EditSwimmerButton.setEnabled(true);
+    }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void EditSwimmerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditSwimmerButtonActionPerformed
+        this.CancelButton.setEnabled(true);
+        this.CommitButton.setEnabled(true);
+        this.EditSwimmerButton.setEnabled(false);
+    }//GEN-LAST:event_EditSwimmerButtonActionPerformed
 
     private void PopulateSwimmerFields(SwimMeetAthlete swimmer) {
         int index = 0;

@@ -484,6 +484,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
             return;
         this.PopulateSwimmerFields(swimmer);
         
+        // Now that we populated the data, enable the edit button
+        this.EditSwimmerButton.setEnabled(true);
+        this.CommitButton.setEnabled(true);
+        this.CancelButton.setEnabled(true);
+        
     }//GEN-LAST:event_swimmerDropDownActionPerformed
 
     private void PopulateSwimmerFields(SwimMeetAthlete swimmer) {

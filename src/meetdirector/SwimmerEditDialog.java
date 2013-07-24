@@ -488,7 +488,6 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private void swimmerDropDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_swimmerDropDownActionPerformed
         // We've had a selection made in the swimmer list, lets look that swimmer up
         String name = (String)this.swimmerDropDown.getSelectedItem();
-        System.out.println ("Get Name " + name);
         
         // Now look the name up in the hash map
         SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);

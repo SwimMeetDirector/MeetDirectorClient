@@ -5,6 +5,7 @@
 package meetdirector;
 
 import entity.SwimMeetAthlete;
+import entity.SwimMeetEvent;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -514,7 +515,13 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_EditSwimmerButtonActionPerformed
 
     private void PopulateSwimmerFields(SwimMeetAthlete swimmer) {
-        int index = 0;
+        List<SwimMeetEvent> events;
+        Comparator<SwimMeetEvent> NumericalSort = new Comparator<SwimMeetEvent>() {
+            public int compare(SwimMeetEvent c1, SwimMeetEvent c2) {
+                    return c1.getEventNumber().compareTo(c2.getEventNumber());
+            }
+        };
+        
         this.FirstNameText.setText(swimmer.getName().getFirstName());
         this.LastNameText.setText(swimmer.getName().getLastName());
         this.MiddleNameText.setText(swimmer.getName().getMiddleName());
@@ -534,6 +541,23 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.CitizenshipTExt.setText(swimmer.getCitizenOf()[0]);
         this.OrgTypeCombo.setSelectedItem(swimmer.getOrganization().name());
         this.IDText.setText(swimmer.getUsasID());
+        
+        // Now we need to populate the event table.  To do that we need
+        // get a full list of events, and mark the ones we're entered in
+        events = SwimMeetEvent.getAllEvents();
+        Collections.sort(events, NumericalSort);
+        
+        Iterator<SwimMeetEvent> iterator = events.iterator();
+        int row = 0;
+        while (iterator.hasNext()) {
+            SwimMeetEvent event = iterator.next();
+            Boolean isEntered;
+            this.EntryTable.setValueAt(event.getSwimmers().contains(swimmer),row, 0);
+            this.EntryTable.setValueAt(event.getEventNumber(), row, 1);
+            this.EntryTable.setValueAt(event.getGender().name(), row, 2);
+            this.EntryTable.setValueAt(event.getDistance(), row, 3);
+            this.EntryTable.setValueAt(event.getStroke(), row, 4);
+        }
     }
     
     private void PopulateSwimmerDropDown() {

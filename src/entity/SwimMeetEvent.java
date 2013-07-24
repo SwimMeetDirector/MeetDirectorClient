@@ -90,6 +90,11 @@ public class SwimMeetEvent extends PersistingObject implements Serializable {
         return results.get(0);
     }
     
+    public static List<SwimMeetEvent> getAllEvents() {
+        String myquery = "SELECT * FROM SwimMeetEvent";
+        return SwimMeetEvent.queryClassObjects(myquery, SwimMeetEvent.class);
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;

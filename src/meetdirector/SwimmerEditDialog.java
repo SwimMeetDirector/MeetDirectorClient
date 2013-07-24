@@ -55,7 +55,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         GenderCombo = new javax.swing.JComboBox();
         AtatchedLabel = new javax.swing.JLabel();
         AttachedCombo = new javax.swing.JComboBox();
-        BirthdayDateChooserCombo1 = new datechooser.beans.DateChooserCombo();
+        BirthdayDateChooserCombo = new datechooser.beans.DateChooserCombo();
         LSCCodeLabel = new javax.swing.JLabel();
         LSCCodeText = new javax.swing.JTextField();
         CitizenshipLabel = new javax.swing.JLabel();
@@ -131,7 +131,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         AttachedCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "No" }));
         AttachedCombo.setEnabled(false);
 
-        BirthdayDateChooserCombo1.setEnabled(false);
+        BirthdayDateChooserCombo.setEnabled(false);
 
         LSCCodeLabel.setText("LSC code");
 
@@ -266,14 +266,13 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(CommitSeedButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AlternateCheckBox, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(MeetCourseText, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(MeetCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RawCourseText, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(RawCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ConvertedTimeText, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ConvertedSeedTimeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(RawSeedTimeText, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addComponent(MeetCourseText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MeetCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RawCourseText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RawCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ConvertedTimeText, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ConvertedSeedTimeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RawSeedTimeText, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -321,7 +320,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                                 .addComponent(BrthdayLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(FirstNameLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                                 .addComponent(FirstNameText, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BirthdayDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CitizenshipLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CitizenshipTExt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -382,7 +381,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                                 .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(GenderCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(AttachedCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(BirthdayDateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(BirthdayDateChooserCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(LSCCodeText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(SwimmerInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -493,7 +492,9 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.LastNameText.setText(swimmer.getName().getLastName());
         this.MiddleNameText.setText(swimmer.getName().getMiddleName());
         this.SuffixText.setText(swimmer.getName().getSuffix());
-        this.BirthdayDateChooserCombo1.setSelectedDate(swimmer.getBirthDate());
+        this.BirthdayDateChooserCombo.setEnabled(true);
+        this.BirthdayDateChooserCombo.setSelectedDate(swimmer.getBirthDate());
+        this.BirthdayDateChooserCombo.setEnabled(false);
         
         this.GenderCombo.setSelectedItem(swimmer.getGender().name());
         
@@ -584,7 +585,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox AlternateCheckBox;
     private javax.swing.JLabel AtatchedLabel;
     private javax.swing.JComboBox AttachedCombo;
-    private datechooser.beans.DateChooserCombo BirthdayDateChooserCombo1;
+    private datechooser.beans.DateChooserCombo BirthdayDateChooserCombo;
     private javax.swing.JLabel BrthdayLabel;
     private javax.swing.JButton CancelButton;
     private javax.swing.JLabel CitizenshipLabel;

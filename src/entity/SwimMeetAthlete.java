@@ -46,6 +46,10 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     @OneToMany
     @JoinColumn
     private List<SwimMeetEvent> enteredEvents;
+    
+    @OneToMany
+    @JoinColumn
+    private List<SeedTime> seedtimes;
     //Note Still need a seed time class list here
     
     public SwimMeetAthlete(AthleteEntryType swimmer, Boolean persist) {
@@ -63,6 +67,8 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.organization = athlete.getOrganization();
             this.usasID = athlete.getUsasID();
             this.enteredEvents = null;
+            this.seedtimes = null;
+            
         }
         if (persist == true)
             this.persist();
@@ -267,6 +273,20 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
      */
     public void setOrganization(OrganizationType organization) {
         this.organization = organization;
+    }
+
+    /**
+     * @return the seedtimes
+     */
+    public List<SeedTime> getSeedtimes() {
+        return seedtimes;
+    }
+
+    /**
+     * @param seedtimes the seedtimes to set
+     */
+    public void setSeedtimes(List<SeedTime> seedtimes) {
+        this.seedtimes = seedtimes;
     }
     
 }

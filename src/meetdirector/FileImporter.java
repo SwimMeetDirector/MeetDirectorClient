@@ -142,6 +142,7 @@ public class FileImporter {
     public void ImportAthleteEvents(SwimMeetAthlete athlete, List<IndividualEntryType> entries) {
         Iterator<IndividualEntryType> iterator = entries.iterator();
         List<SwimMeetEvent> newEvents = new ArrayList<SwimMeetEvent>();
+        List<SeedTime> seeds = new ArrayList<SeedTime>();
         SwimMeetEvent check;
         
         this.updateOutputText("Importing Events for Swimmer " + athlete.getName().getFullName());
@@ -183,12 +184,13 @@ public class FileImporter {
             SeedTime seed = SeedTime.getSeedForEventSwimmer(athlete, check);
             if (seed == null) {
                 this.updateOutputText("Adding seed data for Event " + event.getEventNumber());
-                seed = new SeedTime(event.getSeedData(), athlete, check);
-                seed.persist();
+                seed = new SeedTime(event.getSeedData(), athlete, check, true);
             }
+            seeds.add(seed);
         }
         athlete.startUpdate();
         athlete.setEnteredEvents(newEvents);
+        athlete.setSeedtimes(seeds);
         athlete.commitUpdate();
         
         

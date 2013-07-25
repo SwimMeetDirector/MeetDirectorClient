@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import org.usa_swimming.xsdif.CourseType;
 import org.usa_swimming.xsdif.EventSeedType;
@@ -34,11 +35,10 @@ public class SeedTime extends PersistingObject implements Serializable {
     private CourseType meetCourse;
     private Boolean isAlternate;
     
-    @OneToOne
-    @JoinColumn
+    @ManyToOne
     private SwimMeetAthlete swimmer;
-    @OneToOne
-    @JoinColumn
+            
+    @ManyToOne
     private SwimMeetEvent event;
     
     public SeedTime() {
@@ -51,7 +51,7 @@ public class SeedTime extends PersistingObject implements Serializable {
         this.event = null;
     }
     
-    public SeedTime(EventSeedType seed, SwimMeetAthlete swimmer, SwimMeetEvent event) {
+    public SeedTime(EventSeedType seed, SwimMeetAthlete swimmer, SwimMeetEvent event, Boolean persist) {
         this();
         this.rawSeedTime = seed.getRawSeedTime();
         this.rawCourse = seed.getRawCourse();
@@ -60,10 +60,12 @@ public class SeedTime extends PersistingObject implements Serializable {
         this.isAlternate = seed.isIsAlternate();
         this.swimmer = swimmer;
         this.event = event;
+        if (persist == true)
+            this.persist();
     }
     
     public SeedTime(EventSeedType seed) {
-        this(seed, null, null);
+        this(seed, null, null, false);
     }
     
     public Long getId() {

@@ -24,6 +24,8 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     public SwimmerEditDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.allenteredbuttongroup.add(this.AllEventsButton);
+        this.allenteredbuttongroup.add(this.EnteredEventsBudget);
     }
 
     /**
@@ -35,10 +37,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
+        allenteredbuttongroup = new javax.swing.ButtonGroup();
         SwimmerNamePane = new javax.swing.JScrollPane();
         swimmerDropDown = new javax.swing.JComboBox();
         SwimmersPanel = new javax.swing.JLabel();
@@ -505,14 +504,38 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.CancelButton.setEnabled(false);
         this.CommitButton.setEnabled(false);
         this.EditSwimmerButton.setEnabled(true);
+        String name = (String)this.swimmerDropDown.getSelectedItem();
+        SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+        if (swimmer != null) {
+            this.PopulateSwimmerFields(swimmer);
+        }
+        this.SetEnabledSwimmerEditFields(false);
+            
     }//GEN-LAST:event_CancelButtonActionPerformed
 
     private void EditSwimmerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EditSwimmerButtonActionPerformed
         this.CancelButton.setEnabled(true);
         this.CommitButton.setEnabled(true);
         this.EditSwimmerButton.setEnabled(false);
+        this.SetEnabledSwimmerEditFields(true);
     }//GEN-LAST:event_EditSwimmerButtonActionPerformed
 
+    private void SetEnabledSwimmerEditFields(Boolean onoff) {
+        this.FirstNameText.setEnabled(onoff);
+        this.LastNameText.setEnabled(onoff);
+        this.MiddleNameText.setEnabled(onoff);
+        this.BirthdayDateChooserCombo.setEnabled(onoff);
+        this.GenderCombo.setEnabled(onoff);
+        this.AttachedCombo.setEnabled(onoff);
+        this.LSCCodeText.setEnabled(onoff);
+        this.CitizenshipTExt.setEnabled(onoff);
+        this.OrgTypeCombo.setEnabled(onoff);
+        this.IDText.setEnabled(onoff);
+        this.AllEventsButton.setEnabled(onoff);
+        this.EnteredEventsBudget.setEnabled(onoff);
+        this.EntryTable.setEnabled(onoff);
+    }
+    
     private void PopulateSwimmerFields(SwimMeetAthlete swimmer) {
         List<SwimMeetEvent> events;
         Comparator<SwimMeetEvent> NumericalSort = new Comparator<SwimMeetEvent>() {
@@ -674,10 +697,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JPanel SwimmerInfoPanel;
     private javax.swing.JScrollPane SwimmerNamePane;
     private javax.swing.JLabel SwimmersPanel;
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup allenteredbuttongroup;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;

@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.ListSelectionModel;
 
 /**
  *
@@ -26,6 +27,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         initComponents();
         this.allenteredbuttongroup.add(this.AllEventsButton);
         this.allenteredbuttongroup.add(this.EnteredEventsBudget);
+        this.EntryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -186,6 +188,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
             }
         });
         EntryTable.setEnabled(false);
+        EntryTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EntryTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(EntryTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -521,6 +528,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.SetEnabledSwimmerEditFields(true);
     }//GEN-LAST:event_EditSwimmerButtonActionPerformed
 
+    private void EntryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntryTableMouseClicked
+               int seedidx = (Integer)this.EntryTable.getValueAt(this.EntryTable.getSelectedRow(), 1);
+               System.out.println("Need to post Seed Times for event " + seedidx);
+    }//GEN-LAST:event_EntryTableMouseClicked
+
     private void SetEnabledSwimmerEditFields(Boolean onoff) {
         this.FirstNameText.setEnabled(onoff);
         this.LastNameText.setEnabled(onoff);
@@ -572,6 +584,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         
         Iterator<SwimMeetEvent> iterator = events.iterator();
         int row = 0;
+        this.EntryTable.clearSelection();
         while (iterator.hasNext()) {
             SwimMeetEvent event = iterator.next();
             Boolean isEntered;

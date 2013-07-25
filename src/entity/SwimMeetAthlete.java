@@ -5,8 +5,8 @@
 package entity;
 
 import java.io.Serializable;
-import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -78,6 +78,18 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     public SwimMeetAthlete() {
         this(null, false);
         this.id = null;
+    }
+    
+    public SeedTime getSeedTime(SwimMeetEvent event) {
+        Iterator<SeedTime> iterator = this.seedtimes.iterator();
+        
+        while (iterator.hasNext()) {
+            SeedTime seed = iterator.next();
+            if (seed.getEvent() == event)
+                return seed;
+        }
+        
+        return null;
     }
     
     public static SwimMeetAthlete getAthleteByUsasId(String usasid){

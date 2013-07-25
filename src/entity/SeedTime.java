@@ -78,15 +78,13 @@ public class SeedTime extends PersistingObject implements Serializable {
 
     public static SeedTime getSeedForEventSwimmer(SwimMeetAthlete swimmer, SwimMeetEvent event) {
             List<SeedTime> results;
-            String queryString = "SELECT * FROM SeedTime";
+            String queryString = "SELECT * FROM SeedTime WHERE SeedTime.SWIMMER_ID = " + swimmer.getId() + " AND SeedTime.EVENT_ID = " + event.getId();
             results = SeedTime.queryClassObjects(queryString, SeedTime.class);
-            Iterator<SeedTime> iterator = results.iterator();
-            while (iterator.hasNext()) {
-                SeedTime seed = iterator.next();
-                if ((seed.swimmer == swimmer) && (seed.event == event))
-                    return seed;
+            try {
+                return results.get(0);
+            } catch (Exception e)   {
+                return null;
             }
-            return null;
     }
     
     @Override

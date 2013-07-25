@@ -507,6 +507,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         String name = (String)this.swimmerDropDown.getSelectedItem();
         SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
         if (swimmer != null) {
+            swimmer.refresh();
             this.PopulateSwimmerFields(swimmer);
         }
         this.SetEnabledSwimmerEditFields(false);

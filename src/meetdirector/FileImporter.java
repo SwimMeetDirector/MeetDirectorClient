@@ -4,6 +4,7 @@
  */
 package meetdirector;
 
+import entity.SeedTime;
 import entity.SwimMeet;
 import entity.SwimMeetAthlete;
 import entity.SwimMeetClub;
@@ -141,10 +142,12 @@ public class FileImporter {
     public void ImportAthleteEvents(SwimMeetAthlete athlete, List<IndividualEntryType> entries) {
         Iterator<IndividualEntryType> iterator = entries.iterator();
         List<SwimMeetEvent> newEvents = new ArrayList<SwimMeetEvent>();
+        SwimMeetEvent check;
+        
         this.updateOutputText("Importing Events for Swimmer " + athlete.getName().getFullName());
         while (iterator.hasNext()) {
             IndividualEntryType event = iterator.next();
-            SwimMeetEvent check = SwimMeetEvent.getEventByEventNumber(event.getEventNumber());
+            check = SwimMeetEvent.getEventByEventNumber(event.getEventNumber());
             if (check != null) {
                 this.updateOutputText("Found Event " + event.getEventNumber() + "...Validating");
                 // Note, need to validate the events here, make sure more than the event number matches
@@ -163,23 +166,31 @@ public class FileImporter {
                 // unless the user has selected the import events button
                 if (this.getOptions().get(IMPORT_NOT_FOUND_EVENTS) == true) {
                     this.updateOutputText("Importing new event number " + event.getEventNumber() + " From File");
-                    SwimMeetEvent newEvent = new SwimMeetEvent(event, true);
-                    newEvent.startUpdate();
+                    check = new SwimMeetEvent(event, true);
+                    check.startUpdate();
                     try {
-                        newEvent.addSwimmer(athlete);
+                        check.addSwimmer(athlete);
                     } catch (Exception e) {
                         this.updateOutputText("Error adding swimmer " + athlete.getName().getFullName() + " to event " + event.getEventNumber() + ": " + e.getMessage());
                     }
-                    newEvent.commitUpdate();
-                    newEvents.add(newEvent);
+                    check.commitUpdate();
+                    newEvents.add(check);
                 } else {
                     this.updateOutputText("Hmm, I don't have Event " + event.getEventNumber() + " ... Skipping");
                 }
+            }
+            // Now lets import the seed information
+            SeedTime seed = SeedTime.getSeedForEventSwimmer(athlete, check);
+            if (seed == null) {
+                this.updateOutputText("Adding seed data for Event " + event.getEventNumber());
+                seed = new SeedTime(event.getSeedData(), athlete, check);
+                seed.persist();
             }
         }
         athlete.startUpdate();
         athlete.setEnteredEvents(newEvents);
         athlete.commitUpdate();
+        
         
     }
     

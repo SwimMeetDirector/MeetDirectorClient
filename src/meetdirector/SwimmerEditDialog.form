@@ -523,29 +523,40 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="SeedTimeLabel" min="-2" pref="144" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                      <Component id="SeedTimeLabel" min="-2" pref="144" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="RawTimeLabel" min="-2" pref="142" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="SeedCancelButton" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="CommitSeedButton" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="AlternateCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="MeetCourseLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="RawCourseLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="ConvertedTimeText" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="ConvertedSeedTimeLabel" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="RawSeedTimeText" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="RawTimeLabel" min="-2" pref="142" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="CommitSeedButton" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="AlternateCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="MeetCourseText" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="MeetCourseLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="RawCourseText" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="RawCourseLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ConvertedTimeText" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="ConvertedSeedTimeLabel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="RawSeedTimeText" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="RawCourseCombo" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="MeetCourseCombo" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -565,16 +576,18 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="RawCourseLabel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="RawCourseText" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="RawCourseCombo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                       <Component id="MeetCourseLabel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="MeetCourseText" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                      <Component id="MeetCourseCombo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="AlternateCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="CommitSeedButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="SeedCancelButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -610,19 +623,9 @@
                 <Property name="text" type="java.lang.String" value="Raw Course"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="RawCourseText">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JLabel" name="MeetCourseLabel">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Meet Course"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="MeetCourseText">
-              <Properties>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JCheckBox" name="AlternateCheckBox">
@@ -634,6 +637,36 @@
             <Component class="javax.swing.JButton" name="CommitSeedButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Commit Seed Info"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="SeedCancelButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cancel Seed Changes"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="RawCourseCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="LCM"/>
+                    <StringItem index="1" value="SCY"/>
+                    <StringItem index="2" value="SCM"/>
+                  </StringArray>
+                </Property>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="MeetCourseCombo">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="3">
+                    <StringItem index="0" value="LCM"/>
+                    <StringItem index="1" value="SCY"/>
+                    <StringItem index="2" value="SCM"/>
+                  </StringArray>
+                </Property>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>

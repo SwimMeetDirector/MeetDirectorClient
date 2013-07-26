@@ -4,6 +4,7 @@
  */
 package meetdirector;
 
+import entity.SeedTime;
 import entity.SwimMeetAthlete;
 import entity.SwimMeetEvent;
 import java.util.Collections;
@@ -79,11 +80,12 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         ConvertedSeedTimeLabel = new javax.swing.JLabel();
         ConvertedTimeText = new javax.swing.JTextField();
         RawCourseLabel = new javax.swing.JLabel();
-        RawCourseText = new javax.swing.JTextField();
         MeetCourseLabel = new javax.swing.JLabel();
-        MeetCourseText = new javax.swing.JTextField();
         AlternateCheckBox = new javax.swing.JCheckBox();
         CommitSeedButton = new javax.swing.JButton();
+        SeedCancelButton = new javax.swing.JButton();
+        RawCourseCombo = new javax.swing.JComboBox();
+        MeetCourseCombo = new javax.swing.JComboBox();
         SwimmerInfoLabel = new javax.swing.JLabel();
         EditSwimmerButton = new javax.swing.JButton();
         AddSwimmerButton = new javax.swing.JButton();
@@ -245,17 +247,22 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         RawCourseLabel.setText("Raw Course");
 
-        RawCourseText.setEnabled(false);
-
         MeetCourseLabel.setText("Meet Course");
-
-        MeetCourseText.setEnabled(false);
 
         AlternateCheckBox.setText("Alternate");
         AlternateCheckBox.setEnabled(false);
 
         CommitSeedButton.setText("Commit Seed Info");
         CommitSeedButton.setEnabled(false);
+
+        SeedCancelButton.setText("Cancel Seed Changes");
+        SeedCancelButton.setEnabled(false);
+
+        RawCourseCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LCM", "SCY", "SCM" }));
+        RawCourseCombo.setEnabled(false);
+
+        MeetCourseCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LCM", "SCY", "SCM" }));
+        MeetCourseCombo.setEnabled(false);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -264,24 +271,31 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(SeedTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(SeedTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(RawTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(SeedCancelButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(CommitSeedButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(AlternateCheckBox, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(MeetCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RawCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ConvertedTimeText, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ConvertedSeedTimeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(RawSeedTimeText, javax.swing.GroupLayout.Alignment.LEADING))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(RawTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(CommitSeedButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(AlternateCheckBox, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MeetCourseText, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(MeetCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(RawCourseText, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(RawCourseLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ConvertedTimeText, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ConvertedSeedTimeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(RawSeedTimeText, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RawCourseCombo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(MeetCourseCombo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,16 +313,18 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 .addGap(35, 35, 35)
                 .addComponent(RawCourseLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RawCourseText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addComponent(RawCourseCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addComponent(MeetCourseLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MeetCourseText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(MeetCourseCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(AlternateCheckBox)
                 .addGap(28, 28, 28)
                 .addComponent(CommitSeedButton)
-                .addContainerGap(60, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(SeedCancelButton)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout SwimmerInfoPanelLayout = new javax.swing.GroupLayout(SwimmerInfoPanel);
@@ -529,10 +545,40 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_EditSwimmerButtonActionPerformed
 
     private void EntryTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EntryTableMouseClicked
-               int seedidx = (Integer)this.EntryTable.getValueAt(this.EntryTable.getSelectedRow(), 1);
-               System.out.println("Need to post Seed Times for event " + seedidx);
+        if (this.EntryTable.isEnabled() == false)
+            return;
+        int seedidx = (Integer)this.EntryTable.getValueAt(this.EntryTable.getSelectedRow(), 1);
+        int eventNumber = (int)this.EntryTable.getValueAt(seedidx, 1);
+        
+        SwimMeetEvent event = SwimMeetEvent.getEventByEventNumber(new Integer(eventNumber));
+        String name = (String)this.swimmerDropDown.getSelectedItem();
+        
+        // Now look the name up in the hash map
+        SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+        SeedTime seed = swimmer.getSeedTime(event);
+        if (seed != null)
+            this.populateSeedTimeData(seed);
+        this.setSeedEditEnabled(true);
     }//GEN-LAST:event_EntryTableMouseClicked
 
+    private void setSeedEditEnabled(Boolean onoff) {
+        this.RawSeedTimeText.setEnabled(onoff);
+        this.ConvertedTimeText.setEnabled(onoff);
+        this.MeetCourseCombo.setEnabled(onoff);
+        this.RawCourseCombo.setEnabled(onoff);
+        this.CommitSeedButton.setEnabled(onoff);
+        this.SeedCancelButton.setEnabled(onoff);
+        this.AlternateCheckBox.setEnabled(onoff);
+    }
+    
+    private void populateSeedTimeData(SeedTime seed) {
+        this.RawSeedTimeText.setText(seed.getRawSeedTime());
+        this.ConvertedTimeText.setText(seed.getConvertedSeedTime());
+        this.RawCourseCombo.setSelectedItem(seed.getRawCourse().name());
+        this.MeetCourseCombo.setSelectedItem(seed.getMeetCourse().name());
+        this.AlternateCheckBox.setSelected(seed.getIsAlternate());
+    }
+    
     private void SetEnabledSwimmerEditFields(Boolean onoff) {
         this.FirstNameText.setEnabled(onoff);
         this.LastNameText.setEnabled(onoff);
@@ -694,16 +740,17 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JLabel LSCCodeLabel;
     private javax.swing.JTextField LSCCodeText;
     private javax.swing.JTextField LastNameText;
+    private javax.swing.JComboBox MeetCourseCombo;
     private javax.swing.JLabel MeetCourseLabel;
-    private javax.swing.JTextField MeetCourseText;
     private javax.swing.JLabel MiddleNameLabel;
     private javax.swing.JTextField MiddleNameText;
     private javax.swing.JComboBox OrgTypeCombo;
     private javax.swing.JLabel OrgTypeLabel;
+    private javax.swing.JComboBox RawCourseCombo;
     private javax.swing.JLabel RawCourseLabel;
-    private javax.swing.JTextField RawCourseText;
     private javax.swing.JTextField RawSeedTimeText;
     private javax.swing.JLabel RawTimeLabel;
+    private javax.swing.JButton SeedCancelButton;
     private javax.swing.JLabel SeedTimeLabel;
     private javax.swing.JLabel SuffixLabel;
     private javax.swing.JTextField SuffixText;

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,8 +28,9 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.allenteredbuttongroup.add(this.AllEventsButton);
-        this.allenteredbuttongroup.add(this.EnteredEventsBudget);
+        this.allenteredbuttongroup.add(this.EnteredEventsButton);
         this.EntryTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.ClearEventTable();
     }
 
     /**
@@ -68,7 +70,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         IDLabel = new javax.swing.JLabel();
         IDText = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
-        EnteredEventsBudget = new javax.swing.JRadioButton();
+        EnteredEventsButton = new javax.swing.JRadioButton();
         EventsPanel = new javax.swing.JLabel();
         AllEventsButton = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -154,14 +156,24 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         IDText.setEnabled(false);
 
-        EnteredEventsBudget.setText("Entered Events");
-        EnteredEventsBudget.setEnabled(false);
+        EnteredEventsButton.setText("Entered Events");
+        EnteredEventsButton.setEnabled(false);
+        EnteredEventsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EventsButtonActionPerformed(evt);
+            }
+        });
 
         EventsPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         EventsPanel.setText("Events");
 
         AllEventsButton.setText("All Events");
         AllEventsButton.setEnabled(false);
+        AllEventsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EventsButtonActionPerformed(evt);
+            }
+        });
 
         EntryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -207,7 +219,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(38, 38, 38)
-                                .addComponent(EnteredEventsBudget)
+                                .addComponent(EnteredEventsButton)
                                 .addGap(35, 35, 35)
                                 .addComponent(AllEventsButton))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -226,7 +238,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 .addComponent(EventsPanel)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(EnteredEventsBudget)
+                    .addComponent(EnteredEventsButton)
                     .addComponent(AllEventsButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -561,6 +573,15 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.setSeedEditEnabled(true);
     }//GEN-LAST:event_EntryTableMouseClicked
 
+    private void EventsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventsButtonActionPerformed
+        // We've had a selection made in the swimmer list, lets look that swimmer up
+        String name = (String)this.swimmerDropDown.getSelectedItem();
+        
+        // Now look the name up in the hash map
+        SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+        this.PopulateEventTable(this.AllEventsButton.isSelected(), swimmer);
+    }//GEN-LAST:event_EventsButtonActionPerformed
+
     private void setSeedEditEnabled(Boolean onoff) {
         this.RawSeedTimeText.setEnabled(onoff);
         this.ConvertedTimeText.setEnabled(onoff);
@@ -591,18 +612,45 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.OrgTypeCombo.setEnabled(onoff);
         this.IDText.setEnabled(onoff);
         this.AllEventsButton.setEnabled(onoff);
-        this.EnteredEventsBudget.setEnabled(onoff);
+        this.EnteredEventsButton.setEnabled(onoff);
         this.EntryTable.setEnabled(onoff);
     }
     
-    private void PopulateSwimmerFields(SwimMeetAthlete swimmer) {
+    private void ClearEventTable() {
+        DefaultTableModel dm = (DefaultTableModel)this.EntryTable.getModel();
+        dm.setRowCount(0);
+    }
+    
+    private void PopulateEventTable(Boolean AllEvents, SwimMeetAthlete swimmer) {
         List<SwimMeetEvent> events;
+        Object[] rowData = new Object[5];
         Comparator<SwimMeetEvent> NumericalSort = new Comparator<SwimMeetEvent>() {
             public int compare(SwimMeetEvent c1, SwimMeetEvent c2) {
                     return c1.getEventNumber().compareTo(c2.getEventNumber());
             }
         };
+        this.ClearEventTable();
+        events = SwimMeetEvent.getAllEvents();
+        Collections.sort(events, NumericalSort);
+        Iterator<SwimMeetEvent> iterator = events.iterator();
+        DefaultTableModel model = (DefaultTableModel) this.EntryTable.getModel();
         
+        while (iterator.hasNext()) {
+            SwimMeetEvent event = iterator.next();
+            Boolean isEntered = event.getSwimmers().contains(swimmer);
+            if ((AllEvents == false) && (isEntered == false))
+                continue;
+            rowData[0] = event.getSwimmers().contains(swimmer);
+            rowData[1] = event.getEventNumber();
+            rowData[2] = event.getGender();
+            rowData[3] = event.getDistance();
+            rowData[4] = event.getStroke();
+            model.addRow(rowData);
+        }
+    }
+    
+    private void PopulateSwimmerFields(SwimMeetAthlete swimmer) {
+       
         this.FirstNameText.setText(swimmer.getName().getFirstName());
         this.LastNameText.setText(swimmer.getName().getLastName());
         this.MiddleNameText.setText(swimmer.getName().getMiddleName());
@@ -622,24 +670,8 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.CitizenshipTExt.setText(swimmer.getCitizenOf()[0]);
         this.OrgTypeCombo.setSelectedItem(swimmer.getOrganization().name());
         this.IDText.setText(swimmer.getUsasID());
-        
-        // Now we need to populate the event table.  To do that we need
-        // get a full list of events, and mark the ones we're entered in
-        events = SwimMeetEvent.getAllEvents();
-        Collections.sort(events, NumericalSort);
-        
-        Iterator<SwimMeetEvent> iterator = events.iterator();
-        int row = 0;
-        this.EntryTable.clearSelection();
-        while (iterator.hasNext()) {
-            SwimMeetEvent event = iterator.next();
-            Boolean isEntered;
-            this.EntryTable.setValueAt(event.getSwimmers().contains(swimmer),row, 0);
-            this.EntryTable.setValueAt(event.getEventNumber(), row, 1);
-            this.EntryTable.setValueAt(event.getGender().name(), row, 2);
-            this.EntryTable.setValueAt(event.getDistance(), row, 3);
-            this.EntryTable.setValueAt(event.getStroke(), row, 4);
-        }
+        this.ClearEventTable();
+        this.PopulateEventTable(this.AllEventsButton.isSelected(), swimmer);
     }
     
     private void PopulateSwimmerDropDown() {
@@ -728,7 +760,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JLabel ConvertedSeedTimeLabel;
     private javax.swing.JTextField ConvertedTimeText;
     private javax.swing.JButton EditSwimmerButton;
-    private javax.swing.JRadioButton EnteredEventsBudget;
+    private javax.swing.JRadioButton EnteredEventsButton;
     private javax.swing.JTable EntryTable;
     private javax.swing.JLabel EventsPanel;
     private javax.swing.JLabel FirstNameLabel;

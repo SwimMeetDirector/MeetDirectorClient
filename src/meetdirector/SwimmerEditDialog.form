@@ -396,7 +396,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                                      <Component id="EnteredEventsBudget" min="-2" max="-2" attributes="0"/>
+                                      <Component id="EnteredEventsButton" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                       <Component id="AllEventsButton" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -423,7 +423,7 @@
                       <Component id="EventsPanel" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="EnteredEventsBudget" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="EnteredEventsButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="AllEventsButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="8" max="32767" attributes="0"/>
@@ -434,11 +434,14 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="EnteredEventsBudget">
+            <Component class="javax.swing.JRadioButton" name="EnteredEventsButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Entered Events"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EventsButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="EventsPanel">
               <Properties>
@@ -451,6 +454,9 @@
                 <Property name="text" type="java.lang.String" value="All Events"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EventsButtonActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane2">
               <AuxValues>

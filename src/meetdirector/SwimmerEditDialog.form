@@ -541,8 +541,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="SeedCancelButton" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="CommitSeedButton" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="CommitSeedButton" alignment="0" pref="187" max="32767" attributes="0"/>
                                           <Component id="AlternateCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="MeetCourseLabel" alignment="0" max="32767" attributes="0"/>
                                           <Component id="RawCourseLabel" alignment="0" max="32767" attributes="0"/>
@@ -591,9 +590,7 @@
                       <Component id="AlternateCheckBox" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="CommitSeedButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="SeedCancelButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <EmptySpace pref="60" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -645,12 +642,9 @@
                 <Property name="text" type="java.lang.String" value="Commit Seed Info"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="SeedCancelButton">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Cancel Seed Changes"/>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CommitSeedButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="RawCourseCombo">
               <Properties>

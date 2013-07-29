@@ -5,6 +5,7 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
@@ -69,6 +70,19 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.enteredEvents = null;
             this.seedtimes = null;
             
+        } else {
+            this.name = new AthleteName();
+            this.birthDate = new GregorianCalendar();
+            this.gender = Gender.FEMALE;
+            this.isAttached = true;
+            this.lsc = LscCodeType.AD;
+            this.clubCode = "";
+            this.citizenOf = new String[1];
+            this.citizenOf[0] = "USA";
+            this.organization = OrganizationType.USAS;
+            this.usasID = "";
+            this.enteredEvents = new ArrayList<SwimMeetEvent>();
+            this.seedtimes = new ArrayList<SeedTime>();
         }
         if (persist == true)
             this.persist();

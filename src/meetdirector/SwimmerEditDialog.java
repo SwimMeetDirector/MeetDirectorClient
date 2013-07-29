@@ -7,14 +7,19 @@ package meetdirector;
 import entity.SeedTime;
 import entity.SwimMeetAthlete;
 import entity.SwimMeetEvent;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import org.usa_swimming.xsdif.CourseType;
+import org.usa_swimming.xsdif.Gender;
+import org.usa_swimming.xsdif.LscCodeType;
+import org.usa_swimming.xsdif.OrganizationType;
 
 /**
  *
@@ -129,7 +134,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         GenderLabel.setText("Gender");
 
-        GenderCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female", "Mixed" }));
+        GenderCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "male", "female", "mixed" }));
         GenderCombo.setEnabled(false);
 
         AtatchedLabel.setText("Attached");
@@ -149,7 +154,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         OrgTypeLabel.setText("Organization Type");
 
-        OrgTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "NCAA DIV 1", "NCAA DIV 2", "NCAA DIV 3", "USAS", "MASTERS", "YMCA", "FINA" }));
+        OrgTypeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "USAS", "Masters", "NCAA", "NCAA Div I", "NCAA Div II", "NCAA Div III", "YMCA", "FINA", "HighSch", " " }));
         OrgTypeCombo.setEnabled(false);
 
         IDLabel.setText("ID");
@@ -456,6 +461,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
 
         CommitButton.setText("Commit");
         CommitButton.setEnabled(false);
+        CommitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CommitButtonActionPerformed(evt);
+            }
+        });
 
         CancelButton.setText("Cancel");
         CancelButton.setEnabled(false);
@@ -552,6 +562,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.CancelButton.setEnabled(true);
         this.CommitButton.setEnabled(true);
         this.EditSwimmerButton.setEnabled(false);
+        this.AddSwimmerButton.setEnabled(false);
         this.SetEnabledSwimmerEditFields(true);
     }//GEN-LAST:event_EditSwimmerButtonActionPerformed
 
@@ -593,6 +604,82 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.updateSeedTimeData(seed);
     }//GEN-LAST:event_CommitSeedButtonActionPerformed
 
+    private void CommitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommitButtonActionPerformed
+        // We've had a selection made in the swimmer list, lets look that swimmer up
+        String name = (String)this.swimmerDropDown.getSelectedItem();
+        
+        // Now look the name up in the hash map
+        SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+
+        this.updateSwimmerInfo(swimmer);
+        this.setSeedEditEnabled(false);
+        this.SetEnabledSwimmerEditFields(false);
+        this.EditSwimmerButton.setEnabled(true);
+        this.CancelButton.setEnabled(false);
+        this.CommitButton.setEnabled(false);
+        this.AddSwimmerButton.setEnabled(true);
+    }//GEN-LAST:event_CommitButtonActionPerformed
+
+    private void updateSwimmerInfo(SwimMeetAthlete swimmer) {
+        
+        swimmer.startUpdate();
+        
+        swimmer.getName().setFirstName(this.FirstNameText.getText());
+        swimmer.getName().setLastName(this.LastNameText.getText());
+        swimmer.getName().setMiddleName(this.MiddleNameText.getText());
+        swimmer.getName().setSuffix(this.SuffixText.getText());
+        Calendar Bd = this.BirthdayDateChooserCombo.getSelectedDate();
+        swimmer.setBirthDate(new GregorianCalendar(Bd.get(Calendar.YEAR), Bd.get(Calendar.MONTH), 
+                Bd.get(Calendar.DAY_OF_MONTH), Bd.get(Calendar.HOUR_OF_DAY), Bd.get(Calendar.MINUTE)));
+        swimmer.setGender(Gender.fromValue((String)this.GenderCombo.getSelectedItem()));
+        
+        if (this.AttachedCombo.getSelectedIndex() == 0)
+            swimmer.setIsAttached(true);
+        else
+            swimmer.setIsAttached(false);
+       
+        swimmer.setLsc(LscCodeType.fromValue(this.LSCCodeText.getText()));
+        String[] citizen = new String[1];
+        citizen[0] = this.CitizenshipTExt.getText();
+        swimmer.setCitizenOf(citizen);
+        swimmer.setOrganization(OrganizationType.fromValue((String)this.OrgTypeCombo.getSelectedItem()));
+        swimmer.setUsasID(this.IDText.getText());
+        
+        List<SwimMeetEvent> events = swimmer.getEnteredEvents();
+        for (int i=0; i < this.EntryTable.getRowCount(); i++) {
+            Boolean shouldBeEntered = (Boolean)this.EntryTable.getValueAt(i, 0);
+            SwimMeetEvent idxEvent = SwimMeetEvent.getEventByEventNumber((Integer)this.EntryTable.getValueAt(i, 1));
+            
+            if (shouldBeEntered == true) {
+                // If we should be entered, and the event list has this event, we're done
+                if (events.contains(idxEvent))
+                    continue;
+                
+                // if the old event list doesn't have this set, then we need to add it
+                events.add(idxEvent);
+                try {
+                    idxEvent.addSwimmer(swimmer);
+                } catch (Exception e) {
+                    System.out.println("Can't add swimmer: " + e.getLocalizedMessage());
+                }
+                
+            } else {
+                // This is event we should _not_ be in, so make sure we're not
+                if (events.contains(idxEvent)) {
+                    events.remove(idxEvent);
+                    try {
+                        idxEvent.removeSwimmer(swimmer);
+                    } catch (Exception e) {
+                        System.out.println("Can't remove swimmer: " + e.getLocalizedMessage());
+                    }
+                }
+            } //else shouldBeEntered
+        } // for loop
+        swimmer.setEnteredEvents(events);
+        
+        swimmer.commitUpdate();
+    }
+    
     private void setSeedEditEnabled(Boolean onoff) {
         this.RawSeedTimeText.setEnabled(onoff);
         this.ConvertedTimeText.setEnabled(onoff);
@@ -679,7 +766,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.BirthdayDateChooserCombo.setSelectedDate(swimmer.getBirthDate());
         this.BirthdayDateChooserCombo.setEnabled(false);
         
-        this.GenderCombo.setSelectedItem(swimmer.getGender().name());
+        this.GenderCombo.setSelectedItem(swimmer.getGender().value());
         
         if (swimmer.isIsAttached())
             this.AttachedCombo.setSelectedIndex(0);
@@ -688,7 +775,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         
         this.LSCCodeText.setText(swimmer.getLsc().name());
         this.CitizenshipTExt.setText(swimmer.getCitizenOf()[0]);
-        this.OrgTypeCombo.setSelectedItem(swimmer.getOrganization().name());
+        this.OrgTypeCombo.setSelectedItem(swimmer.getOrganization().value());
         this.IDText.setText(swimmer.getUsasID());
         this.ClearEventTable();
         this.PopulateEventTable(this.AllEventsButton.isSelected(), swimmer);

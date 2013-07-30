@@ -633,6 +633,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
             swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
         SeedTime seed = swimmer.getSeedTime(event);
         this.updateSeedTimeData(seed);
+        this.setSeedEditEnabled(false);
     }//GEN-LAST:event_CommitSeedButtonActionPerformed
 
     private void CommitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommitButtonActionPerformed
@@ -664,6 +665,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.CancelButton.setEnabled(true);
         this.EditSwimmerButton.setEnabled(false);
         this.CommitButton.setEnabled(true);
+        this.AddSwimmerButton.setEnabled(false);
         //create a new swimmer
         SwimMeetAthlete swimmer = new SwimMeetAthlete(null, true);
         this.PopulateSwimmerFields(swimmer);

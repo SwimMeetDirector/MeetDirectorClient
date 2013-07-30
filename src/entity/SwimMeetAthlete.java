@@ -105,8 +105,13 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             if (seed.getEvent() == event)
                 return seed;
         }
-        
-        return new SeedTime(this, event, true);     
+        SeedTime newSeed = new SeedTime(this, event, true);
+        this.startUpdate();
+        List<SeedTime> seeds = this.getSeedtimes();
+        seeds.add(newSeed);
+        this.setSeedtimes(seeds);
+        this.commitUpdate();
+        return newSeed;
     }
     
     public static SwimMeetAthlete getAthleteByUsasId(String usasid){

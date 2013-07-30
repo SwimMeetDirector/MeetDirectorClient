@@ -104,7 +104,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
                 return seed;
         }
         
-        return null;
+        return new SeedTime(this, event, true);     
     }
     
     public static SwimMeetAthlete getAthleteByUsasId(String usasid){

@@ -45,6 +45,7 @@ public class AthleteName extends PersistingObject implements Serializable {
         this.title = "";
         this.firstName = "";
         this.middleName = "";
+        this.lastName = "";
         this.preferredName = "";
         this.suffix = "";
     }

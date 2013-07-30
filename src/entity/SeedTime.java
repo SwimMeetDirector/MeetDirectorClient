@@ -64,6 +64,18 @@ public class SeedTime extends PersistingObject implements Serializable {
             this.persist();
     }
     
+    public SeedTime(SwimMeetAthlete swimmer, SwimMeetEvent event, Boolean persist) {
+        this.rawSeedTime = "";
+        this.rawCourse = CourseType.SCM;
+        this.convertedSeedTime = "";
+        this.meetCourse = CourseType.SCM;
+        this.isAlternate = false;
+        this.swimmer = swimmer;
+        this.event = event;
+        if (persist == true)
+            this.persist();
+    }
+    
     public SeedTime(EventSeedType seed) {
         this(seed, null, null, false);
     }

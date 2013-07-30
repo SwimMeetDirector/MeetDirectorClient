@@ -42,6 +42,11 @@ public class AthleteName extends PersistingObject implements Serializable {
 
     public AthleteName() {
         this.id = null;
+        this.title = "";
+        this.firstName = "";
+        this.middleName = "";
+        this.preferredName = "";
+        this.suffix = "";
     }
     
     public Long getId() {

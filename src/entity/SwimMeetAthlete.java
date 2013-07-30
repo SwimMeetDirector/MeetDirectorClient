@@ -72,6 +72,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             
         } else {
             this.name = new AthleteName();
+            this.name.persist();
             this.birthDate = new GregorianCalendar();
             this.gender = Gender.FEMALE;
             this.isAttached = true;
@@ -158,6 +159,12 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         
     }
 
+    @Override
+    public void remove() {
+        this.name.remove();
+        super.remove();
+    }
+    
     /**
      * @return the name
      */

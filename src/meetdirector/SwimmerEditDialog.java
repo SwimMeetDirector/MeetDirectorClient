@@ -40,6 +40,11 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.ClearEventTable();
     }
 
+    private Boolean IsAddingSwimmer() {
+        if (this.AddingSwimmer == null)
+            return false;
+        return true;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -554,7 +559,9 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.CancelButton.setEnabled(false);
         this.CommitButton.setEnabled(false);
         this.EditSwimmerButton.setEnabled(true);
-        if (this.AddingSwimmer != null) {
+        if (this.IsAddingSwimmer() == true) {
+            //Drop the swimmer object from the database
+            this.AddingSwimmer.remove();
             this.AddingSwimmer = null;
             return;
         }
@@ -588,7 +595,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         SwimMeetEvent event = SwimMeetEvent.getEventByEventNumber(new Integer(eventNumber));
         String name = (String)this.swimmerDropDown.getSelectedItem();
         
-        if (this.AddingSwimmer != null)
+        if (this.IsAddingSwimmer() == true)
             swimmer = this.AddingSwimmer;
         else {
             // Now look the name up in the hash map
@@ -613,11 +620,15 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private void CommitSeedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommitSeedButtonActionPerformed
         int seedidx = (Integer)this.EntryTable.getValueAt(this.EntryTable.getSelectedRow(), 1);
         int eventNumber = (int)this.EntryTable.getValueAt(seedidx, 1);
+        SwimMeetAthlete swimmer;
         SwimMeetEvent event = SwimMeetEvent.getEventByEventNumber(new Integer(eventNumber));
         String name = (String)this.swimmerDropDown.getSelectedItem();
         
         // Now look the name up in the hash map
-        SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+        if (this.IsAddingSwimmer() == true)
+            swimmer = this.AddingSwimmer;
+        else
+            swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
         SeedTime seed = swimmer.getSeedTime(event);
         this.updateSeedTimeData(seed);
     }//GEN-LAST:event_CommitSeedButtonActionPerformed
@@ -625,10 +636,9 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private void CommitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommitButtonActionPerformed
         SwimMeetAthlete swimmer;
         
-        if (this.AddingSwimmer != null) {
+        if (this.IsAddingSwimmer() == true) {
             swimmer = this.AddingSwimmer;
             this.AddingSwimmer = null;
-            swimmer.persist();
         } else {
             // We've had a selection made in the swimmer list, lets look that swimmer up
             String name = (String)this.swimmerDropDown.getSelectedItem();
@@ -644,17 +654,19 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.CancelButton.setEnabled(false);
         this.CommitButton.setEnabled(false);
         this.AddSwimmerButton.setEnabled(true);
+        // Refresh the swimmer dropdown
+        this.PopulateSwimmerDropDown();
     }//GEN-LAST:event_CommitButtonActionPerformed
 
     private void AddSwimmerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddSwimmerButtonActionPerformed
         this.CancelButton.setEnabled(true);
         this.EditSwimmerButton.setEnabled(false);
         this.CommitButton.setEnabled(true);
-        this.SetEnabledSwimmerEditFields(true);
         //create a new swimmer
-        SwimMeetAthlete swimmer = new SwimMeetAthlete();
+        SwimMeetAthlete swimmer = new SwimMeetAthlete(null, true);
         this.PopulateSwimmerFields(swimmer);
-        this.AddingSwimmer = swimmer;
+        this.AddingSwimmer = swimmer;      
+        this.SetEnabledSwimmerEditFields(true);
     }//GEN-LAST:event_AddSwimmerButtonActionPerformed
 
     private void updateSwimmerInfo(SwimMeetAthlete swimmer) {
@@ -749,6 +761,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.FirstNameText.setEnabled(onoff);
         this.LastNameText.setEnabled(onoff);
         this.MiddleNameText.setEnabled(onoff);
+        this.SuffixText.setEnabled(onoff);
         this.BirthdayDateChooserCombo.setEnabled(onoff);
         this.GenderCombo.setEnabled(onoff);
         this.AttachedCombo.setEnabled(onoff);
@@ -828,7 +841,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
             }
         };
         this.SwimmerDropDownMap = new HashMap();
-        
+        this.swimmerDropDown.removeAllItems();
         // STart by getting a full list of all swimmers
         swimmers = SwimMeetAthlete.getAllAthletes();
         if (swimmers.isEmpty())

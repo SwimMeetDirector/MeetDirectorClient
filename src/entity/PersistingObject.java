@@ -48,6 +48,11 @@ public class PersistingObject {
         em.refresh(this);
     }
     
+    public void remove() {
+        EntityManager em = MeetDBConnection.getDBConnection().getEm();
+        em.remove(this);
+    }
+    
     public static <T> List<T> queryClassObjects(String query, Class classtype) {
         MeetDBConnection conn = MeetDBConnection.getDBConnection();
         EntityManager em = conn.getEm();

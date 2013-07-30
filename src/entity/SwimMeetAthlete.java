@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +34,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn
     private AthleteName name;
     private GregorianCalendar birthDate;
@@ -72,7 +73,8 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             
         } else {
             this.name = new AthleteName();
-            this.name.persist();
+            if (persist == true)
+                this.name.persist();
             this.birthDate = new GregorianCalendar();
             this.gender = Gender.FEMALE;
             this.isAttached = true;
@@ -161,7 +163,32 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
 
     @Override
     public void remove() {
-        this.name.remove();
+        AthleteName name = this.getName();
+        List<SwimMeetEvent> events = this.getEnteredEvents();
+        List<SeedTime> seeds = this.getSeedtimes();
+        
+        this.startUpdate();
+        //this.setName(null);
+        this.setEnteredEvents(new ArrayList<SwimMeetEvent>());
+        this.setSeedtimes(new ArrayList<SeedTime>());
+        this.commitUpdate();
+        
+        //name.remove();
+        Iterator<SwimMeetEvent> iterator1 = events.iterator();
+        while (iterator1.hasNext()) {
+            SwimMeetEvent event = iterator1.next();
+            try {
+                event.removeSwimmer(this);
+            } catch (Exception e) {
+                    //pass
+            }
+        }
+        Iterator<SeedTime> iterator2 = seeds.iterator();
+        while (iterator2.hasNext()) {
+            SeedTime seed = iterator2.next();
+            seed.remove();
+        }
+        
         super.remove();
     }
     

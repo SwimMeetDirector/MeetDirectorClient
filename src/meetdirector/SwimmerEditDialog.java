@@ -558,11 +558,13 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
         this.CancelButton.setEnabled(false);
         this.CommitButton.setEnabled(false);
+        this.AddSwimmerButton.setEnabled(true);
         this.EditSwimmerButton.setEnabled(true);
         if (this.IsAddingSwimmer() == true) {
             //Drop the swimmer object from the database
             this.AddingSwimmer.remove();
             this.AddingSwimmer = null;
+            this.SetEnabledSwimmerEditFields(false);
             return;
         }
         

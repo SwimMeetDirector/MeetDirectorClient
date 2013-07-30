@@ -104,6 +104,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         AddSwimmerButton = new javax.swing.JButton();
         CommitButton = new javax.swing.JButton();
         CancelButton = new javax.swing.JButton();
+        DelSwimmerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Swimmer Information");
@@ -487,6 +488,14 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
             }
         });
 
+        DelSwimmerButton.setText("Delete Swimmer");
+        DelSwimmerButton.setToolTipText("");
+        DelSwimmerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DelSwimmerButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -500,9 +509,10 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                             .addComponent(CommitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(DelSwimmerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(AddSwimmerButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(CancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(46, 46, 46)
+                        .addGap(89, 89, 89)
                         .addComponent(SwimmerInfoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,7 +539,9 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(EditSwimmerButton)
                             .addComponent(AddSwimmerButton))
-                        .addGap(46, 46, 46)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(DelSwimmerButton)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CommitButton)
                             .addComponent(CancelButton)))
@@ -673,6 +685,13 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         this.AddingSwimmer = swimmer;      
         this.SetEnabledSwimmerEditFields(true);
     }//GEN-LAST:event_AddSwimmerButtonActionPerformed
+
+    private void DelSwimmerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelSwimmerButtonActionPerformed
+        String name = (String)this.swimmerDropDown.getSelectedItem();
+        SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+        swimmer.remove();
+        this.PopulateSwimmerDropDown();
+    }//GEN-LAST:event_DelSwimmerButtonActionPerformed
 
     private void updateSwimmerInfo(SwimMeetAthlete swimmer) {
         
@@ -922,6 +941,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private javax.swing.JButton CommitSeedButton;
     private javax.swing.JLabel ConvertedSeedTimeLabel;
     private javax.swing.JTextField ConvertedTimeText;
+    private javax.swing.JButton DelSwimmerButton;
     private javax.swing.JButton EditSwimmerButton;
     private javax.swing.JRadioButton EnteredEventsButton;
     private javax.swing.JTable EntryTable;

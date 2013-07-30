@@ -35,10 +35,10 @@ public class SeedTime extends PersistingObject implements Serializable {
     private CourseType meetCourse;
     private Boolean isAlternate;
     
-    @ManyToOne
+    @OneToOne
     private SwimMeetAthlete swimmer;
             
-    @ManyToOne
+    @OneToOne
     private SwimMeetEvent event;
     
     public SeedTime() {
@@ -220,6 +220,15 @@ public class SeedTime extends PersistingObject implements Serializable {
      */
     public void setEvent(SwimMeetEvent event) {
         this.event = event;
+    }
+    
+    @Override
+    public void remove() {
+        this.startUpdate();
+        this.setEvent(null);
+        this.setSwimmer(null);
+        this.commitUpdate();
+        super.remove();
     }
     
 }

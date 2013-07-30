@@ -68,8 +68,8 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.citizenOf = athlete.getCitizenOf().toArray(this.citizenOf);
             this.organization = athlete.getOrganization();
             this.usasID = athlete.getUsasID();
-            this.enteredEvents = null;
-            this.seedtimes = null;
+            this.enteredEvents = new ArrayList<SwimMeetEvent>();
+            this.seedtimes = new ArrayList<SeedTime>();
             
         } else {
             this.name = new AthleteName();
@@ -87,14 +87,42 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             this.enteredEvents = new ArrayList<SwimMeetEvent>();
             this.seedtimes = new ArrayList<SeedTime>();
         }
-        if (persist == true)
+        if (persist == true) {
             this.persist();
+            this.attachToClub();
+        }
     }
     
     
     public SwimMeetAthlete() {
         this(null, false);
         this.id = null;
+    }
+    
+    public void attachToClub() {
+        SwimMeetClub club = SwimMeetClub.GetClub(this.getClubCode());
+        if (club != null) {
+            List<SwimMeetAthlete> swimmers = club.getAthletes();
+            if (swimmers.contains(this) == true)
+                return;
+            club.startUpdate();
+            swimmers.add(this);
+            club.setAthletes(swimmers);
+            club.commitUpdate();
+        }
+    }
+    
+    public void detachFromClub() {
+        SwimMeetClub club = SwimMeetClub.GetClub(this.getClubCode());
+        if (club != null) {
+            List<SwimMeetAthlete> swimmers = club.getAthletes();
+            if (swimmers.contains(this) == false)
+                return;
+            club.startUpdate();
+            swimmers.remove(this);
+            club.setAthletes(swimmers);
+            club.commitUpdate();
+        } 
     }
     
     public SeedTime getSeedTime(SwimMeetEvent event) {
@@ -111,6 +139,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         seeds.add(newSeed);
         this.setSeedtimes(seeds);
         this.commitUpdate();
+        
         return newSeed;
     }
     
@@ -172,13 +201,6 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         List<SwimMeetEvent> events = this.getEnteredEvents();
         List<SeedTime> seeds = this.getSeedtimes();
         
-        this.startUpdate();
-        //this.setName(null);
-        this.setEnteredEvents(new ArrayList<SwimMeetEvent>());
-        this.setSeedtimes(new ArrayList<SeedTime>());
-        this.commitUpdate();
-        
-        //name.remove();
         Iterator<SwimMeetEvent> iterator1 = events.iterator();
         while (iterator1.hasNext()) {
             SwimMeetEvent event = iterator1.next();
@@ -188,12 +210,20 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
                     //pass
             }
         }
+        
         Iterator<SeedTime> iterator2 = seeds.iterator();
         while (iterator2.hasNext()) {
             SeedTime seed = iterator2.next();
             seed.remove();
         }
         
+        // We need to remove ourselves from our club, if we have one
+        this.detachFromClub();
+        
+        this.startUpdate();
+        this.setEnteredEvents(new ArrayList<SwimMeetEvent>());
+        this.setSeedtimes(new ArrayList<SeedTime>());
+        this.commitUpdate();
         super.remove();
     }
     

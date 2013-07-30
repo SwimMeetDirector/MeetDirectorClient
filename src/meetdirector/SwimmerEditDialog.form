@@ -454,6 +454,7 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="AllEventsButton">
               <Properties>
+                <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="All Events"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>

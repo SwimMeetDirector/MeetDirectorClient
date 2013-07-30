@@ -178,6 +178,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
         EventsPanel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         EventsPanel.setText("Events");
 
+        AllEventsButton.setSelected(true);
         AllEventsButton.setText("All Events");
         AllEventsButton.setEnabled(false);
         AllEventsButton.addActionListener(new java.awt.event.ActionListener() {

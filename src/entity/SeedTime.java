@@ -47,8 +47,6 @@ public class SeedTime extends PersistingObject implements Serializable {
         this.convertedSeedTime = "";
         this.meetCourse  = CourseType.LCM;
         this.isAlternate = false;
-        this.swimmer = null;
-        this.event = null;
     }
     
     public SeedTime(EventSeedType seed, SwimMeetAthlete swimmer, SwimMeetEvent event, Boolean persist) {

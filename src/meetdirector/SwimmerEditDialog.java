@@ -689,6 +689,10 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
     private void DelSwimmerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelSwimmerButtonActionPerformed
         String name = (String)this.swimmerDropDown.getSelectedItem();
         SwimMeetAthlete swimmer = (SwimMeetAthlete)this.SwimmerDropDownMap.get(name);
+        Boolean rc = ConfirmDialog.GetConfirmation("Really Delete Swimmer " + name, null, null);
+        if (rc == false)
+            return;
+        
         swimmer.remove();
         this.PopulateSwimmerDropDown();
     }//GEN-LAST:event_DelSwimmerButtonActionPerformed

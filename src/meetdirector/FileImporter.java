@@ -153,13 +153,11 @@ public class FileImporter {
                 // Note, need to validate the events here, make sure more than the event number matches
                 newEvents.add(check);
                 //add the new athlete here
-                athlete.startUpdate();
                 try {
-                    check.addSwimmer(athlete);
+                    check.addSwimmer(athlete, true);
                 } catch (Exception e) {
                     this.updateOutputText("Cant add swimmer " + athlete.getName().getFullName() + " : " + e.getLocalizedMessage());
                 }
-                athlete.commitUpdate();
                 
             } else {
                 // Events have to be created in the event creation window, they won't auto create on import
@@ -167,23 +165,28 @@ public class FileImporter {
                 if (this.getOptions().get(IMPORT_NOT_FOUND_EVENTS) == true) {
                     this.updateOutputText("Importing new event number " + event.getEventNumber() + " From File");
                     check = new SwimMeetEvent(event, true);
-                    check.startUpdate();
                     try {
-                        check.addSwimmer(athlete);
+                        check.addSwimmer(athlete, true);
                     } catch (Exception e) {
                         this.updateOutputText("Error adding swimmer " + athlete.getName().getFullName() + " to event " + event.getEventNumber() + ": " + e.getMessage());
                     }
-                    check.commitUpdate();
                     newEvents.add(check);
                 } else {
                     this.updateOutputText("Hmm, I don't have Event " + event.getEventNumber() + " ... Skipping");
                 }
             }
+            
             // Now lets import the seed information
+            // Note if there is no seed time for this entry, one will be created as blank
             SeedTime seed = athlete.getSeedTime(check);
         }
         
+        // Now record teh new event list for this swimmer
+        athlete.startUpdate();
+        athlete.setEnteredEvents(newEvents);
+        athlete.commitUpdate();
         
+       
     }
     
     public void updateOutputText(String msg) {

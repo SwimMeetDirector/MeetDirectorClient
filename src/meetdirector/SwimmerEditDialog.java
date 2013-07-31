@@ -732,7 +732,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 // if the old event list doesn't have this set, then we need to add it
                 events.add(idxEvent);
                 try {
-                    idxEvent.addSwimmer(swimmer);
+                    idxEvent.addSwimmer(swimmer, false);
                 } catch (Exception e) {
                     System.out.println("Can't add swimmer: " + e.getLocalizedMessage());
                 }
@@ -742,7 +742,7 @@ public class SwimmerEditDialog extends javax.swing.JDialog {
                 if (events.contains(idxEvent)) {
                     events.remove(idxEvent);
                     try {
-                        idxEvent.removeSwimmer(swimmer);
+                        idxEvent.removeSwimmer(swimmer, false);
                     } catch (Exception e) {
                         System.out.println("Can't remove swimmer: " + e.getLocalizedMessage());
                     }

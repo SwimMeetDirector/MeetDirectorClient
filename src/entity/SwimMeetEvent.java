@@ -274,17 +274,25 @@ public class SwimMeetEvent extends PersistingObject implements Serializable {
         this.swimmers = swimmers;
     }
     
-    public void addSwimmer(SwimMeetAthlete newswimmer) throws Exception {
+    public void addSwimmer(SwimMeetAthlete newswimmer, Boolean commit) throws Exception {
         
         if (getSwimmers().contains(newswimmer)) {
                 throw new Exception("Swimmer already registered for this event");
         }
-        getSwimmers().add(newswimmer);
+        if (commit)
+            this.startUpdate();
+        this.getSwimmers().add(newswimmer);
+        if (commit)
+            this.commitUpdate();
     }
     
-    public void removeSwimmer(SwimMeetAthlete swimmer) throws ObjectNotFoundException {
+    public void removeSwimmer(SwimMeetAthlete swimmer, Boolean commit) throws ObjectNotFoundException {
         if (getSwimmers().contains(swimmer)) {
-            getSwimmers().remove(swimmer);
+            if (commit)
+                this.startUpdate();
+            this.getSwimmers().remove(swimmer);
+            if (commit)
+                this.commitUpdate();
         }
         
     }

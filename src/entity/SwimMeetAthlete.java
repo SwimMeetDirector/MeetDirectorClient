@@ -205,7 +205,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         while (iterator1.hasNext()) {
             SwimMeetEvent event = iterator1.next();
             try {
-                event.removeSwimmer(this);
+                event.removeSwimmer(this, true);
             } catch (Exception e) {
                     //pass
             }

@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.usa_swimming.xsdif.AthleteEntryType;
 import org.usa_swimming.xsdif.AthleteType;
+import org.usa_swimming.xsdif.EventSeedType;
 import org.usa_swimming.xsdif.Gender;
 import org.usa_swimming.xsdif.LscCodeType;
 import org.usa_swimming.xsdif.OrganizationType;
@@ -125,7 +126,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         } 
     }
     
-    public SeedTime getSeedTime(SwimMeetEvent event) {
+    public SeedTime getSeedTime(SwimMeetEvent event, EventSeedType seedData) {
         Iterator<SeedTime> iterator = this.seedtimes.iterator();
         
         while (iterator.hasNext()) {
@@ -133,7 +134,11 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
             if (seed.getEvent() == event)
                 return seed;
         }
-        SeedTime newSeed = new SeedTime(this, event, true);
+        SeedTime newSeed;
+        if (seedData == null)
+            newSeed = new SeedTime(this, event, true);
+        else
+            newSeed = new SeedTime(seedData, this, event, true);
         this.startUpdate();
         List<SeedTime> seeds = this.getSeedtimes();
         seeds.add(newSeed);
@@ -143,6 +148,9 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
         return newSeed;
     }
     
+    public SeedTime getSeedTime(SwimMeetEvent event) {
+        return this.getSeedTime(event, null);
+    }
     public static SwimMeetAthlete getAthleteByUsasId(String usasid){
         List<SwimMeetAthlete> results;
         String myquery = "SELECT * FROM SwimMeetAthlete WHERE SwimMeetAthlete.usasid = '" + usasid +"'";
@@ -191,7 +199,7 @@ public class SwimMeetAthlete extends PersistingObject implements Serializable {
 
     @Override
     public String toString() {
-        return "entity.SwimMeetAthlete[ usasID=" + getUsasID() + " ]";
+        return "entity.SwimMeetAthlete[ id=" + getId() + " ]";
         
     }
 

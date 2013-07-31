@@ -178,7 +178,7 @@ public class FileImporter {
             
             // Now lets import the seed information
             // Note if there is no seed time for this entry, one will be created as blank
-            SeedTime seed = athlete.getSeedTime(check);
+            SeedTime seed = athlete.getSeedTime(check, event.getSeedData());
         }
         
         // Now record teh new event list for this swimmer

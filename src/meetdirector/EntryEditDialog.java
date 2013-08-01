@@ -41,6 +41,7 @@ public class EntryEditDialog extends javax.swing.JDialog {
         CloseMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Event Editor");
 
         EventTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

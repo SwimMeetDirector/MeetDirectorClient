@@ -34,6 +34,7 @@ public class ConfirmDialog extends javax.swing.JDialog {
         ConfirmButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Confirm");
 
         ConfirmDialogMsg.setEditable(false);
         ConfirmDialogMsg.setHorizontalAlignment(javax.swing.JTextField.CENTER);

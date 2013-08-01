@@ -47,6 +47,7 @@ public class MeetDirector extends javax.swing.JFrame {
         MeetDataMenu = new javax.swing.JMenu();
         MeetInfoMenu = new javax.swing.JMenuItem();
         SwimmerEditMenuItem = new javax.swing.JMenuItem();
+        EventEditMenuItem = new javax.swing.JMenuItem();
 
         ImportChooser.setDialogTitle("Import Meet XML");
         ImportChooser.getAccessibleContext().setAccessibleParent(MainPanel);
@@ -114,6 +115,14 @@ public class MeetDirector extends javax.swing.JFrame {
         });
         MeetDataMenu.add(SwimmerEditMenuItem);
 
+        EventEditMenuItem.setText("Edit Events");
+        EventEditMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EventEditMenuItemActionPerformed(evt);
+            }
+        });
+        MeetDataMenu.add(EventEditMenuItem);
+
         jMenuBar2.add(MeetDataMenu);
 
         setJMenuBar(jMenuBar2);
@@ -172,6 +181,10 @@ public class MeetDirector extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ConnecttoDBMenuItemActionPerformed
 
+    private void EventEditMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EventEditMenuItemActionPerformed
+        EntryEditDialog.OpenWindow();
+    }//GEN-LAST:event_EventEditMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -209,6 +222,7 @@ public class MeetDirector extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem ConnecttoDBMenuItem;
+    private javax.swing.JMenuItem EventEditMenuItem;
     private javax.swing.JMenuItem ExitMenuItem;
     private javax.swing.JFileChooser ImportChooser;
     private javax.swing.JMenuItem ImportMenuItem;

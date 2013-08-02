@@ -4,6 +4,13 @@
  */
 package meetdirector;
 
+import entity.SwimMeetEvent;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author nhorman
@@ -16,8 +23,35 @@ public class EntryEditDialog extends javax.swing.JDialog {
     public EntryEditDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.populateEventTable();
     }
 
+    public void populateEventTable() {
+        List<SwimMeetEvent> events =  SwimMeetEvent.getAllEvents();
+        Comparator<SwimMeetEvent> NumericalSort = new Comparator<SwimMeetEvent>() {
+            public int compare(SwimMeetEvent c1, SwimMeetEvent c2) {
+                    return c1.getEventNumber().compareTo(c2.getEventNumber());
+            }
+        };
+        Object[] rowData = new Object[4];
+        
+        Collections.sort(events, NumericalSort);
+        
+        DefaultTableModel dm = (DefaultTableModel)this.EventTable.getModel();
+        dm.setRowCount(0);
+        Iterator<SwimMeetEvent> iterator = events.iterator();
+        while (iterator.hasNext()) {
+            SwimMeetEvent event = iterator.next();
+            rowData[0] = event.getEventNumber();
+            rowData[1] = event.getGender().value();
+            rowData[2] = event.getDistance();
+            rowData[3] = event.getStroke().value();
+            dm.addRow(rowData);
+        }
+        
+        
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

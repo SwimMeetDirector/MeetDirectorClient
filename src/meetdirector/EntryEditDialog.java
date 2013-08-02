@@ -58,6 +58,11 @@ public class EntryEditDialog extends javax.swing.JDialog {
         
     }
     
+    private void clearSwimmerTable() {
+        DefaultTableModel dm = (DefaultTableModel)this.SwimmerTable.getModel();
+        dm.setRowCount(0);
+    }
+    
     private void populateSwimmerTable(SwimMeetEvent event) {
         List<SwimMeetAthlete> swimmers;
         Comparator<SwimMeetAthlete> alphabeticalSort = new Comparator<SwimMeetAthlete>() {
@@ -68,8 +73,8 @@ public class EntryEditDialog extends javax.swing.JDialog {
         swimmers = SwimMeetAthlete.getAllAthletes();
         Collections.sort(event.getSwimmers(), alphabeticalSort);
         Object[] rowData = new Object[3];
+        this.clearSwimmerTable();
         DefaultTableModel dm = (DefaultTableModel)this.SwimmerTable.getModel();
-        dm.setRowCount(0);
         Iterator<SwimMeetAthlete> iterator = swimmers.iterator();
         while (iterator.hasNext()) {
             SwimMeetAthlete swimmer = iterator.next();
@@ -260,8 +265,10 @@ public class EntryEditDialog extends javax.swing.JDialog {
     private void EventTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EventTableMouseClicked
         int[] rows = this.EventTable.getSelectedRows();
         
-        if (rows.length != 1)
+        if (rows.length != 1) {
+            this.clearSwimmerTable();
             return;         
+        }
         
         SwimMeetEvent event = (SwimMeetEvent)this.EventTable.getModel().getValueAt(rows[0], 4);
         

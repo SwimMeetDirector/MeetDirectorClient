@@ -4,7 +4,9 @@
  */
 package meetdirector;
 
+import entity.SwimMeetAthlete;
 import entity.SwimMeetEvent;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -16,25 +18,28 @@ import javax.swing.table.DefaultTableModel;
  * @author nhorman
  */
 public class EntryEditDialog extends javax.swing.JDialog {
-
+ 
     /**
      * Creates new form EntryEditDialog
      */
     public EntryEditDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        // Hide the object column for each of our tables
+        this.EventTable.removeColumn(this.EventTable.getColumnModel().getColumn(4));
+        this.SwimmerTable.removeColumn(this.SwimmerTable.getColumnModel().getColumn(2));
+        
         this.populateEventTable();
     }
 
-    public void populateEventTable() {
+    private void populateEventTable() {
         List<SwimMeetEvent> events =  SwimMeetEvent.getAllEvents();
         Comparator<SwimMeetEvent> NumericalSort = new Comparator<SwimMeetEvent>() {
             public int compare(SwimMeetEvent c1, SwimMeetEvent c2) {
                     return c1.getEventNumber().compareTo(c2.getEventNumber());
             }
         };
-        Object[] rowData = new Object[4];
-        
+        Object[] rowData = new Object[5];
         Collections.sort(events, NumericalSort);
         
         DefaultTableModel dm = (DefaultTableModel)this.EventTable.getModel();
@@ -46,9 +51,36 @@ public class EntryEditDialog extends javax.swing.JDialog {
             rowData[1] = event.getGender().value();
             rowData[2] = event.getDistance();
             rowData[3] = event.getStroke().value();
+            rowData[4] = event;
             dm.addRow(rowData);
         }
         
+        
+    }
+    
+    private void populateSwimmerTable(SwimMeetEvent event) {
+        List<SwimMeetAthlete> swimmers;
+        Comparator<SwimMeetAthlete> alphabeticalSort = new Comparator<SwimMeetAthlete>() {
+            public int compare(SwimMeetAthlete c1, SwimMeetAthlete c2) {
+                    return c1.getName().getLastName().compareTo(c2.getName().getLastName());
+            }
+        };
+        swimmers = SwimMeetAthlete.getAllAthletes();
+        Collections.sort(event.getSwimmers(), alphabeticalSort);
+        Object[] rowData = new Object[3];
+        DefaultTableModel dm = (DefaultTableModel)this.SwimmerTable.getModel();
+        dm.setRowCount(0);
+        Iterator<SwimMeetAthlete> iterator = swimmers.iterator();
+        while (iterator.hasNext()) {
+            SwimMeetAthlete swimmer = iterator.next();
+            if (event.getSwimmers().contains(swimmer))
+                rowData[0] = true;
+            else
+                rowData[0] = false;
+            rowData[1] = swimmer.getName().getLastName() + ", " + swimmer.getName().getFirstName();
+            rowData[2] = swimmer;
+            dm.addRow(rowData);
+        }
         
     }
     
@@ -77,19 +109,20 @@ public class EntryEditDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Event Editor");
 
+        EventTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         EventTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Number", "Gender", "Distance", "Name"
+                "Number", "Gender", "Distance", "Name", "Object"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -100,6 +133,11 @@ public class EntryEditDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        EventTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EventTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(EventTable);
 
         EventLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,19 +146,20 @@ public class EntryEditDialog extends javax.swing.JDialog {
         SwimmersLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         SwimmersLabel.setText("Swimmers");
 
+        SwimmerTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         SwimmerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Entered", "Swimmer"
+                "Entered", "Swimmer", "Object"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.String.class
+                java.lang.Boolean.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false
+                true, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -217,6 +256,17 @@ public class EntryEditDialog extends javax.swing.JDialog {
     private void CloseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseMenuItemActionPerformed
         this.dispose();
     }//GEN-LAST:event_CloseMenuItemActionPerformed
+
+    private void EventTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EventTableMouseClicked
+        int[] rows = this.EventTable.getSelectedRows();
+        
+        if (rows.length != 1)
+            return;         
+        
+        SwimMeetEvent event = (SwimMeetEvent)this.EventTable.getModel().getValueAt(rows[0], 4);
+        
+        this.populateSwimmerTable(event);
+    }//GEN-LAST:event_EventTableMouseClicked
 
     
     public static void OpenWindow() {

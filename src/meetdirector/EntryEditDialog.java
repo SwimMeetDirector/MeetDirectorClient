@@ -110,6 +110,8 @@ public class EntryEditDialog extends javax.swing.JDialog {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         CloseMenuItem = new javax.swing.JMenuItem();
+        SeedMenu = new javax.swing.JMenu();
+        SeedEventsMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Event Editor");
@@ -164,7 +166,7 @@ public class EntryEditDialog extends javax.swing.JDialog {
                 java.lang.Boolean.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -216,6 +218,18 @@ public class EntryEditDialog extends javax.swing.JDialog {
         jMenu1.add(CloseMenuItem);
 
         jMenuBar1.add(jMenu1);
+
+        SeedMenu.setText("Seed");
+
+        SeedEventsMenuItem.setText("Seed Selected Events");
+        SeedEventsMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SeedEventsMenuItemActionPerformed(evt);
+            }
+        });
+        SeedMenu.add(SeedEventsMenuItem);
+
+        jMenuBar1.add(SeedMenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -275,6 +289,22 @@ public class EntryEditDialog extends javax.swing.JDialog {
         this.populateSwimmerTable(event);
     }//GEN-LAST:event_EventTableMouseClicked
 
+    private void seedEvent(SwimMeetEvent event) {
+        // Need to fill this in when I have pool/session information
+    }
+    
+    private void SeedEventsMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SeedEventsMenuItemActionPerformed
+        // We need to find the selected events in the events table
+        // and for each one, seed it.
+        int rows[] = this.EventTable.getSelectedRows();
+        SwimMeetEvent event;
+        
+        for(int i=0; i<rows.length;i++) {
+            event = (SwimMeetEvent)this.EventTable.getModel().getValueAt(rows[i], 4);
+            this.seedEvent(event);
+        }
+    }//GEN-LAST:event_SeedEventsMenuItemActionPerformed
+
     
     public static void OpenWindow() {
         EntryEditDialog dialog = new EntryEditDialog(new javax.swing.JFrame(), true);
@@ -287,6 +317,8 @@ public class EntryEditDialog extends javax.swing.JDialog {
     private javax.swing.JTable EventTable;
     private javax.swing.JLabel HeatLabel;
     private javax.swing.JTable HeatTable;
+    private javax.swing.JMenuItem SeedEventsMenuItem;
+    private javax.swing.JMenu SeedMenu;
     private javax.swing.JTable SwimmerTable;
     private javax.swing.JLabel SwimmersLabel;
     private javax.swing.JMenu jMenu1;

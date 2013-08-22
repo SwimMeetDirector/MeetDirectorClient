@@ -24,7 +24,8 @@ public class SwimMeetSession extends PersistingObject implements Serializable {
     private Long id;
     
     private String SessionName;
-    protected static final String PersistenceUnit = "MeetObjectPU";
+    private int LaneCount;
+    
     
     public SwimMeetSession() {
         SessionName = "";

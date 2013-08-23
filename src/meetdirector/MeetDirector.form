@@ -60,6 +60,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MeetInfoMenuActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="SessionEditMenuItem">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edit Sessions"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SessionEditMenuItemActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="SwimmerEditMenuItem">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Edit Swimmers"/>

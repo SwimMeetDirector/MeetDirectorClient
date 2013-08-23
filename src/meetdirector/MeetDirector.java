@@ -46,6 +46,7 @@ public class MeetDirector extends javax.swing.JFrame {
         ExitMenuItem = new javax.swing.JMenuItem();
         MeetDataMenu = new javax.swing.JMenu();
         MeetInfoMenu = new javax.swing.JMenuItem();
+        SessionEditMenuItem = new javax.swing.JMenuItem();
         SwimmerEditMenuItem = new javax.swing.JMenuItem();
         EventEditMenuItem = new javax.swing.JMenuItem();
 
@@ -105,6 +106,14 @@ public class MeetDirector extends javax.swing.JFrame {
             }
         });
         MeetDataMenu.add(MeetInfoMenu);
+
+        SessionEditMenuItem.setText("Edit Sessions");
+        SessionEditMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SessionEditMenuItemActionPerformed(evt);
+            }
+        });
+        MeetDataMenu.add(SessionEditMenuItem);
 
         SwimmerEditMenuItem.setText("Edit Swimmers");
         SwimmerEditMenuItem.setToolTipText("");
@@ -185,6 +194,10 @@ public class MeetDirector extends javax.swing.JFrame {
         EntryEditDialog.OpenWindow();
     }//GEN-LAST:event_EventEditMenuItemActionPerformed
 
+    private void SessionEditMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SessionEditMenuItemActionPerformed
+        SessionEditDialog.OpenWindow();
+    }//GEN-LAST:event_SessionEditMenuItemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -229,6 +242,7 @@ public class MeetDirector extends javax.swing.JFrame {
     private javax.swing.JPanel MainPanel;
     private javax.swing.JMenu MeetDataMenu;
     private javax.swing.JMenuItem MeetInfoMenu;
+    private javax.swing.JMenuItem SessionEditMenuItem;
     private javax.swing.JMenuItem SwimmerEditMenuItem;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar2;
